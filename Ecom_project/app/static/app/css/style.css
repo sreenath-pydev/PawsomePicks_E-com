@@ -1,0 +1,145 @@
+/* Home Page */
+/* Ensure the static content and carousel are aligned properly */
+.row {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Add padding/margin to the columns if necessary */
+  
+  
+  .carousel-inner img {
+    height: 100%;
+    object-fit: cover;
+  }
+  
+
+  
+  /* Customize the text */
+
+  
+.container-fluid {
+    padding: 0;
+}
+.col-3{
+    width: 400px;
+}
+.slider img {
+    height: 560px;
+}
+
+.slider-col-2{
+    width: 600px;
+    text-align: center;
+    align-items: center;
+    
+
+}
+.slider-col-2 h1{
+    font-weight: 800;
+    font-size: 50px;
+    
+}
+.slider-col-2 img{
+
+    width: 200px;
+    height: 200px;
+    
+    
+}
+.H1{
+    color: #F48B48; 
+    margin-bottom: -3%;
+}
+.H12{
+    color: #FFD34E;
+}
+.slider-col-2 .btn{
+    background-color: #FFD34E;
+}
+.banners{
+    height: 100%;
+    background-color: #FFD34E;
+    align-items: center;
+    display: flex;
+}
+.banners img{
+    height: 500px;
+    width: 80%;
+    margin-top: 15%;
+    margin-bottom: 15%;
+    transition:  0.6s ease-in-out;
+
+}
+.banners img:hover{
+    transform: scale(1.1);
+}
+.banners h1{
+    font-weight: 1000;
+    font-size: 60px;
+}
+.banner2{
+    height: 100%;
+    align-items: center;
+    display: flex;
+}
+.banner2 h1{
+    font-weight: 1000;
+    font-size: 60px;
+} 
+
+.banner2 img{
+    height: 500px;
+    width: 80%;
+    margin-top: 15%;
+    margin-bottom: 15%;
+    transition: 0.6s ease-in-out;
+
+}
+.banner2 img:hover{
+    transform: scale(1.1);
+}
+.get-to {
+    margin-bottom: -5%;
+    color: #F48B48;
+}
+
+.banner3{
+    background-color: #FFD34E;
+}
+.banner3 h1{
+    font-weight: 1000;
+    font-size: 60px;
+}
+.banner3 .text-white{
+    margin-bottom: -3%;
+}
+.banner3 img{
+    width: 250px;
+    transition:  0.6s ease-in-out;
+}
+.banner3 img:hover{
+    transform: scale(1.1);
+}
+.banner3 h2{
+    font-size: 20px;
+    color: #F48B48;
+}
+.banner3 h2:hover{
+    color: white;
+}
+
+/* Media query for screens wider than 576px */  /*PENDING*/
+@media (max-width: 667px) { 
+
+    .slider img{
+    height: 300px;   
+}
+.banner2 img{
+    height: 300px;
+}
+.banners img{
+    height: 300px;
+}
+
+}

@@ -2,19 +2,19 @@
 {% load static %}
 {% block title %}Home {% endblock title %}
 
-
-<!--slider-->
-{% block slider %}
-<div id="carouselExampleFade" class="carousel slide carousel-fade">
-    <div class="carousel-inner">
+{% block carousel %}
+<div class="container-fluid">
+<div class="row ">
+<div id="carouselExampleFade" class=" col-12 col-md-6 carousel slide carousel-fade slider ">
+    <div class="carousel-inner ">
       <div class="carousel-item active">
-        <img src="{% static 'app/images/banner/carousel1.png'%}" class="d-block w-100" alt="...">
+        <img src="{% static 'app/images/banner/carousel1.png' %}" class="d-block w-100" alt="Carousel-Image1">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'app/images/banner/carousel2.png'%}" class="d-block w-100" alt="...">
+        <img src="{% static 'app/images/banner/carousel2.png' %}" class="d-block w-100" alt="Carousel-Image2">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'app/images/banner/carousel3.png'%}" class="d-block w-100" alt="...">
+        <img src="{% static 'app/images/banner/carousel3.png' %}" class="d-block w-100" alt="Carousel-Image3">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -26,8 +26,88 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-{% endblock slider %}
+  <!--slider colum -->
+  <div class="col-12 col-md-6 slider-col-2 ">
+    <img src="{% static 'app/images/banner/PawsomePicks.png' %}"  alt="Carousel-Image3"><br>
+    <h1 class="H1">Your friendly</h1><br> <h1 class="H12">neighborhood pet shop</h1>
+    <button class="btn ">Shop Now</button>
+  </div>
+</div>
+</div>
+{% endblock carousel %}
+
 {% block main-content %}
+<!--banner 1-->
+<div class="container-fluid text-center">
+    <div class="row align-items-center banners">
+      <div class="col-12 col-md-6 ">
+        <h1 class="get-to"> GET TO </h1><br><h1 class="text-white">KNOW US</h1>
+        <br>
+             <p>
+             Mews 'n' Woofs is an all-natural <br>
+             and cruelty-free pet store that  <br>
+             provides top quality food,  <br>
+             accessories, and grooming  <br>
+             products for your pets.
+            </p>
+      </div>
+      <div class="col-12 col-md-6">
+        <img src="{% static 'app/images/banner/catcare.png' %}"  alt="Carousel-Image3">
+      </div>
+      
+    </div>
+  </div>
+  <!--banner 2-->
+<div class="container-fluid text-center">
+    <div class="row align-items-center banner2 ">
+        <div class="col-12 col-md-6 ">
+            <img src="{% static 'app/images/banner/dogwithtoy.png' %}"  alt="banner2 image">
+        </div>
+
+      <div class="col-12 col-md-6">
+        <h1 class="get-to"> Dora Pet </h1><br>
+        <h1 style="color: #FFD34E;"> Curia Toy</h1>
+        <br>
+             <p>
+                Encourage your fur baby's curiosity <br>
+                 with this engaging toy.
+            
+            </p>
+      </div> 
+    </div>
+  </div>
+  
+ <!--banner3 product line--> 
+ <div class="container-fluid text-center banner3">
+  <div class="col-12 col-md-12">
+      <h1 class="text-white">OUR</h1><br>
+      <h1 style="color: #F48B48;">PRODUCT LINE</h1>
+  </div>
+
+  <div class="row align-items-center">
+      <div class="col-12 col-md-4">
+          <a href="#"><img src="{% static 'app/images/banner/doglogo.png' %}" alt="category-images"></a>
+          <br>
+          <h2>Products For Dogs</h2><br>
+          <p>Raise your dogs to be at their <br>
+              happiest and healthiest!</p>
+      </div>
+      <div class="col-12 col-md-4">
+          <a href="#"><img src="{% static 'app/images/banner/catlogo.png' %}" alt="category-images"></a>
+          <br>
+          <h2>Products For Cats</h2><br>
+          <p>Premium products for your<br>
+              favorite feline companions</p>
+      </div>
+      <div class="col-12 col-md-4">
+          <a href="#"><img src="{% static 'app/images/banner/otherlogo.png' %}" alt="category-images"></a>
+          <br>
+          <h2>Other Products</h2><br>
+          <p>Browse our wide range of <br>
+              high-quality pet products</p>
+      </div>
+  </div>
+</div>
 
 
 {% endblock main-content %}
