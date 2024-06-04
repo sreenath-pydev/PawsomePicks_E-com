@@ -128,8 +128,62 @@
 .banner3 h2:hover{
     color: white;
 }
+.banner4 img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.banner4 h1{
+    font-weight: 1000;
+    font-size: 60px;
+    
+}
 
-/* Media query for screens wider than 576px */  /*PENDING*/
+/* Footer */
+footer img{
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+}
+footer h5 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #F48B48;
+}
+footer h5:hover{
+    color: #FFD34E;
+}
+footer a {
+    color: black;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background-color: white ;
+}
+
+footer .bg-copyright {
+    background-color: white;
+}
+
+footer p {
+    margin-bottom: 0;
+}
+footer .payment-img img{
+    width: 50px;
+    height: 50px;
+    transition: 0.3s ease-in-out;
+}
+footer .payment-img img:hover{
+    transform: scale(1.1);
+    
+}
+* Media query for screens wider than 576px */  /*PENDING*/
 @media (max-width: 667px) { 
 
     .slider img{
