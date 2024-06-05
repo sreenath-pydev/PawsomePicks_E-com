@@ -1,26 +1,20 @@
 /* Home Page */
-/* Ensure the static content and carousel are aligned properly */
 .row {
     display: flex;
     align-items: center;
   }
-  
-  /* Add padding/margin to the columns if necessary */
-  
-  
-  .carousel-inner img {
-    height: 100%;
-    object-fit: cover;
-  }
-  
-
-  
-  /* Customize the text */
-
-  
 .container-fluid {
     padding: 0;
 }
+  
+.carousel-inner  img {
+    height: 100%;
+    object-fit: cover;
+    padding: 0;
+    margin: 0;
+}
+    
+
 .col-3{
     width: 400px;
 }
@@ -32,20 +26,14 @@
     width: 600px;
     text-align: center;
     align-items: center;
-    
-
 }
 .slider-col-2 h1{
     font-weight: 800;
     font-size: 50px;
-    
 }
 .slider-col-2 img{
-
     width: 200px;
-    height: 200px;
-    
-    
+    height: 200px; 
 }
 .H1{
     color: #F48B48; 
@@ -141,10 +129,9 @@
 
 /* Footer */
 footer img{
-    width: 100px;
-    height: 100px;
-    align-items: center;
-    justify-content: center;
+    width: 150px;
+    height: 150px;
+    
 }
 footer h5 {
     font-weight: bold;
@@ -183,7 +170,7 @@ footer .payment-img img:hover{
     transform: scale(1.1);
     
 }
-* Media query for screens wider than 576px */  /*PENDING*/
+/* Media query for screens wider than 576px */  /*PENDING*/
 @media (max-width: 667px) { 
 
     .slider img{
