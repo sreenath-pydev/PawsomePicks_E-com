@@ -24,7 +24,7 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#"></a>
@@ -34,13 +34,23 @@
                       Products
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Dog Food</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'DF' %}">Dog Food</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'DT' %}">Dog Toys</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'DBP' %}">Dog Bathing Product</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'DL' %}">Dog Leash</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'DH' %}">Dog Harness</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'DB' %}">Dog Belt</a></li>
                       
-                      <li><a class="dropdown-item" href="#">Cat Food</a></li>
-                      <li><a class="dropdown-item" href="#">Toys</a></li>
-                      <li><a class="dropdown-item" href="#">Grooming Products</a></li>
-                      <li><a class="dropdown-item" href="#">Bathing Product</a></li>
-                      <li><a class="dropdown-item" href="#">Other Products</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'CF' %}">Cat Food</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'CT' %}">Cat Toys</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'CBP' %}">Cat Bathing Product</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'CL' %}">Cat Leash</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'CH' %}">Cat Harness</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'CB' %}">Cat Belt</a></li>
+
+                      <li><a class="dropdown-item" href="{% url 'category' 'GP' %}">Grooming</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'OP' %}">Other products</a></li>
+
                     </ul>
                   </li>
                   
@@ -77,10 +87,7 @@
           </nav>
           {% block carousel %}{% endblock carousel %}
           {% block main-content %}{% endblock main-content %}
-          <!--footer-->
-          {% block footer %}
-           {% include "app/footer.html" %} 
-          {% endblock footer %}
+          {% block categorys %}{% endblock categorys %}
             <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
