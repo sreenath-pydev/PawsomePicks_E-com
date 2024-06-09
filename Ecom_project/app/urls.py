@@ -20,6 +20,9 @@ from django.urls import path
 from . import views
 urlpatterns = [
     path('',views.index,name='index'),
+    path('about/',views.about,name='about'),
+    path('contact/',views.contact,name='contact'),
     path('category/<slug:val>',views.CategoryView.as_view(),name='category'),
-
+    path('product_details/<int:pk>',views.ProductDetailsView.as_view(),name='product_details'),
+    path('products-title/<val>', views.CategoryTitle.as_view(), name='products-title'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # ? FOR IMAGE URL CONFIG

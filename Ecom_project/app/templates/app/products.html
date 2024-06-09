@@ -6,21 +6,21 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-3 my-3 ">
-        <!--list product titles-->
+        <!--list product titles by category-->
             <div class="list-group">
                 {% for val in title%}
-                <a href="#" class="list-group-item list-group-item-action " aria-current="true">
+                <a href="{% url 'products-title' val.title %}" class="list-group-item list-group-item-action " aria-current="true">
                     {{val.title}}
                 </a>
                 {% endfor %}
               </div>   
         </div>
-        <!--display the products-->
+        <!--display the products by category-->
         <div class="col-sm-9">
             <div class="row ">
                 {% for prod in product%}
-                <div class="col text-center my-4">
-                    <a href="#" class="btn">
+                <div class=" card col text-center my-4">
+                    <a href="{% url 'product_details' prod.id %}" class="btn">
                         <div>
                             <img src="{{prod.product_image.url}}" width="300px" height="200px"/>
                             <div class="fw-bold">{{prod.title}}</div>

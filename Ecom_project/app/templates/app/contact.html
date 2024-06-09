@@ -1,0 +1,71 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Contact Us {% endblock title %}
+
+<!--Contact Us-->
+{% block main-content %}
+<div class=" container-fluid p-0 banner4 position-relative ">
+    <img src="{% static 'app/images/banner/indexbottumbanner.png' %}" class="img-fluid w-100">
+    <h1 class="position-absolute top-50 start-50 translate-middle text-white ">Find Us Hear</h1>
+  </div>
+<div class="contact-us">
+    <div class="container-fluid p-5">
+        <h1>Contact Us</h1>
+        <p>We'd love to hear from you! Whether you have a question about our products, need assistance, or just want to share your pet's latest adventure, our team is here to help.</p>
+        
+        <h2>Get in Touch</h2>
+        <p>You can reach us through the following methods:</p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:support@pawsomepicks.com">support@pawsomepicks.com</a></li>
+            <li><strong>Phone:</strong> (123) 456-7890</li>
+            <li><strong>Address:</strong> 123 Pet Street, Petville, PA 12345</li>
+        </ul>
+
+        <h2>Customer Support Hours</h2>
+        <p>Our customer support team is available during the following hours:</p>
+        <ul>
+            <li>Monday - Friday: 9:00 AM - 6:00 PM</li>
+            <li>Saturday: 10:00 AM - 4:00 PM</li>
+            <li>Sunday: Closed</li>
+        </ul>
+        
+        <h2>Contact Form</h2>
+        <p>Alternatively, you can fill out the contact form below and we'll get back to you as soon as possible.</p>
+        
+        <form action="{% url 'contact' %}" >
+            
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn"><b>Send Message</b></button>
+        </form>
+        
+        <h2>Follow Us</h2>
+        <p>Stay connected with us on social media for the latest updates and promotions:</p>
+        <ul class="social-media-links">
+            <li><a href="https://facebook.com/pawsomepicks" target="_blank">Facebook</a></li>
+            <li><a href="https://twitter.com/pawsomepicks" target="_blank">Twitter</a></li>
+            <li><a href="https://instagram.com/pawsomepicks" target="_blank">Instagram</a></li>
+        </ul>
+    </div>
+</div>
+
+<!--footer-->
+{% block footer %}
+{% include "app/footer.html" %} 
+{% endblock footer %}
+
+{% endblock main-content %}

@@ -6,7 +6,12 @@
 .container-fluid {
     padding: 0;
 }
-  
+.search-btn .btn{
+    border-color: #F48B48;
+}  
+.search-btn .btn:hover{
+    background-color: #F48B48;
+}  
 .carousel-inner  img {
     height: 100%;
     object-fit: cover;
@@ -170,6 +175,160 @@ footer .payment-img img:hover{
     transform: scale(1.1);
     
 }
+/*single product*/
+.single_prod_image{
+    padding: 20px;
+    margin: 20px;
+}
+.single_prod_image .position-sticky {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+}
+.single_prod_image img {
+    width:100%;
+    height: 550px;
+    max-width: 400px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    
+}
+/* products by category*/
+.list-group.position-sticky {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+}
+
+.col-sm-9 {
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.col-md-4 {
+    padding-bottom: 20px;
+}
+.card{
+    border-color: green;
+}
+/*Contact Us*/
+
+/* General form styles */
+.contact-us .form-group {
+    margin-bottom: 15px;
+}
+
+.contact-us label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.contact-us input[type="text"],
+.contact-us input[type="email"],
+.contact-us textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.contact-us input[type="text"]:focus,
+.contact-us input[type="email"]:focus,
+.contact-us textarea:focus {
+    border-color: #66afe9;
+    outline: none;
+}
+
+.contact-us textarea {
+    resize: vertical;
+}
+
+.contact-us .btn {
+    background-color: #F48B48;
+    border-color: #F48B48;
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.contact-us .btn:hover {
+    background-color: #FFD34E;
+    border-color: #FFD34E;
+}
+
+
+
+/* Additional form container styles */
+.contact-us .container {
+   
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* General layout and typography */
+.contact-us h1,
+.contact-us h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.contact-us p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.contact-us ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contact-us ul li {
+    margin-bottom: 10px;
+}
+
+.contact-us ul li a {
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+
+/* contact us Social media links */
+.social-media-links {
+    display: flex;
+    gap: 10px;
+}
+
+.social-media-links li {
+    display: inline-block;
+}
+
+.social-media-links li a {
+    display: block;
+    padding: 10px 15px;
+    background-color: #F48B48;
+    color: black;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.social-media-links li a:hover {
+    background-color: #FFD34E
+}
+
+
 /* Media query for screens wider than 576px */  /*PENDING*/
 @media (max-width: 667px) { 
 

@@ -24,14 +24,14 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/"><b>Home</b></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#"></a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Products
+                      <b>Dog</b>
                     </a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="{% url 'category' 'DF' %}">Dog Food</a></li>
@@ -40,7 +40,16 @@
                       <li><a class="dropdown-item" href="{% url 'category' 'DL' %}">Dog Leash</a></li>
                       <li><a class="dropdown-item" href="{% url 'category' 'DH' %}">Dog Harness</a></li>
                       <li><a class="dropdown-item" href="{% url 'category' 'DB' %}">Dog Belt</a></li>
-                      
+                      <li><a class="dropdown-item" href="{% url 'category' 'GP' %}">Grooming</a></li>
+                      <li><a class="dropdown-item" href="{% url 'category' 'OP' %}">Other products</a></li>
+
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <b>Cat</b>
+                    </a>
+                    <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="{% url 'category' 'CF' %}">Cat Food</a></li>
                       <li><a class="dropdown-item" href="{% url 'category' 'CT' %}">Cat Toys</a></li>
                       <li><a class="dropdown-item" href="{% url 'category' 'CBP' %}">Cat Bathing Product</a></li>
@@ -55,15 +64,15 @@
                   </li>
                   
                 </ul>
-                <form class="d-flex" role="search">
+                <form class="d-flex search-btn " role="search">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
+                  <button class="btn " type="submit"><b>Search</b></button>
                 </form>
 
                <ul class="navbar-nav ">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Products
+                    <b>user</b> 
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">User</a></li>
@@ -72,14 +81,18 @@
                     <li><a class="dropdown-item" href="#">Cart</a></li>
                     <li><a class="dropdown-item" href="#">Order</a></li>
                     <li><a class="dropdown-item" href="#">Logout</a></li>
-                    <li><a class="dropdown-item" href="#">Other Products</a></li>
+                    
                   </ul>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " aria-disabled="true">About</a>
+                  <a class="nav-link " aria-disabled="true"><b>Wishlist</b></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " aria-disabled="true">Contact</a>
+                  <a href="{% url 'about' %}" class="nav-link " aria-disabled="true"><b>About</b></a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{% url 'contact' %}" class="nav-link " aria-disabled="true"><b>Contact</b></a>
                 </li>
               </ul>
               </div>

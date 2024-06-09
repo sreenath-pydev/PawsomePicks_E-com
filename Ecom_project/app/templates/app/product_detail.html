@@ -1,0 +1,36 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Product Details{% endblock title %}
+
+{% block main-content %}
+<!-- Single Product -->
+<div class="container">
+    <div class="row justify-content-between">
+        <div class="single_prod_image card card-body col-lg-5 mt-5 position-sticky" style="top: 20px;">
+            <img src="{{ product.product_image.url }}" class="col-12 mt-3 text-center h-75" alt="">
+        </div>
+        <div class="productdetail col-lg-5 mt-5">
+            <h1 style="font-family: Georgia; font-size: 50px;">{{ product.title }}</h1>
+            <h5>Rs.{{ product.discount_price }}/-</h5>
+            <small class="text-decoration-line-through text-muted fs-5"><del>Rs. {{ product.selling_price }}/-</del></small>
+            <br><br>
+            <h3 class="mt-4">Product Details <i class="fa fa-indent"></i></h3>
+            <p>{{ product.Description }}</p>
+            <button class="btn btn-link mt-2 text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#productDetails" aria-expanded="false" aria-controls="productDetails">
+                View More
+            </button>
+            <div class="collapse" id="productDetails">
+                <div class="card card-body">
+                    <p>{{ product.composition }}<br>
+                    {{ product.product_app }}</p>
+                </div>
+            </div>
+
+            <div class="buttons row flex mt-3" style="font-family: Rajdhani;">
+                <button type="button" class="btn btn-info m-1 p-1">Add to cart</button>
+                <button type="button" class="btn btn-success m-1 p-1">Buy Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}
