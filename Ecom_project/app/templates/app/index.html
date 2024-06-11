@@ -38,32 +38,10 @@
 
 {% block main-content %}
 <!--banner 1-->
-<div class="container-fluid text-center">
-    <div class="row align-items-center banners">
-      <div class="col-12 col-md-6 ">
-        <h1 class="get-to"> GET TO </h1><br><h1 class="text-white">KNOW US</h1>
-        <br>
-             <p>
-             Mews 'n' Woofs is an all-natural <br>
-             and cruelty-free pet store that  <br>
-             provides top quality food,  <br>
-             accessories, and grooming  <br>
-             products for your pets.
-            </p>
-      </div>
-      <div class="col-12 col-md-6">
-        <img src="{% static 'app/images/banner/catcare.png' %}"  alt="Carousel-Image3">
-      </div>
-      
-    </div>
-</div>
+
   <!--banner 2-->
 <div class="container-fluid text-center">
     <div class="row align-items-center banner2 ">
-        <div class="col-12 col-md-6 ">
-            <img src="{% static 'app/images/banner/dogwithtoy.png' %}"  alt="banner2 image">
-        </div>
-
       <div class="col-12 col-md-6">
         <h1 class="get-to"> Dora Pet </h1><br>
         <h1 style="color: #FFD34E;"> Curia Toy</h1>
@@ -74,6 +52,11 @@
             
             </p>
       </div> 
+        <div class="col-12 col-md-6 ">
+            <img src="{% static 'app/images/banner/dogwithtoy.png' %}"  alt="banner2 image">
+        </div>
+
+      
     </div>
   </div>
   
@@ -109,10 +92,7 @@
   </div>
 </div>
 
-<div class=" container-fluid p-0 banner4 position-relative ">
-  <img src="{% static 'app/images/banner/indexbottumbanner.png' %}" class="img-fluid w-100">
-  <h1 class="position-absolute top-50 start-50 translate-middle text-white ">Find Us Hear</h1>
-</div>
+
 <!--footer-->
 {% block footer %}
 {% include "app/footer.html" %} 

@@ -1,0 +1,42 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+
+{% block main-content %}
+<div class='container'>
+    <div class="row my-3">
+        <div class="col-sm-6 offset-sm-3 shadow p-5">
+            <h1 class="text-center">Login Now</h1>
+            <hr>
+            <!-- Registration Form -->
+            <form action="{% url 'index' %}" method="post" novalidate >
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="mb-3">
+                    {{ field.label_tag }}{{ field }}
+                    <small class="text-danger">{{ field.errors|striptags }}</small>
+                </div>
+                {% endfor %}
+                <small> <a href="#">Forget Password ?</a></small><br>
+                <input type="submit" value="Login" class="btn btn-primary">
+                <!-- New User register Option -->
+            <div class="text-center text-primary fw-bold mt-3">
+                <small>New User ? 
+                <a href="{% url 'registration' %}" class="text-danger">Register Now</a>
+                </small>
+            </div>
+            <!-- Non_field_error messages -->
+            {% if form.non_field_errors %}
+            <div class='alert alert-danger my-3'>
+                {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock main-content %}

@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views import View
 from .models import products,CATERGORY_CHOICES
 from django.db.models import Count
+from . form import UserRegistrationForm
+from django.contrib import messages
 # home page
 def index(request):
     return render (request,'app/index.html')
@@ -32,6 +34,22 @@ class ProductDetailsView(View):
     def get(self,request,pk):
         product = products.objects.get(pk=pk)
         return render(request,'app/product_detail.html',locals())
+    
+# User registration form
+class UserResgistrationView(View):
+    def get(self,request):
+        form = UserRegistrationForm()
+        return render(request,'app/registration.html',locals())
+    def post(self,request):
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"User Registrated successfully")
+        else:
+            messages.warning(request,"Invalid Input")
+
+        return render(request,"app/registration.html",locals())
+
     
 # Handle GET requests to fetch distinct categories of products and render them in a template.
 """class CategoryView(View):
