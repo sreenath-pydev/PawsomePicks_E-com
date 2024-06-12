@@ -399,7 +399,14 @@ footer .payment-img img:hover{
       left: 100%;
     }
   }
-  
+/*Profile page*/
+.profile_form .col-sm-9{
+    margin-top: -150px;
+    height: 400px;
+}
+.update_address .col-sm-9{
+    height: 400px;
+}
 
 /* Media query for screens wider than 576px */  /*PENDING*/
 @media (max-width: 667px) { 
@@ -414,4 +421,11 @@ footer .payment-img img:hover{
     height: 300px;
 }
 
+.profile_form .col-sm-9{
+    margin-top: 50px;
+    height: 550px;
+}
+.update_address .col-sm-9{
+    height: 550px;
+}
 }

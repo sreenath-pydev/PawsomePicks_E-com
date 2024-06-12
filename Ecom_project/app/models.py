@@ -1,5 +1,7 @@
 from django.db import models
-# product categorys
+from django.contrib.auth.models import User
+
+# product categorys model choices
 CATERGORY_CHOICES=(
     ('DF','DOG_FOOD'),
     ('DT','DOG_TOYS'),
@@ -16,9 +18,48 @@ CATERGORY_CHOICES=(
     ('GP','GROOMING_PRODUCTS'),
     ('OP','OTHER_PRODUCTS')
 )
- 
+ # for customer model choices
+STATE_CHOICES = (
+    ('ANDAMAN AND NICOBAR ISLANDS', 'ANDAMAN AND NICOBAR ISLANDS'),
+    ('ANDHRA PRADESH', 'ANDHRA PRADESH'),
+    ('ARUNACHAL PRADESH', 'ARUNACHAL PRADESH'),
+    ('ASSAM', 'ASSAM'),
+    ('BIHAR', 'BIHAR'),
+    ('CHANDIGARH', 'CHANDIGARH'),
+    ('CHHATTISGARH', 'CHHATTISGARH'),
+    ('DADRA AND NAGAR HAVELI AND DAMAN AND DIU', 'DADRA AND NAGAR HAVELI AND DAMAN AND DIU'),
+    ('DELHI', 'DELHI'),
+    ('GOA', 'GOA'),
+    ('GUJARAT', 'GUJARAT'),
+    ('HARYANA', 'HARYANA'),
+    ('HIMACHAL PRADESH', 'HIMACHAL PRADESH'),
+    ('JAMMU AND KASHMIR', 'JAMMU AND KASHMIR'),
+    ('JHARKHAND', 'JHARKHAND'),
+    ('KARNATAKA', 'KARNATAKA'),
+    ('KERALA', 'KERALA'),
+    ('LAKSHADWEEP', 'LAKSHADWEEP'),
+    ('MADHYA PRADESH', 'MADHYA PRADESH'),
+    ('MAHARASHTRA', 'MAHARASHTRA'),
+    ('MANIPUR', 'MANIPUR'),
+    ('MEGHALAYA', 'MEGHALAYA'),
+    ('MIZORAM', 'MIZORAM'),
+    ('NAGALAND', 'NAGALAND'),
+    ('ODISHA', 'ODISHA'),
+    ('PUNJAB', 'PUNJAB'),
+    ('RAJASTHAN', 'RAJASTHAN'),
+    ('SIKKIM', 'SIKKIM'),
+    ('TAMIL NADU', 'TAMIL NADU'),
+    ('TELANGANA', 'TELANGANA'),
+    ('TRIPURA', 'TRIPURA'),
+    ('UTTAR PRADESH', 'UTTAR PRADESH'),
+    ('UTTARAKHAND', 'UTTARAKHAND'),
+    ('WEST BENGAL', 'WEST BENGAL'),
+    ('PUDUCHERRY', 'PUDUCHERRY'),
+)
 
-# Create your models here.
+
+
+# Product model.
 class products(models.Model):
     title = models.CharField(max_length=100)
     selling_price = models.FloatField()
@@ -30,4 +71,18 @@ class products(models.Model):
     product_image = models.ImageField(upload_to='products',default='product_image')
     def __str__(self):
         return self.title
+
+# customer Model
+
+class customer(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    name = models.CharField(max_length=225)
+    locality = models.CharField(max_length=225)
+    city = models.CharField(max_length=225)
+    phone = models.BigIntegerField(default=0)
+    state = models.CharField(choices=STATE_CHOICES,max_length=100)
+    zipcode = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
     

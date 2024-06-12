@@ -1,0 +1,74 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Update{% endblock title %}
+
+{% block main-content %}
+<div class='container m-5 update_address '>
+    <div class="row">
+        <h2>Hi <span class="text-capitalize">{{ request.user }}</span></h2>
+        <div class="col-sm-9 offset-sm-3 shadow p-5 " >
+            <form method="post" action="" novalidate>
+                {% csrf_token %}
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form.name.label_tag }}{{ form.name }}
+                        <small class="text-danger">{{ form.name.errors|striptags }}</small>
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.locality.label_tag }}{{ form.locality }}
+                        <small class="text-danger">{{ form.locality.errors|striptags }}</small>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form.city.label_tag }}{{ form.city }}
+                        <small class="text-danger">{{ form.city.errors|striptags }}</small>
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.phone.label_tag }}{{ form.phone }}
+                        <small class="text-danger">{{ form.phone.errors|striptags }}</small>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form.state.label_tag }}{{ form.state }}
+                        <small class="text-danger">{{ form.state.errors|striptags }}</small>
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.zipcode.label_tag }}{{ form.zipcode }}
+                        <small class="text-danger">{{ form.zipcode.errors|striptags }}</small>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary" >Update</button>
+                       <a href="{% url 'address'%}" class="btn btn-secondary">BAck</a>
+                    </div>
+                </div>
+                
+                <!-- Non_field_error messages -->
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger my-3">
+                    {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            
+                <!-- Error messages -->
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

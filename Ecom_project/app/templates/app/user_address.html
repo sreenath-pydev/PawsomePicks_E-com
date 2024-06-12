@@ -1,0 +1,38 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Address{% endblock title %}
+
+{% block main-content %}
+<div class='container m-5 profile_form'>
+    <div class="row">
+        <!--user name-->
+        <h2>Hi <span class="text-capitalize">{{ request.user }}</span></h2>
+        <!--options-->
+        <div class="col-sm-2 border-end ">
+            <ul class="list-unstyled ">
+                <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-secondary mb-2">Profile</a></li>
+                <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-primary">Address</a></li>
+            </ul>
+        </div>
+        <div class = "col-sm-9 offset-sm-3 shadow p-5 " >
+            <div class="row">
+             {% for ad  in add %}
+                <div class="col-sm-6 mb-3 mb-sm-0 "  style="width: 15rem;">
+                  <div class="card shadow ">
+                    <div class="card-body">
+                      <h5 class="card-title text-capitalize ">{{ad.name}}</h5>
+                      <p class="card-text">{{ad.locality}} <br>{{ad.city}} <br>{{ad.phone}} <br>{{ad.state}} <br>{{ad.zipcode}}</p>
+                      <a href="{% url 'update_address' pk=ad.id %}" class="btn btn-primary">Update</a>
+                      <a href="{% url 'delete_address' pk=ad.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+             
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock main-content %}
