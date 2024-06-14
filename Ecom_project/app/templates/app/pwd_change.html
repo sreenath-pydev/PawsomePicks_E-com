@@ -1,0 +1,44 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Change Password {% endblock title %}
+
+{% block main-content %}
+<div class='container m-5 profile_form '>
+    <div class="row">
+        <h2>Hi <span class="text-capitalize">{{ request.user }}</span></h2>
+      
+        <div class="col-sm-2 border-end">
+            <ul class="list-unstyled">
+                <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-primary mb-2">Profile</a></li>
+                
+            </ul>
+        </div>
+        <div class="col-sm-9 offset-sm-3 shadow p-5 " >
+            <form method="post" action="" novalidate>
+                {% csrf_token %}
+                {% for fm in form%}   
+                <div>
+                {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>   
+                </div>
+                {% endfor %}   
+                <div class="row pt-3">
+                    <div class="col-md-12">
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </div>
+                </div>
+                
+                
+            
+                <!-- Error messages -->
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

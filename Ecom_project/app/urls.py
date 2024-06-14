@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_view
-from . form import LoginForm,PasswordResetForm
+from . form import LoginForm,PasswordResetForm,PasswordChangeForm,SetNewPasswordForm
 urlpatterns = [
     path('',views.index,name='index'),
     path('about/',views.about,name='about'),
@@ -35,9 +35,14 @@ urlpatterns = [
     # User Authentication Section
     path('registration/', views.UserResgistrationView.as_view(), name='registration'),
     path('login/',auth_view.LoginView.as_view(template_name="app/login.html", authentication_form=LoginForm),name='login'),
-    path('password-reset/',auth_view.PasswordResetView.as_view(template_name="app/reset_pwd.html", form_class=PasswordResetForm),name='reset_pwd'),
-
-
+    path('password-change/',auth_view.PasswordChangeView.as_view(template_name="app/pwd_change.html", form_class=PasswordChangeForm,success_url='/password-change-done'),name='change_pwd'),
+    path('password-change-done/',auth_view.PasswordChangeDoneView.as_view(template_name="app/pwd_change_done.html"),name='Pwd_change_done'),
+    path('logout/',auth_view.LogoutView.as_view(next_page='login'),name='logout'),
+    
+    path('reset_password/',auth_view.PasswordResetView.as_view(template_name="app/reset_password.html", form_class=PasswordResetForm),name='reset_password'),
+    path('password_reset_done/',auth_view.PasswordResetDoneView.as_view(template_name="app/password_reset_done.html"),name='password_reset_done'),
+    path('password_reset_confirm/<uidb64>/<token>/',auth_view.PasswordResetConfirmView.as_view(template_name="app/password_reset_confirm.html", form_class=SetNewPasswordForm),name='password_reset_confirm'),
+    path('password_reset_complete/',auth_view.PasswordResetCompleteView.as_view(template_name="app/password_reset_complete.html"),name='password_reset_complete'),
 
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # ? FOR IMAGE URL CONFIG

@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField,PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField,PasswordChangeForm,SetPasswordForm,PasswordResetForm
 from django.contrib.auth.models import User
 from . models import customer
 # User Registration Form
@@ -12,16 +12,31 @@ class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
-
+    # Email=Unique
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("This email address is already in use.")
+        return email
 # User Login Form
 class LoginForm(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={'autofocus': 'True', 'class': 'form-control'}))
     password = forms.CharField(label="Password", widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class': 'form-control'}))
 
 # Reset password
-class PasswordResetForm(PasswordChangeForm):
-    pass
+class PasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
+# set password
+class SetNewPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(label='New Password',widget=forms.PasswordInput(attrs={'autofocus': 'current-password', 'class': 'form-control'}))
+    new_password2 = forms.CharField(label='Confirm New password',widget=forms.PasswordInput(attrs={'autofocus': 'True', 'class': 'form-control'}))
+
+# change password
+class PasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(label='Old password',widget=forms.PasswordInput(attrs={'autofocus': 'current-password', 'class': 'form-control'}))
+    new_password1 = forms.CharField(label='New Password',widget=forms.PasswordInput(attrs={'autofocus': 'current-password', 'class': 'form-control'}))
+    new_password2 = forms.CharField(label='Confirm password',widget=forms.PasswordInput(attrs={'autofocus': 'True', 'class': 'form-control'}))
 # Customer Profile Form
 class CustomerProfileForm(forms.ModelForm):
     class Meta:
