@@ -86,3 +86,12 @@ class customer(models.Model):
     def __str__(self):
         return self.name
     
+# cart model
+class Cart(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    product = models.ForeignKey(products,on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    @property
+    def total_price(self):
+        return  self.quantity * self.product.discount_price

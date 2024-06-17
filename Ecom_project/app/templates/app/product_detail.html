@@ -6,29 +6,46 @@
 <!-- Single Product -->
 <div class="container">
     <div class="row justify-content-between">
-        <div class="single_prod_image card card-body col-lg-5 mt-5 position-sticky" style="top: 20px;">
-            <img src="{{ product.product_image.url }}" class="col-12 mt-3 text-center h-75" alt="">
-        </div>
-        <div class="productdetail col-lg-5 mt-5">
-            <h1 style="font-family: Georgia; font-size: 50px;">{{ product.title }}</h1>
-            <h5>Rs.{{ product.discount_price }}/-</h5>
-            <small class="text-decoration-line-through text-muted fs-5"><del>Rs. {{ product.selling_price }}/-</del></small>
-            <br><br>
-            <h3 class="mt-4">Product Details <i class="fa fa-indent"></i></h3>
-            <p>{{ product.Description }}</p>
-            <button class="btn btn-link mt-2 text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#productDetails" aria-expanded="false" aria-controls="productDetails">
-                View More
-            </button>
-            <div class="collapse" id="productDetails">
-                <div class="card card-body">
-                    <p>{{ product.composition }}<br>
-                    {{ product.product_app }}</p>
-                </div>
+        <!-- Product Image Column -->
+        <div class="col-lg-5">
+            <div class="position-sticky top-0" style="z-index: 1;">
+                <img src="{{ product.product_image.url }}" class="img-fluid" alt="">
             </div>
+        </div>
 
-            <div class="buttons row flex mt-3" style="font-family: Rajdhani;">
-                <button type="button" class="btn btn-info m-1 p-1">Add to cart</button>
-                <button type="button" class="btn btn-success m-1 p-1">Buy Now</button>
+        <!-- Product Details Column -->
+        <div class="col-lg-5 overflow-auto" style="max-height: 80vh;">
+            <div class="productdetail  px-4">
+                <h1 style="font-family: Georgia; font-size: 50px;">{{ product.title }}</h1>
+                <h5>Rs.{{ product.discount_price }}/-</h5>
+                <small class="text-decoration-line-through text-muted fs-5"><del>Rs. {{ product.selling_price }}/-</del></small>
+                <br><br>
+                <h3 class="">Product Details <i class="fa fa-indent"></i></h3>
+                <p>{{ product.Description }}</p>
+                <button class="btn btn-link  text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#productDetails" aria-expanded="false" aria-controls="productDetails">
+                    View More
+                </button>
+                <div class="collapse" id="productDetails">
+                    <div class="">
+                            <b>Composition</b> <br>
+                        <p>{{ product.composition }}<br>
+                            <b>Product Appilactions</b> <br>
+                        {{ product.product_app }}</p>
+                    </div>
+                </div>
+
+                <!-- Buttons Section -->
+                <div class="row ">
+                    <div class="col-md-6">
+                        <form action="/add_to_cart" method="get">
+                            <input type="hidden" name="prod_id" value="{{ product.id }}">
+                            <button type="submit" class="btn btn-info m-1 p-2">Add to cart</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-success m-1 p-2">Buy Now</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

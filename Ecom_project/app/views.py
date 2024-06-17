@@ -1,10 +1,13 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.views import View
-from .models import products,customer
-from django.db.models import Count
+from .models import products,customer,Cart 
+from django.db.models import Count,Q
 from . form import UserRegistrationForm,CustomerProfileForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+import numpy as np
+from django.http import JsonResponse
+
 # home page
 def index(request):
     return render (request,'app/index.html')
@@ -113,6 +116,94 @@ class DeleteAddressView(View):
         add.delete()
         messages.success(request, "Address Deleted Successfully")
         return redirect('address')
+
+# add to cart 
+def add_to_cart(request):
+    user = request.user
+    product_id = request.GET.get('prod_id')
+    product = get_object_or_404(products, id=product_id)
+
+    # Check if the cart item already exists for the user
+    cart_item, created = Cart.objects.get_or_create(user=user, product=product)
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+
+    return redirect('/cart')
+
+# show cart items
+def show_cart_items(request):
+    user = request.user
+    cart_items = Cart.objects.filter(user=user)
+    
+    amount = np.sum([item.total_price for item in cart_items])
+    
+    totalamount = amount + 40
+    
+    return render(request,'app/cart.html',locals())
+
+# remove from cart
+def remove_from_cart(request, prod_id):
+    product = get_object_or_404(products, id=prod_id)
+    cart_item = Cart.objects.filter(user=request.user, product=product).first()
+    if cart_item:
+        cart_item.delete()
+    return redirect('/cart')
+
+# quantity plus in cart
+def plus_cart(request):
+    if request.method == 'GET':
+        prod_id = request.GET['prod_id']
+        cart_object = Cart.objects.get(Q(product=prod_id) & Q(user=request.user))
+        cart_object.quantity +=1
+        cart_object.save()
+        user = request.user
+        cart =  Cart.objects.filter(user=user)
+        amount = 0
+        for pro in cart:
+            value = pro.quantity * pro.product.discount_price
+            amount = amount + value
+        totalamount = amount + 40
+        data ={
+            'quantity' : cart_object.quantity,
+            'amount' : amount,
+            'totalamount': totalamount
+
+        }
+        return JsonResponse(data)
+# minus cart
+def minus_cart(request):
+    if request.method == 'GET':
+        prod_id = request.GET['prod_id']
+        cart_object = Cart.objects.get(Q(product=prod_id) & Q(user=request.user))
+        if cart_object.quantity > 1:
+                cart_object.quantity -= 1
+                cart_object.save()
+        user = request.user
+        cart =  Cart.objects.filter(user=user)
+        amount = 0
+        for pro in cart:
+            value = pro.quantity * pro.product.discount_price
+            amount = amount + value
+        totalamount = amount + 40
+        data ={
+            'quantity' : cart_object.quantity,
+            'amount' : amount,
+            'totalamount': totalamount
+
+        }
+        return JsonResponse(data)
+    
+# checkout
+class CheckOutView(View):
+    def get(self,request):
+        user = request.user
+        add = customer.objects.filter(user=user)
+        cart_items = Cart.objects.filter(user=user)
+        F_amount = 0
+        F_amount = sum(p.quantity * p.product.discount_price for p in cart_items)
+        total_amount = F_amount + 40
+        return render(request,"app/checkout.html",locals())
     
 # Handle GET requests to fetch distinct categories of products and render them in a template.
 """class CategoryView(View):

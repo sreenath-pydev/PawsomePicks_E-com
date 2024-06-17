@@ -1,10 +1,16 @@
 /* carousel autoplay */ 
-
-var myCarousel = document.querySelector('#carouselExampleFade');
-var carousel = new bootstrap.Carousel(myCarousel, {
-  interval: 5000, // 2 seconds
-  ride: 'carousel'
+document.addEventListener('DOMContentLoaded', function() {
+  // Your custom JavaScript code here
+  var myCarousel = document.querySelector('#carouselExampleFade');
+  if (myCarousel) {
+    var carousel = new bootstrap.Carousel(myCarousel, {
+      interval: 5000,
+      ride: 'carousel'
+    });
+  }
 });
+
+
 /* single product details view more */ 
 document.addEventListener('DOMContentLoaded', function() {
   var viewMoreBtn = document.getElementById('viewMoreBtn');
@@ -18,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-/*drop down hover effect */
+/*navbar drop down hover effect */
 document.addEventListener('DOMContentLoaded', function () {
   var dropdowns = document.querySelectorAll('.dropdown');
 
@@ -33,4 +39,46 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+/*cart plus and minus */
 
+$('.plus-cart').click(function(){
+  var id = $(this).attr("pid").toString()
+  var obj = this.parentNode.children[2]
+  console.log("pid=",id)
+  $.ajax({
+    type : "GET",
+    url : '/plus_cart',
+    data : {
+      prod_id : id
+    },
+    success:function(data){
+      console.log("data = " ,data);
+      obj.innerText = data.quantity
+      document.getElementById('amount').innerText = data.amount
+      document.getElementById('totalamount').innerText = data.totalamount
+    }
+    
+
+  })
+})
+/* minus cart*/
+$('.minus-cart').click(function(){
+  var id = $(this).attr("pid").toString()
+  var obj = this.parentNode.children[2]
+  console.log("pid=",id)
+  $.ajax({
+    type : "GET",
+    url : '/minus_cart',
+    data : {
+      prod_id : id
+    },
+    success:function(data){
+      console.log("data = " ,data);
+      obj.innerText = data.quantity
+      document.getElementById('amount').innerText = data.amount
+      document.getElementById('totalamount').innerText = data.totalamount
+    }
+    
+
+  })
+})
