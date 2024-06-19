@@ -2,70 +2,82 @@
 {% load static %}
 {% block title %}Checkout {% endblock title %}
 
-
-
 {% block main-content %}
-
-<div class="container mt-5">
+<div class="container mt-3">
     <div class="row">
-        <div class="col-md-6 order-md-2 mb-4">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <!-- Left Column: Billing Address and Cart Items -->
+        <div class="col-md-8 order-md-1">
+            <!-- Accordion for Billing Address -->
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <h5 class="mb-3">Billing address</h5>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body" style="overflow-y: auto; max-height: 30vh;">
+                            <strong>
+                                {% for ad in add %}
+                                    <div class="col-sm-12 mb-3">
+                                        <div class="card shadow mb-1" onclick="document.getElementById('custid{{forloop.counter}}').checked = true;">
+                                            <div class="card-body">
+                                                <div class="form-check mb-3">
+                                                    <label class="form-check-label fw-bold" for="custadd{{forloop.counter}}">
+                                                        Address: {{forloop.counter}}
+                                                    </label>
+                                                    <input class="form-check-input" type="radio" name="custid" id="custid{{forloop.counter}}" value="{{ad.id}}">
+                                                </div>
+                                                <h5 class="card-title text-capitalize">{{ad.name}}</h5>
+                                                <p class="card-text">{{ad.locality}} {{ad.city}} {{ad.phone}} {{ad.state}} {{ad.zipcode}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Items -->
+            <h4 class="d-flex justify-content-between align-items-center mb-3 mt-4">
                 <span class="text-muted">Your cart</span>
                 <span class="badge badge-secondary badge-pill">{{ order.items.count }}</span>
             </h4>
-            <ul class="list-group mb-3">
-                {% for item in cart %}
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">{{ item.product.title }}</h6>
-                        <small class="text-muted">Quantity: {{ item.quantity }}</small>
-                    </div>
-                    <span class="text-muted">₹{{ item.product.discount_price }}</span>
-                </li>
+            <ul class="list-group mb-3" style="overflow-y: auto; max-height: 35vh;">
+                {% for item in cart_items %}
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">{{ item.product.title }}</h6>
+                            <img src="{{ item.product.product_image.url }}" alt="{{ item.product.title }}" class="img-fluid img-thumbnail shadow-sm" height="50" width="50">
+                            <small class="text-muted">Quantity: {{ item.quantity }}</small>
+                        </div>
+                        <span class="text-muted">₹{{ item.product.discount_price }}</span>
+                    </li>
                 {% endfor %}
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Total (INR)</span>
-                    <strong>₹{{ total_amount }}</strong>
-                </li>
+                
             </ul>
         </div>
-        <div class="col-md-6 order-md-1">
-            
-            <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        
-                        <h5 class="mb-3">Billing address</h5>
-                        
-                    </button>
-                    
-                  </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                    <div class="accordion-body" style="overflow-y: auto; max-height: 35vh;">
-                      <strong>
-                        {% for ad  in add  %}
-                      
-                        <div class="col-sm-6 mb-3 mb-sm-0 "  style="width: 100%;">
-                          <div class="card shadow mb-1">
-                            <div class="card-body ">
-                              <h5 class="card-title text-capitalize ">{{ad.name}}</h5>
-                              <p class="card-text">{{ad.locality}} {{ad.city}} {{ad.phone}} {{ad.state}} {{ad.zipcode}}</p>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        {% endfor %}
-                        </strong>
+
+        <!-- Right Column: Payment Section -->
+        <div class="col-md-4 order-md-2 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Payment</span>
+            </h4>
+            <div class="card">
+                <div class="card-body">
+                    <!-- Payment form or details go here -->
+                    <li class="list-group-item d-flex justify-content-between">
+                      <span>Total (INR)</span>
+                      <strong>₹{{ total_amount }}</strong>
+                  </li>
+                    <div class="d-grid mt-3">
+                        <a href="#" class="btn btn-primary">Place Order</a>
                     </div>
-                  </div>
                 </div>
-                
-              </div>
-              
+            </div>
         </div>
     </div>
 </div>
-
 {% endblock main-content %}
