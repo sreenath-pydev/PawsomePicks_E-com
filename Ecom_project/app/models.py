@@ -60,7 +60,7 @@ STATE_CHOICES = (
 
 
 # Product model.
-class products(models.Model):
+class Products(models.Model):
     title = models.CharField(max_length=100)
     selling_price = models.FloatField()
     discount_price = models.FloatField()
@@ -74,7 +74,7 @@ class products(models.Model):
 
 # customer Model
 
-class customer(models.Model):
+class Customers(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=225)
     locality = models.CharField(max_length=225)
@@ -89,9 +89,46 @@ class customer(models.Model):
 # cart model
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    product = models.ForeignKey(products,on_delete=models.CASCADE)
+    product = models.ForeignKey(Products,on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
     @property
     def total_price(self):
         return  self.quantity * self.product.discount_price
+    
+# payment model
+class Payment(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    amount = models.FloatField()
+    razorpay_order_id = models.CharField(max_length=100,blank=True,null=True)
+    razorpay_payment_status = models.CharField(max_length=100,blank=True,null=True)
+    razorpay_payment_id = models.CharField(max_length=100,blank=True,null=True)
+    paid = models.BooleanField(default=False)
+
+# Order status model
+ORDER_STATUS_CHOICES = (
+    ('PENDING', 'Pending'),
+    ('PROCESSING', 'Processing'),
+    ('SHIPPED', 'Shipped'),
+    ('DELIVERED', 'Delivered'),
+    ('CANCELLED', 'Cancelled'),
+    ('RETURNED', 'Returned'),
+    ('REFUNDED', 'Refunded'),
+)
+
+# models.py
+
+class OrderPlaced(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customers, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    order_date = models.DateTimeField(auto_now_add=True)
+    order_status = models.CharField(max_length=100, choices=ORDER_STATUS_CHOICES, default='PENDING')
+    payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
+
+    @property
+    def total_amount(self):
+        return self.quantity * self.product.discount_price
+
+    

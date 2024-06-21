@@ -132,6 +132,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Razorpay payment KEY ID AND KEY SECRET
+RAZORPAY_KEY_ID = 'rzp_test_nuJUFPC95KxH7j'
+RAZORPAY_KEY_SECRET = '3mlKYc6ipIQqbtTomtuCucjd'
+
 
 
 

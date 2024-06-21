@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField,PasswordChangeForm,SetPasswordForm,PasswordResetForm
 from django.contrib.auth.models import User
-from . models import customer
+from . models import Customers
 # User Registration Form
 class UserRegistrationForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'True', 'class': 'form-control'}))
@@ -40,7 +40,7 @@ class PasswordChangeForm(PasswordChangeForm):
 # Customer Profile Form
 class CustomerProfileForm(forms.ModelForm):
     class Meta:
-        model = customer
+        model = Customers
         fields = ['name', 'locality', 'city', 'phone', 'state', 'zipcode']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-/* single product details view more */ 
+/* single product details view more 
 document.addEventListener('DOMContentLoaded', function() {
   var viewMoreBtn = document.getElementById('viewMoreBtn');
   var extraDetails = document.getElementById('extraDetails');
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
           viewMoreBtn.style.display = 'none'; // Hide the "View More" button after clicking
       }
   });
-});
+}); */ 
 
 /*navbar drop down hover effect */
 document.addEventListener('DOMContentLoaded', function () {

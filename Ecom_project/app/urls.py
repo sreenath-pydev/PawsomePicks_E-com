@@ -37,8 +37,9 @@ urlpatterns = [
     path('remove_cart/<int:prod_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('plus_cart/',views.plus_cart),
     path('minus_cart/',views.minus_cart),
-    path('checkour/', views.CheckOutView.as_view(), name='checkout'),
-
+    path('checkout/', views.CheckOutView.as_view(), name='checkout'),
+    path('paymentdone/', views.paymentdone, name='paymentdone'),
+    path('orders/',views.order_success,name='orders'),
     # User Authentication Section
     path('registration/', views.UserResgistrationView.as_view(), name='registration'),
     path('login/',auth_view.LoginView.as_view(template_name="app/login.html", authentication_form=LoginForm),name='login'),
