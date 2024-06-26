@@ -83,7 +83,7 @@
                     <ul class="dropdown-menu">             
                         <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                         <li><a class="dropdown-item" href="{% url 'cart' %}">Cart</a></li>
-                        <li><a class="dropdown-item" href="{% url 'orders' %}">Order</a></li>
+                        <li><a class="dropdown-item" href="#">Order</a></li>
                         <li>
                             <form method="post" action="{% url 'logout' %}">
                                 {% csrf_token %}

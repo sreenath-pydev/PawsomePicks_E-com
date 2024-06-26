@@ -103,6 +103,7 @@ class Payment(models.Model):
     razorpay_order_id = models.CharField(max_length=100,blank=True,null=True)
     razorpay_payment_status = models.CharField(max_length=100,blank=True,null=True)
     razorpay_payment_id = models.CharField(max_length=100,blank=True,null=True)
+    signature_id = models.CharField( max_length=128, null=True, blank=True)
     paid = models.BooleanField(default=False)
 
 # Order status model
@@ -120,7 +121,7 @@ ORDER_STATUS_CHOICES = (
 
 class OrderPlaced(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    customer = models.ForeignKey(Customers, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customers, on_delete=models.CASCADE,null=True)
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     order_date = models.DateTimeField(auto_now_add=True)

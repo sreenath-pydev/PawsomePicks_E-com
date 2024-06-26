@@ -123,6 +123,7 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
 LOGIN_REDIRECT_URL='/'
+LOGOUT_REDIRECT_URL = '/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -136,6 +137,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 RAZORPAY_KEY_ID = 'rzp_test_nuJUFPC95KxH7j'
 RAZORPAY_KEY_SECRET = '3mlKYc6ipIQqbtTomtuCucjd'
 
+
+  # Or the appropriate path to your login view
 
 
 

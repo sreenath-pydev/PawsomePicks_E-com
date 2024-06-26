@@ -55,7 +55,7 @@ $('.plus-cart').click(function(){
       console.log("data = " ,data);
       obj.innerText = data.quantity
       document.getElementById('amount').innerText = data.amount
-      document.getElementById('totalamount').innerText = data.totalamount
+      document.getElementById('total_amount').innerText = data.total_amount
     }
     
 
@@ -76,9 +76,19 @@ $('.minus-cart').click(function(){
       console.log("data = " ,data);
       obj.innerText = data.quantity
       document.getElementById('amount').innerText = data.amount
-      document.getElementById('totalamount').innerText = data.totalamount
+      document.getElementById('total_amount').innerText = data.total_amount
     }
     
 
   })
 })
+
+
+ /* Get the radio buttons  checkout page */
+
+ const radioButtons = document.querySelectorAll('.address-radio');  
+ // Add event listener to each radio button  
+ radioButtons.forEach(function(radioButton) {  
+ radioButton.addEventListener('change', function() {   
+ // Enable the payment button if a radio button is selected    
+ document.getElementById('rzp-button1').disabled = false;    });  });
