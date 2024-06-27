@@ -15,15 +15,23 @@
     <div class="col-sm-6">
       <h4>Order Summary</h4>
       <hr>
-      {% for item in cart_items %}
-        <div class="card mb-2">
-          <div class="card-body">
-            <h5>Product: {{ item.product.title }}</h5>
-            <p>Quantity: {{ item.quantity }}</p>
-            <p class="fw-bold">Price: ₹{{ item.product.discount_price }}</p>
-          </div>
-        </div>
-      {% endfor %}
+      <h4 class="d-flex justify-content-between align-items-center mb-3 mt-4">
+        <span class="text-muted">Your cart</span>
+        <span class="badge badge-secondary badge-pill">{{ order.items.count }}</span>
+    </h4>
+    <ul class="list-group mb-3" style="overflow-y: auto; max-height: 35vh;">
+        {% for item in cart_items %}
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+                <h6 class="my-0">{{ item.product.title }}</h6>
+                <img src="{{ item.product.product_image.url }}" alt="{{ item.product.title }}" class="img-fluid img-thumbnail shadow-sm" height="50" width="50">
+                <small class="text-muted">Quantity: {{ item.quantity }}</small>
+            </div>
+            <span class="text-muted">₹{{ item.product.discount_price }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+
       <p class="fw-bold">Total Cost + Rs. 40 = ₹{{ total_amount }}</p>
       <small>Terms and Conditions: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
     </div>
@@ -34,32 +42,51 @@
 
       <form method="post" action="{% url 'checkout' %}" id="myform">
         {% csrf_token %}
-        {% if add %}
-        {% for ad in add %}
-          <div class="card mb-2">
-            <div class="card-body">
-              <h5>{{ ad.name }}</h5>
-              <p>Mobile: {{ ad.phone }}</p>
-              <p>{{ ad.locality }}, {{ ad.city }}, {{ ad.state }} - {{ ad.zipcode }}</p>
-            </div>
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+              <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <h5 class="mb-3">Billing address</h5>
+                  </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                  <div class="accordion-body" style="overflow-y: auto; max-height: 30vh;">
+                      <strong>
+                        {% if add %}
+                        
+                          {% for ad in add %}
+                          <div class="col-sm-12 mb-3">
+                              <div class="card shadow mb-1" onclick="document.getElementById('custid{{ forloop.counter }}').checked = true;">
+                                  <div class="card-body">
+                                      <div class="form-check mb-3">
+                                          <label class="form-check-label fw-bold" for="custadd{{ forloop.counter }}">
+                                              Address: {{ forloop.counter }}
+                                          </label>
+                                          <input class="form-check-input address-radio" type="radio" name="custid" id="custid{{ forloop.counter }}" value="{{ ad.id }}">
+                                      </div>
+                                      <h5 class="card-title text-capitalize">{{ ad.name }}</h5>
+                                      <p class="card-text">{{ ad.locality }} {{ ad.city }} {{ ad.phone }} {{ ad.state }} {{ ad.zipcode }}</p>
+                                  </div>
+                              </div>
+                          </div>
+                          {% endfor %}
+                          {% else %}
+                        <a class="btn btn-secondary" href="{% url "profile" %}">Add New Address</a>
+                        {% endif %}
+                      </strong>
+                  </div>
+              </div>
           </div>
-          <div class="form-check mt-2 mb-5">
-            <input class="form-check-input address-radio " type="radio" name="custid" id="custadd{{ forloop.counter }}" value="{{ ad.id }}">
-            
+      </div>
 
-            <label class="form-check-label fw-bold" for="custadd{{ forloop.counter }}">
-              Address: {{ forloop.counter }}
-            </label>
-            
-          </div>
-          
-        {% endfor %}
-        {% else %}
-        <a class="btn btn-secondary" href="{% url "profile" %}">Add New Address</a>
-        {% endif %}
+       
+       
         <div class="form-group mb-3">
           <label for="totamount" class="form-label">Total Amount</label>
-          <input type="number" class="form-control" name="totamount" value="{{ total_amount }}" readonly>
+          <div class="input-group">
+            <span class="input-group-text">₹</span>
+            <input type="number" class="form-control fw-bold" name="totamount" value="{{ total_amount }}" readonly>
+        </div> 
         </div>
         <!--Razorpay payment button-->
         

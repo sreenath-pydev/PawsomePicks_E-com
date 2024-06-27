@@ -72,8 +72,17 @@ class Products(models.Model):
     def __str__(self):
         return self.title
 
-# customer Model
+# cart model
+class Cart(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    product = models.ForeignKey(Products,on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
 
+    @property
+    def total_price(self):
+        return  self.quantity * self.product.discount_price
+
+# customer Details
 class Customers(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=225)
@@ -85,18 +94,8 @@ class Customers(models.Model):
 
     def __str__(self):
         return self.name
-    
-# cart model
-class Cart(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    product = models.ForeignKey(Products,on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-
-    @property
-    def total_price(self):
-        return  self.quantity * self.product.discount_price
-    
-# payment model
+ 
+# store the payment details 
 class Payment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     amount = models.FloatField()
@@ -106,7 +105,8 @@ class Payment(models.Model):
     signature_id = models.CharField( max_length=128, null=True, blank=True)
     paid = models.BooleanField(default=False)
 
-# Order status model
+# Store purchace details after payment completed OrderPlaced 
+# Order_status choices
 ORDER_STATUS_CHOICES = (
     ('PENDING', 'Pending'),
     ('PROCESSING', 'Processing'),
@@ -116,9 +116,6 @@ ORDER_STATUS_CHOICES = (
     ('RETURNED', 'Returned'),
     ('REFUNDED', 'Refunded'),
 )
-
-# models.py
-
 class OrderPlaced(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customers, on_delete=models.CASCADE,null=True)

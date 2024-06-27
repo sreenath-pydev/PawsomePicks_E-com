@@ -24,7 +24,7 @@ urlpatterns = [
     path('plus_cart/', views.plus_cart, name='plus_cart'),
     path('minus_cart/', views.minus_cart, name='minus_cart'),
    # checkout section
-    path('CheckoutAddForm/',views.CheckoutAddForm,name="CheckoutAddForm"),
+    
     path('checkout/', views.CheckOutView.as_view(), name='checkout'),
     #payment
     #path('order_payment/', views.order_payment, name='order_payment'),

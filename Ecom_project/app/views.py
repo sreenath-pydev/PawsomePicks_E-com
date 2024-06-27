@@ -29,7 +29,7 @@ def contact(request):
 # Retrieve products based on a specific category value and render them in a template.
 class CategoryView(View):
     def get(self, request, val):
-        products = Products.objects.filter(category=val)
+        product = Products.objects.filter(category=val)
         title = Products.objects.filter(category=val).values('title').annotate(total=Count('title'))
         return render(request, 'app/products.html', locals())
 
@@ -188,27 +188,9 @@ def minus_cart(request):
         return JsonResponse(data)
     
 
-
-from django.http import HttpResponseBadRequest
-import logging
-logger = logging.getLogger(__name__)
-# Checkout
-from django.urls import reverse
-
-def CheckoutAddForm(request):
-    user = request.user
-    form = CustomerProfileForm()
-    add = Customers.objects.filter(user=user)
-    context ={
-        'user':user,
-        'form':form,
-        'add':add,
-    } 
-    return render(request, "app/checkout.html", context)
-    
+# checkout  
 class CheckOutView(View):
     def get(self, request):
-         
         user = request.user
         form = CustomerProfileForm()
         add = Customers.objects.filter(user=user)
@@ -216,7 +198,6 @@ class CheckOutView(View):
         F_amount = sum(p.quantity * p.product.discount_price for p in cart_items)
         total_amount = F_amount + 40
         context = {
-            
             'user': user,
             'form':form,
             'add':add,
@@ -228,12 +209,8 @@ class CheckOutView(View):
 
     def post(self, request):
         user = request.user
-        # ! Customer ID fetching pending
-        """cust_id = request.POST.get("custid") 
-        print("cust_id >>>>>>>>>>>>>>!",cust_id)
-        if not cust_id:
-            return HttpResponseBadRequest("Customer ID is missing.")"""
-        
+        cust_id = request.POST.get("custid") 
+        print("cust_id @Checkout-POST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",cust_id)
         cart_items = Cart.objects.filter(user=user)
         F_amount = sum(p.quantity * p.product.discount_price for p in cart_items)
         total_amount = F_amount + 40
@@ -251,8 +228,8 @@ class CheckOutView(View):
                 razorpay_order_id=order_id,
                 razorpay_payment_status=order_status,
             )
-            payment.save()
-        callback_url = f"http://127.0.0.1:8000/paymentdone/?user_id={user.id}"
+            payment.save()                                                  #! 
+        callback_url = f"http://127.0.0.1:8000/paymentdone/?user_id={user.id}&cust_id={cust_id}"
         context = {
             "user": request.user,
             # ! pending "cust_id": cust_id,
@@ -262,16 +239,18 @@ class CheckOutView(View):
             "order_id": order_id,
         }
         return render(request, "app/payment.html", context)
-
+    
+from django.http import HttpResponseBadRequest
 @csrf_exempt
 def paymentdone(request):
     user_id = request.GET.get('user_id')
+    print("cust_id @ paymentdone.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",user_id)
     user = get_object_or_404(User, pk=user_id)
-
+    cart = Cart.objects.filter(user=user_id)
     # ! pending
     """cust_id = request.GET.get('cust_id')
-    customer = get_object_or_404(Customers, id=cust_id)
-    print("cust_id>>>>>>>>>>>>.",cust_id)
+    print("cust_id @ paymentdone.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.",cust_id)
+    customer = get_object_or_404(Customers, id=cust_id) 
     if not user_id or not cust_id:
         return HttpResponseBadRequest("User ID or Customer ID is missing.")"""
 
@@ -285,7 +264,7 @@ def paymentdone(request):
         payment_id = request.POST.get("razorpay_payment_id", "")
         signature_id = request.POST.get("razorpay_signature", "")
         order_id = request.POST.get("razorpay_order_id")
-
+        
         payment = Payment.objects.get(razorpay_order_id=order_id)
         payment.razorpay_payment_id = payment_id
         payment.signature_id = signature_id
@@ -300,8 +279,7 @@ def paymentdone(request):
             payment.paid = True
             payment.save()
 
-    cart = Cart.objects.filter(user=user_id)
-    for c in cart:
+    for c in cart:             # ! Customer id Pending
         OrderPlaced(user=user, customer=None, product=c.product, quantity=c.quantity, payment=payment).save()
         c.delete()
         
