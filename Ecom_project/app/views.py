@@ -229,9 +229,9 @@ class CheckOutView(View):
                 razorpay_payment_status=order_status,
             )
             payment.save()                                                  #! 
-        callback_url = f"http://127.0.0.1:8000/paymentdone/?user_id={user.id}&cust_id={cust_id}"
+        callback_url = f"http://127.0.0.1:8000/paymentdone/?user_id={user.id}&cust_id={cust_id}&user={user}"
         context = {
-            "user": request.user,
+            "user": user,
             # ! pending "cust_id": cust_id,
             "callback_url": callback_url,
             "razorpay_key": settings.RAZORPAY_KEY_ID,
@@ -243,8 +243,11 @@ class CheckOutView(View):
 from django.http import HttpResponseBadRequest
 @csrf_exempt
 def paymentdone(request):
+    USER = request.GET.get('user')
+    print("USER,",USER)
     user_id = request.GET.get('user_id')
-    print("cust_id @ paymentdone.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",user_id)
+    
+    print("User_id @ paymentdone.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",user_id)
     user = get_object_or_404(User, pk=user_id)
     cart = Cart.objects.filter(user=user_id)
     # ! pending
@@ -282,8 +285,9 @@ def paymentdone(request):
     for c in cart:             # ! Customer id Pending
         OrderPlaced(user=user, customer=None, product=c.product, quantity=c.quantity, payment=payment).save()
         c.delete()
-        
-    return render(request, "app/order_status.html", context={"status": "Order Placed Successfully"})
+    return redirect('order_success')    
+    #return render(request, "app/order_status.html", context={"status": "Order Placed Successfully","user": user})
 # Orders success - order status
 def order_success(request):
+    user = request.user
     return render(request, "app/order_status.html", locals())
