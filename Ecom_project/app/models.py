@@ -151,4 +151,6 @@ class OrderPlaced(models.Model):
     def total_amount(self):
         return self.quantity * self.product.discount_price
 
-    
+class Wishlist(models. Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    product = models.ForeignKey(Products,on_delete=models.CASCADE)

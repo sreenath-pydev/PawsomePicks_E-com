@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import Products, Customers, Cart, Payment, OrderPlaced
+from .models import Products, Customers, Cart, Payment, OrderPlaced,Wishlist
 from django.db.models import Count, Q
 from .form import UserRegistrationForm, CustomerProfileForm
 from django.contrib import messages
@@ -18,18 +18,21 @@ from django.utils.decorators import method_decorator
 def index(request):
     if request.user.is_authenticated:
         totalitems = len(Cart.objects.filter(user=request.user))
+        wishlistitems = len(Wishlist.objects.filter(user=request.user))
     return render(request, 'app/index.html',locals())
 
 # about page
 def about(request):
     if request.user.is_authenticated:
         totalitems = len(Cart.objects.filter(user=request.user))
+        wishlistitems = len(Wishlist.objects.filter(user=request.user))
     return render(request, 'app/about.html',locals())
 
 # contact page
 def contact(request):
     if request.user.is_authenticated:
         totalitems = len(Cart.objects.filter(user=request.user))
+        wishlistitems = len(Wishlist.objects.filter(user=request.user))
     return render(request, 'app/contact.html',locals())
 
 # Retrieve products based on a specific category value and render them in a template.
@@ -37,6 +40,7 @@ class CategoryView(View):
     def get(self, request, val):
         if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
         product = Products.objects.filter(category=val)
         title = Products.objects.filter(category=val).values('title').annotate(total=Count('title'))
         return render(request, 'app/products.html', locals())
@@ -46,6 +50,7 @@ class CategoryTitle(View):
     def get(self, request, val):
         if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
         product = Products.objects.filter(title=val)
         title = Products.objects.filter(category=product[0].category).values('title')
         return render(request, 'app/products.html', locals())
@@ -53,10 +58,41 @@ class CategoryTitle(View):
 # product details
 class ProductDetailsView(View):
     def get(self, request, pk):
+        product = Products.objects.get(pk=pk)
+        wishlist = Wishlist.objects.filter(Q(product=product) & Q(user=request.user))
+        
+        totalitems = 0
         if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
-        product = Products.objects.get(pk=pk)
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
+        
         return render(request, 'app/product_detail.html', locals())
+
+# Add to wishlist
+def PulsWishlist(request):
+    if request.method=="GET":
+        prod_id = request.GET.get('prod_id')
+        product = Products.objects.get(id=prod_id)
+        user = request.user
+        Wishlist(user=user,product=product).save()
+        data = {
+            'massage':'wishlist added successfully'
+        }
+    return JsonResponse(data)
+
+# Remove From wishlist
+def MinusWishlist(request):
+    if request.method=="GET":
+        prod_id = request.GET.get('prod_id')
+        print("pppppp",prod_id)
+        product = Products.objects.get(id=prod_id)
+        user = request.user
+        Wishlist.objects.filter(user=user,product=product).delete()
+        data = {
+            'massage':'wishlist Removed successfully'
+        }
+    return JsonResponse(data)
+
 
 # User registration form
 class UserRegistrationView(View):
@@ -80,12 +116,14 @@ class ProfileView(View):
     def get(self,request):
         if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
         form = CustomerProfileForm()
         return render(request,'app/profile.html',locals())
     
     def post(self,request):
         if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
         form = CustomerProfileForm(request.POST)
         if form.is_valid():
             user = request.user
@@ -108,6 +146,7 @@ class ProfileView(View):
 def address(request):
     if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
     add = Customers.objects.filter(user=request.user)
     return render(request, 'app/user_address.html', locals())
 
@@ -117,6 +156,7 @@ class UpdateAddressView(View):
     def get(self, request, pk):
         if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
         add = get_object_or_404(Customers, pk=pk)
         form = CustomerProfileForm(instance=add)
         return render(request, 'app/update_address.html', locals())
@@ -124,6 +164,7 @@ class UpdateAddressView(View):
     def post(self, request, pk):
         if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
         form = CustomerProfileForm(request.POST, instance=get_object_or_404(Customers, pk=pk))
         if form.is_valid():
             form.save()
@@ -132,8 +173,9 @@ class UpdateAddressView(View):
             messages.warning(request, "Invalid input")
         return render(request, 'app/update_address.html', locals())
 
-# Delete address
 
+
+# Delete address
 class DeleteAddressView(View):
     def get(self, request, pk):
         add = get_object_or_404(Customers, pk=pk)
@@ -141,8 +183,8 @@ class DeleteAddressView(View):
         messages.success(request, "Address deleted successfully")
         return redirect('address')
 
-# Add to cart
 
+# Add to cart
 def add_to_cart(request):
     user = request.user
     product_id = request.GET.get('prod_id')
@@ -158,6 +200,7 @@ def add_to_cart(request):
 def show_cart_items(request):
     if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
     user = request.user
     cart_items = Cart.objects.filter(user=user)
     amount = np.sum([item.total_price for item in cart_items])
@@ -218,6 +261,7 @@ class CheckOutView(View):
     def get(self, request):
         if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
         user = request.user
         form = CustomerProfileForm()
         add = Customers.objects.filter(user=user)
@@ -318,8 +362,16 @@ def paymentdone(request):
     #return render(request, "app/order_status.html", context={"status": "Order Placed Successfully","user": user})
 # Orders success - order status
 def order_success(request):
-    if request.user.is_authenticated:
-            totalitems = len(Cart.objects.filter(user=request.user))
     user = request.user
     orders = OrderPlaced.objects.filter(user=user).order_by('-order_date')
+    if request.user.is_authenticated:
+            totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
+    
     return render(request, "app/order_status.html", locals())
+
+def Wishlists(request):
+    wishlist = Wishlist.objects.filter(user=request.user)
+
+    return render(request,"app/wishlist.html",locals())   
+

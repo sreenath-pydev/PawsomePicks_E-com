@@ -23,6 +23,9 @@ urlpatterns = [
     path('remove_cart/<int:prod_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('plus_cart/', views.plus_cart, name='plus_cart'),
     path('minus_cart/', views.minus_cart, name='minus_cart'),
+    path('wishlist/',views.Wishlists,name='wishlist'),
+    path('pluswishlist/', views.PulsWishlist,name='pluswishlist'),
+    path('minuswishlist/', views.MinusWishlist,name='minuswishlist'),
    # checkout section
     
     path('checkout/', views.CheckOutView.as_view(), name='checkout'),

@@ -92,3 +92,41 @@ $('.minus-cart').click(function(){
  radioButton.addEventListener('change', function() {   
  // Enable the payment button if a radio button is selected    
  document.getElementById('rzp-button1').disabled = false;    });  });
+
+ $(document).ready(function() {
+  $('.plus_wishlist').click(function() {
+    var id = $(this).attr("pid").toString();
+    $.ajax({
+      type: "GET",
+      url: "/pluswishlist",
+      data: {
+        prod_id: id
+      },
+      success: function(data) {
+        window.location.href = `/product_details/${id}`;
+      },
+      error: function(xhr, status, error) {
+        console.error("An error occurred: " + error);
+        alert("An error occurred while adding the product to the wishlist. Please try again.");
+      }
+    });
+  });
+
+  $('.minus_wishlist').click(function() {
+    var id = $(this).attr("pid").toString();
+    $.ajax({
+      type: "GET",
+      url: "/minuswishlist",
+      data: {
+        prod_id: id
+      },
+      success: function(data) {
+        window.location.href = `/product_details/${id}`;
+      },
+      error: function(xhr, status, error) {
+        console.error("An error occurred: " + error);
+        alert("An error occurred while removing the product from the wishlist. Please try again.");
+      }
+    });
+  });
+});

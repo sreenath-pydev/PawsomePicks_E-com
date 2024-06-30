@@ -36,15 +36,23 @@
 
                 <!-- Buttons Section -->
                 <div class="row ">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <form action="{% url "add_to_cart" %}" method="get">
                             <input type="hidden" name="prod_id" value="{{ product.id }}">
-                            <button type="submit" class="btn btn-info m-1 p-2">Add to cart</button>
+                            <button type="submit" class="btn btn-info shadow  py-2 ms-4" style="width:150px;">Add to cart</button>
                         </form>
                     </div>
-                    <div class="col-md-6">
-                        <button type="button" class="btn btn-success m-1 p-2">Buy Now</button>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-success shadow  py-2 ms-4" style="width:150px;">Buy Now</button>
                     </div>
+                    <div class="col-md-4"> 
+                        {% if wishlist %}
+                        <a pid="{{ product.id }}" class="minus_wishlist btn py-2 ms-4" ><i class="fas fa-heart fa-2x" style="color: #F48B48;"></i></a>
+                        {% else %}
+                        <a pid="{{ product.id }}" class="plus_wishlist btn py-2 ms-4 "><i class="far fa-heart fa-2x" style="color: #FFD43B;"></i></a>
+                        {% endif %}
+                    </div>
+                    
                 </div>
             </div>
         </div>
