@@ -124,6 +124,28 @@ class OrderPlaced(models.Model):
     order_date = models.DateTimeField(auto_now_add=True)
     order_status = models.CharField(max_length=100, choices=ORDER_STATUS_CHOICES, default='PENDING')
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
+    def get_progress_value(self):
+        progress_values = {
+            'PENDING': 25,
+            'PROCESSING': 50,
+            'SHIPPED': 75,
+            'DELIVERED': 100,
+            'CANCELLED': 100,
+            'RETURNED': 100,
+            'REFUNDED': 100,
+        }
+        return progress_values.get(self.order_status.upper(), 0)
+    def get_progress_class(self):
+        progress_classes = {
+            'PENDING': 'bg-secondary',
+            'PROCESSING': 'bg-info',
+            'SHIPPED': 'bg-primary',
+            'DELIVERED': 'bg-success',
+            'CANCELLED': 'bg-danger',
+            'RETURNED': 'bg-warning',
+            'REFUNDED': 'bg-dark',
+        }
+        return progress_classes.get(self.order_status.upper(), 'bg-secondary')
 
     @property
     def total_amount(self):

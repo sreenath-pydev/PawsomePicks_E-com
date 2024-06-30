@@ -1,7 +1,47 @@
 {% extends "app/base.html" %}
 {% load static %}
-{% block title %}order{% endblock title %}
+{% block title %}Your Orders{% endblock title %}
 
 {% block main-content %}
-<h2>payment</h2> {{status}}
+<div class="container mt-5">
+    <div class="row align-items-center mb-4">
+        <div class="col-md-6">
+            <h2>Your Orders</h2>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="/" class="btn btn-info">Back to Home</a>
+        </div>
+    </div>
+    <div class="row">
+        {% for order in orders %}
+            <div class="col-md-12 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="{{ order.product.product_image.url }}" class="img-fluid img-thumbnail" alt="{{ order.product.title }}" width="100px">
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="card-title">{{ order.product.title }}</h5>
+                                <p class="card-text">Price: ₹{{ order.product.discount_price }}</p>
+                                <p class="card-text">Quantity: {{ order.quantity }}</p>
+                            </div>
+                            <div class="col-md-3">
+                                {% if order.order_status %}
+                                {{order.order_date}}
+                                <div class="progress" role="progressbar" aria-valuenow="{{ order.get_progress_value }}" aria-valuemin="0" aria-valuemax="100" style="height: 30px;">
+                                    <div class="progress-bar {{ order.get_progress_class }}" style="width: {{ order.get_progress_value }}%;" >
+                                        {{ order.get_order_status_display }}
+                                    </div>
+                                </div>
+                                
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock main-content %}

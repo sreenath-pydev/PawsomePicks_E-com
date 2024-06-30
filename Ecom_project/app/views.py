@@ -290,4 +290,5 @@ def paymentdone(request):
 # Orders success - order status
 def order_success(request):
     user = request.user
+    orders = OrderPlaced.objects.filter(user=user).order_by('-order_date')
     return render(request, "app/order_status.html", locals())
