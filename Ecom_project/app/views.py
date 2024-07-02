@@ -174,7 +174,6 @@ class UpdateAddressView(View):
         return render(request, 'app/update_address.html', locals())
 
 
-
 # Delete address
 class DeleteAddressView(View):
     def get(self, request, pk):
@@ -182,7 +181,6 @@ class DeleteAddressView(View):
         add.delete()
         messages.success(request, "Address deleted successfully")
         return redirect('address')
-
 
 # Add to cart
 def add_to_cart(request):
@@ -193,10 +191,18 @@ def add_to_cart(request):
     if not created:
         cart_item.quantity += 1
         cart_item.save()
+    return redirect(f'/product_details/{product_id}')
+
+# Remove from cart
+def remove_from_cart(request, prod_id):
+    product = get_object_or_404(Products, id=prod_id)
+    cart_item = Cart.objects.filter(user=request.user, product=product).first()
+    if cart_item:
+        cart_item.delete()
     return redirect('/cart')
 
-# Show cart items
 
+# Show cart items
 def show_cart_items(request):
     if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
@@ -207,14 +213,6 @@ def show_cart_items(request):
     total_amount = amount + 40
     return render(request, 'app/cart.html', locals())
 
-# Remove from cart
-
-def remove_from_cart(request, prod_id):
-    product = get_object_or_404(Products, id=prod_id)
-    cart_item = Cart.objects.filter(user=request.user, product=product).first()
-    if cart_item:
-        cart_item.delete()
-    return redirect('/cart')
 
 # Quantity plus in cart
 
@@ -359,7 +357,8 @@ def paymentdone(request):
         OrderPlaced(user=user, customer=None, product=c.product, quantity=c.quantity, payment=payment).save()
         c.delete()
     return redirect('order_success')    
-    #return render(request, "app/order_status.html", context={"status": "Order Placed Successfully","user": user})
+    
+
 # Orders success - order status
 def order_success(request):
     user = request.user
@@ -370,8 +369,39 @@ def order_success(request):
     
     return render(request, "app/order_status.html", locals())
 
+# wishlist
 def Wishlists(request):
+    if request.user.is_authenticated:
+            totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
     wishlist = Wishlist.objects.filter(user=request.user)
-
     return render(request,"app/wishlist.html",locals())   
+
+# search 
+def search_products(request):
+    searched = request.GET['searched']
+    print(searched)
+    if searched:
+        # Perform search using the query
+        searched = Products.objects.filter(title__icontains=searched)
+        if not searched:
+            messages.success(request, "This Product Does Not Exist...Please Try Again")
+            searched = Products.objects.all()
+            print(searched)
+    else:
+        # Handle the case when the search query is not provided
+        messages.success(request,"This Product Does Not Exist...Please Try Again")
+        searched = Products.objects.all()
+    
+    if request.user.is_authenticated:
+            totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
+    context ={
+        'totalitems':totalitems,
+        'wishlistitems':wishlistitems,
+        'searched': searched
+    }
+    return render(request, 'app/search_results.html', context)
+
+
 
