@@ -63,6 +63,7 @@ class ProductDetailsView(View):
         totalitems = 0
         wishlistitems = 0
         if request.user.is_authenticated:
+            in_cart = Cart.objects.filter(user=request.user, product=product)
             wishlist = Wishlist.objects.filter(Q(product=product) & Q(user=request.user))
             totalitems = len(Cart.objects.filter(user=request.user))
             wishlistitems = len(Wishlist.objects.filter(user=request.user))
