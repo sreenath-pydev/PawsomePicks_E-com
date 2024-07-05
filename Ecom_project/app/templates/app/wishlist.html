@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <img src="{{ items.product.product_image.url }}" class="img-fluid img-thumbnail" alt="{{ items.product.title }}" width="100px">
+                                <a href="{% url 'product_details' pk=items.product.pk %}" > <img src="{{ items.product.product_image.url }}" class="img-fluid img-thumbnail" alt="{{ items.product.title }}" width="100px"></a>
                             </div>
                             <div class="col-md-6">
                                 <h5 class="card-title">{{ items.product.title }}</h5>
