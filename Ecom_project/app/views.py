@@ -56,17 +56,18 @@ class CategoryTitle(View):
         return render(request, 'app/products.html', locals())
 
 # product details
+
 class ProductDetailsView(View):
     def get(self, request, pk):
         product = Products.objects.get(pk=pk)
-        wishlist = Wishlist.objects.filter(Q(product=product) & Q(user=request.user))
-        
         totalitems = 0
+        wishlistitems = 0
         if request.user.is_authenticated:
+            wishlist = Wishlist.objects.filter(Q(product=product) & Q(user=request.user))
             totalitems = len(Cart.objects.filter(user=request.user))
             wishlistitems = len(Wishlist.objects.filter(user=request.user))
-        
         return render(request, 'app/product_detail.html', locals())
+
 
 # Add to wishlist
 def PulsWishlist(request):
@@ -181,7 +182,7 @@ class DeleteAddressView(View):
         add.delete()
         messages.success(request, "Address deleted successfully")
         return redirect('address')
-
+@login_required
 # Add to cart
 def add_to_cart(request):
     user = request.user
@@ -392,7 +393,8 @@ def search_products(request):
         # Handle the case when the search query is not provided
         messages.success(request,"This Product Does Not Exist...Please Try Again")
         searched = Products.objects.all()
-    
+    totalitems = 0
+    wishlistitems =0
     if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
             wishlistitems = len(Wishlist.objects.filter(user=request.user))
