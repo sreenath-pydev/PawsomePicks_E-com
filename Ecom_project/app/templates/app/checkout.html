@@ -24,7 +24,9 @@
         <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
                 <h6 class="my-0">{{ item.product.title }}</h6>
+                <a href="{% url 'product_details' pk=item.product.pk %}">
                 <img src="{{ item.product.product_image.url }}" alt="{{ item.product.title }}" class="img-fluid img-thumbnail shadow-sm" height="50" width="50">
+                </a>
                 <small class="text-muted">Quantity: {{ item.quantity }}</small>
             </div>
             <span class="text-muted">₹{{ item.product.discount_price }}</span>
@@ -101,10 +103,4 @@
 
 {% endblock main-content %}
 
-{% block payment-gateway %}
-{% comment %} 
-<form method="POST">
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></>
 
- {% endcomment %}
-{% endblock payment-gateway %}
