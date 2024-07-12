@@ -26,12 +26,27 @@
 .container-fluid {
     padding: 0;
 }
-.search-btn .btn{
-    border-color: #F48B48;
-}  
-.search-btn .btn:hover{
-    background-color: #F48B48;
-}  
+/* Search Bar */
+.custom-search-input{
+    width: 600px!important;
+    height: 60px!important;
+    border-radius: 25px!important;
+  }
+.custom-search-button {
+    height: 60px!important;
+    width: 60px!important;
+    border-color: #F48B48!important;
+    border-radius: 25px!important;
+}
+.custom-search-button i{
+    color: #F48B48!important;
+}
+.custom-search-button:hover {
+    background-color: #F48B48!important;
+}
+.custom-search-button:hover i {
+    color: white !important;
+  }
 .carousel-inner  img {
     height: 100%;
     object-fit: cover;
@@ -591,4 +606,8 @@ svg {
 .update_address .col-sm-9{
     height: 550px;
 }
+.custom-search-input{
+    width: 270px!important;
+}
+
 }
