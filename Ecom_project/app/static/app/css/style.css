@@ -26,11 +26,13 @@
 .container-fluid {
     padding: 0;
 }
+
 /* Search Bar */
 .custom-search-input{
     width: 600px!important;
     height: 60px!important;
     border-radius: 25px!important;
+    border-color: #F48B48!important;
   }
 .custom-search-button {
     height: 60px!important;
