@@ -1,6 +1,5 @@
-/* carousel autoplay */ 
+  // Carousel autoplay 
 document.addEventListener('DOMContentLoaded', function() {
-  // Your custom JavaScript code here
   var myCarousel = document.querySelector('#carouselExampleFade');
   if (myCarousel) {
     var carousel = new bootstrap.Carousel(myCarousel, {
@@ -10,8 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-
-/* single product details view more 
+//single product details view more 
 document.addEventListener('DOMContentLoaded', function() {
   var viewMoreBtn = document.getElementById('viewMoreBtn');
   var extraDetails = document.getElementById('extraDetails');
@@ -22,9 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
           viewMoreBtn.style.display = 'none'; // Hide the "View More" button after clicking
       }
   });
-}); */ 
+});  
 
-/*navbar drop down hover effect */
+// navbar drop down hover effect
 document.addEventListener('DOMContentLoaded', function () {
   var dropdowns = document.querySelectorAll('.dropdown');
 
@@ -39,8 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-/*cart plus and minus */
-
+// cart plus button
 $('.plus-cart').click(function(){
   var id = $(this).attr("pid").toString()
   var obj = this.parentNode.children[2]
@@ -57,11 +54,9 @@ $('.plus-cart').click(function(){
       document.getElementById('amount').innerText = data.amount
       document.getElementById('total_amount').innerText = data.total_amount
     }
-    
-
   })
 })
-/* minus cart*/
+// cart minus button
 $('.minus-cart').click(function(){
   var id = $(this).attr("pid").toString()
   var obj = this.parentNode.children[2]
@@ -78,21 +73,16 @@ $('.minus-cart').click(function(){
       document.getElementById('amount').innerText = data.amount
       document.getElementById('total_amount').innerText = data.total_amount
     }
-    
-
   })
 })
-
-
- /* Get the radio buttons  checkout page */
-
- const radioButtons = document.querySelectorAll('.address-radio');  
- // Add event listener to each radio button  
+ // Get the radio buttons  checkout page -(Enable the payment button if a radio button is selected)
+ const radioButtons = document.querySelectorAll('.address-radio');   
  radioButtons.forEach(function(radioButton) {  
- radioButton.addEventListener('change', function() {   
- // Enable the payment button if a radio button is selected    
+ radioButton.addEventListener('change', function() {      
  document.getElementById('rzp-button1').disabled = false;    });  });
 
+
+// Add product to wishlist
  $(document).ready(function() {
   $('.plus_wishlist').click(function() {
     var id = $(this).attr("pid").toString();
@@ -111,7 +101,7 @@ $('.minus-cart').click(function(){
       }
     });
   });
-
+// Remove product from wishlist
   $('.minus_wishlist').click(function() {
     var id = $(this).attr("pid").toString();
     $.ajax({
@@ -129,4 +119,74 @@ $('.minus-cart').click(function(){
       }
     });
   });
+});
+// Dog products slider
+var dogSwiper = new Swiper(".dog-slider .slide-content", {
+  slidesPerView: 4,
+  spaceBetween: 25,
+  loop: true,
+  centerSlide: 'true',
+  fade: 'true',
+  grabCursor: 'true',
+  pagination: {
+    el: ".dog-swiper-pagination",
+    clickable: true,
+    dynamicBullets: true,
+  },
+  navigation: {
+    nextEl: ".dog-swiper-next",
+    prevEl: ".dog-swiper-prev",
+  },
+  breakpoints: {
+    0: {
+      slidesPerView: 1,
+    },
+    520: {
+      slidesPerView: 2,
+    },
+    950: {
+      slidesPerView: 3,
+    },
+    1130: {
+      slidesPerView: 4,
+    },
+    1400: {
+      slidesPerView: 5,
+    },
+  },
+});
+//cat products slider
+var catSwiper = new Swiper(".cat-slider .slide-content", {
+  slidesPerView: 4,
+  spaceBetween: 25,
+  loop: true,
+  centerSlide: 'true',
+  fade: 'true',
+  grabCursor: 'true',
+  pagination: {
+    el: ".cat-swiper-pagination",
+    clickable: true,
+    dynamicBullets: true,
+  },
+  navigation: {
+    nextEl: ".cat-swiper-next",
+    prevEl: ".cat-swiper-prev",
+  },
+  breakpoints: {
+    0: {
+      slidesPerView: 1,
+    },
+    520: {
+      slidesPerView: 2,
+    },
+    950: {
+      slidesPerView: 3,
+    },
+    1130: {
+      slidesPerView: 4,
+    },
+    1400: {
+      slidesPerView: 5,
+    },
+  },
 });

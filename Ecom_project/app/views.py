@@ -19,6 +19,8 @@ def index(request):
     if request.user.is_authenticated:
         totalitems = len(Cart.objects.filter(user=request.user))
         wishlistitems = len(Wishlist.objects.filter(user=request.user))
+    Dog_product = Products.objects.filter(category__startswith='D').order_by('-id')
+    Cat_product = Products.objects.filter(category__startswith='C').order_by('-id')
     return render(request, 'app/index.html',locals())
 
 # about page
