@@ -9,18 +9,26 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-//single product details view more 
-document.addEventListener('DOMContentLoaded', function() {
-  var viewMoreBtn = document.getElementById('viewMoreBtn');
-  var extraDetails = document.getElementById('extraDetails');
-  
-  viewMoreBtn.addEventListener('click', function() {
-      if (extraDetails.style.display === 'none') {
-          extraDetails.style.display = 'block';
-          viewMoreBtn.style.display = 'none'; // Hide the "View More" button after clicking
-      }
-  });
-});  
+// //single product details view more 
+// document.addEventListener('DOMContentLoaded', function() {
+//   var viewMoreBtn = document.getElementById('viewMoreBtn');
+//   var showLessBtn = document.getElementById('showLessBtn');
+//   var productDetails = document.getElementById('productDetails');
+
+//   viewMoreBtn.addEventListener('click', function() {
+//       if (productDetails.classList.contains('show')) {
+//           viewMoreBtn.style.display = 'none'; // Hide the "View More" button after clicking
+//           showLessBtn.style.display = 'block'; // Show the "Show Less" button
+//       }
+//   });
+
+//   showLessBtn.addEventListener('click', function() {
+//       if (productDetails.classList.contains('show')) {
+//           showLessBtn.style.display = 'none'; // Hide the "Show Less" button after clicking
+//           viewMoreBtn.style.display = 'block'; // Show the "View More" button
+//       }
+//   });
+// });
 
 // navbar drop down hover effect
 document.addEventListener('DOMContentLoaded', function () {

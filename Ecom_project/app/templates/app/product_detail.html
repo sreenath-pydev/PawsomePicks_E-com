@@ -1,76 +1,82 @@
 {% extends "app/base.html" %}
 {% load static %}
-{% block title %}Product Details{% endblock title %}
+
+{% block title %}
+    Product Details
+{% endblock title %}
 
 {% block main-content %}
-<!-- Single Product -->
-<div class="container">
-    <div class="row justify-content-between">
-        <!-- Product Image Column -->
-        <div class="col-lg-5">
-            <div class="position-sticky top-0" style="z-index: 1;">
-                <img src="{{ product.product_image.url }}" class="img-fluid" alt="">
-            </div>
-        </div>
-
-        <!-- Product Details Column -->
-        <div class="col-lg-5 overflow-auto" style="max-height: 80vh;">
-            <div class="productdetail  px-4">
-                <h1 style="font-family: Georgia; font-size: 50px;">{{ product.title }}</h1>
-                <h5>Rs.{{ product.discount_price }}/-</h5>
-                <small class="text-decoration-line-through text-muted fs-5"><del>Rs. {{ product.selling_price }}/-</del></small>
-                <br><br>
-                <h3 class="">Product Details <i class="fa fa-indent"></i></h3>
-                <p>{{ product.Description }}</p>
-
-                <!--View More Details-->
-                <button class="btn btn-link  text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#productDetails" aria-expanded="false" aria-controls="productDetails">
-                    View More
-                </button>
-
-                <div class="collapse" id="productDetails">
-                    <div class="">
-                            <b>Composition</b> <br>
-                        <p>{{ product.composition }}<br>
-                            <b>Product Appilactions</b> <br>
-                        {{ product.product_app }}</p>
-                    </div>
+    <!-- Single Product -->
+    <div class="container">
+        <div class="row justify-content-between">
+            <!-- Product Image Column -->
+            <div class="col-lg-5">
+                <div class="position-sticky top-0" style="z-index: 1;">
+                    <img src="{{ product.product_image.url }}" class="img-fluid" alt="">
                 </div>
+            </div>
 
-                <!--Add To Cart Buttons-->
-                <div class="row ">
-                    <div class="col-md-4">
-                        {% if in_cart %}
-                            <form action="{% url "cart" %}" method="get">
-                                <button type="submit" class="btn btn-info shadow py-2 ms-4" style="width:150px;">Go to Cart</button>
-                            </form>
-                        {% else %}
-                            <form action="{% url "add_to_cart" %}" method="get">
+            <!-- Product Details Column -->
+            <div class="col-lg-5 overflow-auto" style="max-height: 80vh;">
+                <div class="productdetail px-4">
+                    <h1 style="font-family: Georgia; font-size: 50px;">{{ product.title }}</h1>
+                    <h5>Rs.{{ product.discount_price }}/-</h5>
+                    <small class="text-decoration-line-through text-muted fs-5"><del>Rs. {{ product.selling_price }}/-</del></small>
+                    <br><br>
+                    <h3 class="">Product Details <i class="fa fa-indent"></i></h3>
+                    <p>{{ product.Description }}</p>
+                    <!-- Add To Cart Buttons -->
+                    <div class="row">
+                        <div class="col-md-4">
+                            {% if in_cart %}
+                                <form action="{% url "cart" %}" method="get">
+                                    <button type="submit" class="btn btn-info shadow py-2 ms-4" style="width:150px;">Go to Cart</button>
+                                </form>
+                            {% else %}
+                                <form action="{% url "add_to_cart" %}" method="get">
+                                    <input type="hidden" name="prod_id" value="{{ product.id }}">
+                                    <button type="submit" class="btn btn-info shadow py-2 ms-4" style="width:150px;">Add to Cart</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                        <!-- Buy Now Button -->
+                        <div class="col-md-4">
+                            <form action="{% url "cart" %}" method="post">
+                                {% csrf_token %}
                                 <input type="hidden" name="prod_id" value="{{ product.id }}">
-                                <button type="submit" class="btn btn-info shadow py-2 ms-4" style="width:150px;">Add to Cart</button>
+                                <button type="submit" class="btn btn-success shadow py-2 ms-4" style="width:150px;">Buy Now</button>
                             </form>
-                        {% endif %}
+                        </div>
+                        <!-- Wishlist Button -->
+                        <div class="col-md-4"> 
+                            {% if wishlist %}
+                                <a pid="{{ product.id }}" class="minus_wishlist btn py-2 ms-4"><i class="fas fa-heart fa-2x" style="color: #F48B48;"></i></a>
+                            {% else %}
+                                <a pid="{{ product.id }}" class="plus_wishlist btn py-2 ms-4"><i class="far fa-heart fa-2x" style="color: #FFD43B;"></i></a>
+                            {% endif %}
+                        </div>
                     </div>
-                    <!--Buy Now Button-->
-                    <div class="col-md-4">
-                        <form action="{% url "cart" %}" method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="prod_id" value="{{ product.id }}">
-                            <button type="submit" class="btn btn-success shadow  py-2 ms-4" style="width:150px;">Buy Now</button>
-                        </form>
+                    <!-- View More Details -->
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    View More
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <b>Composition</b><br>
+                                    <p>{{ product.composition }}<br>
+                                        <b>Product Applications</b><br>
+                                        {{ product.product_app }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!--Wishlist Button-->
-                    <div class="col-md-4"> 
-                        {% if wishlist %}
-                        <a pid="{{ product.id }}" class="minus_wishlist btn py-2 ms-4" ><i class="fas fa-heart fa-2x" style="color: #F48B48;"></i></a>
-                        {% else %}
-                        <a pid="{{ product.id }}" class="plus_wishlist btn py-2 ms-4 "><i class="far fa-heart fa-2x" style="color: #FFD43B;"></i></a>
-                        {% endif %}
-                    </div>
-                    
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock main-content %}

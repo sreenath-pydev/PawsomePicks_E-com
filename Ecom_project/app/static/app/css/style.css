@@ -257,7 +257,9 @@ footer .payment-img img:hover{
 .productdetail .collapse {
     margin-top: 1rem;
 }
-
+.accordion-button{
+    color: #F48B48!important;
+}
 /* Buttons section */
 .buttons .btn {
     width: 100%; /* Full width for buttons */
