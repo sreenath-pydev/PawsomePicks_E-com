@@ -49,21 +49,16 @@
 .custom-search-button:hover i {
     color: white !important;
   }
+/* Carousel Slider */
 .carousel-inner  img {
     height: 100%;
     object-fit: cover;
     padding: 0;
     margin: 0;
 }
-    
-
 .col-3{
     width: 400px;
 }
-.slider img {
-    height: 560px;
-}
-
 .slider-col-2{
     width: 600px;
     text-align: center;
