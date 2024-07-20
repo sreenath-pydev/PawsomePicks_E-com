@@ -60,7 +60,8 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
-
+# Ignore database files
+Ecom_project/db.sqlite3
 # Translations
 *.mo
 *.pot
@@ -70,7 +71,13 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+# Ignore all executable files
+*.exe
 
+# Optionally, you can ignore other types of files, like logs or temporary files
+*.log
+*.tmp
+*.bat
 # Flask stuff:
 instance/
 .webassets-cache
@@ -132,6 +139,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.myenv/Scripts
 .env
 .venv
 env/
