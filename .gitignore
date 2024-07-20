@@ -1,3 +1,13 @@
+# Ignore image files
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.svg
+*.ico
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -50,7 +60,8 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
-
+# Ignore database files
+Ecom_project/db.sqlite3
 # Translations
 *.mo
 *.pot
@@ -60,7 +71,13 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+# Ignore all executable files
+*.exe
 
+# Optionally, you can ignore other types of files, like logs or temporary files
+*.log
+*.tmp
+*.bat
 # Flask stuff:
 instance/
 .webassets-cache
@@ -106,8 +123,10 @@ ipython_config.py
 #pdm.lock
 #   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
 #   in version control.
-#   https://pdm.fming.dev/#use-with-ide
+#   https://pdm.fming.dev/latest/usage/project/#working-with-version-control
 .pdm.toml
+.pdm-python
+.pdm-build/
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
@@ -120,6 +139,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+myenv/
 .env
 .venv
 env/
