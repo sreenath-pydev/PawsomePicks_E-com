@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Home{% endblock title %}
 
-{% block banner %}
+{% block carousel %}
 <div class="container-fluid">
   <div class="row">
     <!-- Carousel Slider -->
@@ -27,11 +27,11 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <!-- Slider Column -->
+    
     
   </div>
 </div>
-{% endblock banner %}
+{% endblock carousel %}
 
 {% block main-content %}
 <!-- Dog Products Categories Slider -->
@@ -112,6 +112,35 @@
   <div class="swiper-button-next cat-swiper-next swiper-navBtn"></div>
   <div class="swiper-button-prev cat-swiper-prev swiper-navBtn"></div>
   <div class="swiper-pagination cat-swiper-pagination"></div>
+</div>
+<!--offer banner-->
+<div class="container-fluid offer-banner">
+  <img src="{% static 'app/images/banner/offer_banner.png' %}">
+</div>
+<!--Product line banner-->
+<div class="container mt-5">
+  <div class="row product-line">
+    <!-- dog -->
+    <div class="col-md-4 position-relative">
+      <a href="#"> <img class="dog" src="{% static 'app/images/banner/dog.png' %}"></a>
+      <div class="text-container">
+        <h2><span class="color-1">Products For Dogs</span></h2>
+        <h5>Rise your dogs to be at  their <br>happiest and  healthiest</h5>
+      </div>
+    </div>
+    <!-- head -->
+    <div class="col col-lg-2 heading-text">
+      <h1><span class="color-1">OUR</span> <span class="color-2">PRODUCT LINE</span></h1>
+    </div>
+    <!-- cat -->
+    <div class="col-md-4 position-relative">
+      <div class="text-container mb-3">
+        <h2><span class="color-1">Products For Cats</span></h2>
+        <h5>Premium products for your <br> favorite feline companions</h5>
+      </div>
+      <a href="#"><img class="cat" src="{% static 'app/images/banner/cat.png' %}"></a>
+    </div>
+  </div>
 </div>
 
 {% endblock main-content %}
