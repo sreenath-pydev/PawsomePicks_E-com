@@ -183,7 +183,7 @@ body {
   align-items: center;
 }
 
-.position-relative img {
+.product-line .position-relative img {
   width: 90%;
   height: 90%;
   object-fit: cover;
@@ -629,7 +629,7 @@ svg {
   background-color: #ffcaa6;
 }
 
-/* Product cart page */
+/* Products at the cart page */
 .cart-items {
   display: flex;
   flex-direction: column;
