@@ -56,9 +56,7 @@ body {
   object-fit: cover;
   padding: 0;
   margin: 0;
-}
-.col-3 {
-  width: 400px;
+  border-radius: 20px !important;
 }
 .slider-col-2 {
   width: 600px;
@@ -94,8 +92,10 @@ body {
   font-weight: 1000;
   font-size: 30px;
 }
+/* offer banner */
 .offer-banner img {
   width: 100%;
+  border-radius: 20px !important;
 }
 .banners {
   height: 100%;
