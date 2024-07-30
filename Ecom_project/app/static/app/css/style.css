@@ -108,7 +108,7 @@ body {
   border-radius: 20px;
   transition: 0.6s ease-in-out;
 }
-.position-relative img:hover {
+.product-line .position-relative img:hover {
   transform: scale(1.1);
 }
 .dog {
@@ -404,7 +404,6 @@ footer .payment-img img:hover {
 .contact-us ul li {
   margin-bottom: 10px;
 }
-
 .contact-us ul li a {
   color: black;
   text-decoration: none;
@@ -416,11 +415,9 @@ footer .payment-img img:hover {
   display: flex;
   gap: 10px;
 }
-
 .social-media-links li {
   display: inline-block;
 }
-
 .social-media-links li a {
   display: block;
   padding: 10px 15px;
@@ -429,7 +426,6 @@ footer .payment-img img:hover {
   border-radius: 4px;
   transition: background-color 0.3s;
 }
-
 .social-media-links li a:hover {
   background-color: #ffd34e;
 }
