@@ -443,6 +443,26 @@ footer .payment-img img:hover {
 .update_address .col-sm-9 {
   height: 400px;
 }
+/* login section */
+.login h1 {
+  font-weight: 1000;
+  font-size: 60px;
+}
+form .login-btn {
+  background-color: #f48b48;
+  border-color: #f48b48;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 1000;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+form .login-btn:hover {
+  background-color: #ffd34e;
+  border-color: #ffd34e;
+}
 /* Product card  */
 .slide-container {
   width: 100%;
