@@ -1,39 +1,40 @@
 {% extends "app/base.html" %}
 {% load static %}
-{% block title %}About {% endblock title %}
+{% block title %}About Us{% endblock title %}
 
-<!--About Us-->
 {% block main-content %}
-<div class="about-us ">
-    <div class="container-fluid  text-center">
-        <div class="row align-items-center banners">
-          <div class="col-12 col-md-6 ">
-            <h1 class="get-to"> GET TO </h1><br><h1 class="text-white">KNOW US</h1>
-            <br>
-                 <p>
-                 Mews 'n' Woofs is an all-natural <br>
-                 and cruelty-free pet store that  <br>
-                 provides top quality food,  <br>
-                 accessories, and grooming  <br>
-                 products for your pets.
+<!-- About Us Section -->
+<div class="about">
+    <div class="container-fluid text-center">
+        <div class="row align-items-center about-us">
+            <div class="col-12 col-md-6">
+                <h1><span class="color-1">GET TO</span><br><span class="text-white">KNOW US</span></h1>
+                <br>
+                <p>
+                    Mews 'n' Woofs is an all-natural <br>
+                    and cruelty-free pet store that <br>
+                    provides top quality food, <br>
+                    accessories, and grooming <br>
+                    products for your pets.
                 </p>
-          </div>
-          <div class="col-12 col-md-6">
-            <img src="{% static 'app/images/banner/catcare.png' %}"  alt="Carousel-Image3">
-          </div>
-          
+            </div>
+            <div class="col-12 col-md-6">
+                <img src="{% static 'app/images/banner/catcare.png' %}" alt="About Us Image">
+            </div>
         </div>
     </div>
+
+    <!-- About PawsomePicksome Content -->
     <div class="container">
-        <h1>About PawsomePicks</h1>
-        <p>Welcome to PawsomePicks, your number one source for all things pet-related. We're dedicated to giving you the very best of pet products, with a focus on quality, customer service, and uniqueness.</p>
-        
+        <h1>About PawsomePicksome</h1>
+        <p>Welcome to PawsomePicksome, your number one source for all things pet-related. We're dedicated to giving you the very best of pet products, with a focus on quality, customer service, and uniqueness.</p>       
+
         <h2>Our Story</h2>
-        <p>Founded in 2022, PawsomePicks has come a long way from its beginnings in a small home office. When we first started out, our passion for providing the best products for pet owners drove us to start our own business.</p>
-        
+        <p>Founded in 2022, PawsomePicksome has come a long way from its beginnings in a small home office. When we first started out, our passion for providing the best products for pet owners drove us to start our own business.</p>      
+
         <h2>Our Mission</h2>
-        <p>Our mission is to offer top-notch pet products that enhance the lives of pets and their owners. We believe in the power of pets to bring joy and happiness to our lives, and we want to ensure that every pet gets the care and attention they deserve.</p>
-        
+        <p>Our mission is to offer top-notch pet products that enhance the lives of pets and their owners. We believe in the power of pets to bring joy and happiness to our lives, and we want to ensure that every pet gets the care and attention they deserve.</p>        
+
         <h2>What We Offer</h2>
         <ul>
             <li>High-quality pet food and treats</li>
@@ -43,23 +44,22 @@
         </ul>
         
         <h2>Why Choose Us?</h2>
-        <p>At PawsomePicks, we prioritize the well-being of your pets. Our team of pet enthusiasts carefully selects each product, ensuring it meets our high standards of quality. We are committed to providing exceptional customer service and a seamless shopping experience.</p>
+        <p>At PawsomePicksome, we prioritize the well-being of your pets. Our team of pet enthusiasts carefully selects each product, ensuring it meets our high standards of quality. We are committed to providing exceptional customer service and a seamless shopping experience.</p>
         
         <h2>Contact Us</h2>
         <p>If you have any questions or comments, please don't hesitate to contact us. We're here to help and look forward to hearing from you.</p>
-        <!--contact us button-->
+        
+        <!-- Contact Us Button -->
         <button class="button">
-           <a href="{% url 'contact' %}" class="text-decoration-none ">Contact Us</a>
+            <a href="{% url 'contact' %}" class="text-decoration-none">Contact Us</a>
             <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
-              <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
+                <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
             </svg>
-          </button>
+        </button>
     </div>
 </div>
-
-<!--footer-->
-{% block footer %}
-{% include "app/footer.html" %} 
-{% endblock footer %}
-
 {% endblock main-content %}
+
+{% block footer %}
+{% include "app/footer.html" %}
+{% endblock footer %}
