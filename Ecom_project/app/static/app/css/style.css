@@ -130,37 +130,6 @@ body {
   text-align: end;
   margin-bottom: 3%;
 }
-/* about section */
-.about-us  {
-  height: 100%;
-  background-color: #ffd34e;
-  align-items: center;
-  display: flex;
-}
-.about-us img {
-  height: 500px;
-  width: 80%;
-  margin-top: 15%;
-  margin-bottom: 15%;
-  transition: 0.6s ease-in-out;
-}
-.about-us img:hover {
-  transform: scale(1.1);
-}
-.about-us h1 {
-  font-weight: 1000;
-  font-size: 60px;
-}
-/* contact section */
-.contact-us img {
-  width: 100%;
-  height: 556px;
-  object-fit: cover;
-}
-.contact-us h1 {
-  font-weight: 1000;
-  font-size: 60px;
-}
 /* Footer */
 footer img {
   width: 150px;
@@ -262,7 +231,6 @@ footer .payment-img img:hover {
   position: sticky;
   top: 0;
 }
-
 .col-sm-9 {
   height: 100vh;
   overflow-y: scroll;
@@ -274,20 +242,21 @@ footer .payment-img img:hover {
 .card {
   border-color: green;
 }
-/*Contact Us*/
-
-/* General form styles */
+/* Contact Section */
+.contact-us img {
+  width: 100%;
+  height: 556px;
+  object-fit: cover;
+}
 .contact-us .form-group {
   margin-bottom: 15px;
 }
-
 .contact-us label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
   color: #333;
 }
-
 .contact-us input[type="text"],
 .contact-us input[type="email"],
 .contact-us textarea {
@@ -298,18 +267,15 @@ footer .payment-img img:hover {
   box-sizing: border-box;
   transition: border-color 0.3s;
 }
-
 .contact-us input[type="text"]:focus,
 .contact-us input[type="email"]:focus,
 .contact-us textarea:focus {
   border-color: #ffd34e;
   outline: none;
 }
-
 .contact-us textarea {
   resize: vertical;
 }
-
 .contact-us .btn {
   background-color: #f48b48;
   border-color: #f48b48;
@@ -320,23 +286,22 @@ footer .payment-img img:hover {
   cursor: pointer;
   transition: background-color 0.3s, border-color 0.3s;
 }
-
 .contact-us .btn:hover {
   background-color: #ffd34e;
   border-color: #ffd34e;
 }
-
-/* Additional form container styles */
-.contact-us .container {
+.contact-us .container { /* Additional form container styles */
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
-
-/* General layout and typography */
-.contact-us h1,
+.contact-us h1 {
+  font-weight: 1000;
+  font-size: 60px;
+}
+.contact-us h1,  /* General layout and typography */
 .contact-us h2 {
   color: #333;
   margin-bottom: 15px;
@@ -361,9 +326,7 @@ footer .payment-img img:hover {
   text-decoration: none;
   transition: color 0.3s;
 }
-
-/* contact us Social media links */
-.social-media-links {
+.social-media-links { /* contact us Social media links */
   display: flex;
   gap: 10px;
 }
@@ -381,8 +344,27 @@ footer .payment-img img:hover {
 .social-media-links li a:hover {
   background-color: #ffd34e;
 }
-/*About us */
-/* about us contact button */
+/* About section */
+.about-us  {
+  height: 100%;
+  background-color: #ffd34e;
+  align-items: center;
+  display: flex;
+}
+.about-us img {
+  height: 500px;
+  width: 80%;
+  margin-top: 15%;
+  margin-bottom: 15%;
+  transition: 0.6s ease-in-out;
+}
+.about-us img:hover {
+  transform: scale(1.1);
+}
+.about-us h1 {
+  font-weight: 1000;
+  font-size: 60px;
+}
 .button {
   position: relative;
   transition: all 0.3s ease-in-out;
