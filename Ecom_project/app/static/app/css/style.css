@@ -71,10 +71,9 @@ body {
   font-weight: 1000;
   font-size: 30px;
 }
-/* offer banner */
-.offer-banner img {
-  width: 100%;
-  border-radius: 20px !important;
+/* offer banner carousel */
+.swiper-button-next {
+  display: none !important;
 }
 /* Product Line Section */
 .product-line {

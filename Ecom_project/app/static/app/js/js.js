@@ -1,130 +1,120 @@
-  // Carousel autoplay 
-document.addEventListener('DOMContentLoaded', function() {
-  var myCarousel = document.querySelector('#carouselExampleFade');
+// Carousel autoplay
+document.addEventListener("DOMContentLoaded", function () {
+  var myCarousel = document.querySelector("#carouselExampleFade");
   if (myCarousel) {
     var carousel = new bootstrap.Carousel(myCarousel, {
       interval: 5000,
-      ride: 'carousel'
+      ride: "carousel",
     });
   }
 });
-
-// //single product details view more 
-// document.addEventListener('DOMContentLoaded', function() {
-//   var viewMoreBtn = document.getElementById('viewMoreBtn');
-//   var showLessBtn = document.getElementById('showLessBtn');
-//   var productDetails = document.getElementById('productDetails');
-
-//   viewMoreBtn.addEventListener('click', function() {
-//       if (productDetails.classList.contains('show')) {
-//           viewMoreBtn.style.display = 'none'; // Hide the "View More" button after clicking
-//           showLessBtn.style.display = 'block'; // Show the "Show Less" button
-//       }
-//   });
-
-//   showLessBtn.addEventListener('click', function() {
-//       if (productDetails.classList.contains('show')) {
-//           showLessBtn.style.display = 'none'; // Hide the "Show Less" button after clicking
-//           viewMoreBtn.style.display = 'block'; // Show the "View More" button
-//       }
-//   });
-// });
-
+//offer banner carousel autoplay
+document.addEventListener("DOMContentLoaded", function () {
+  var myCarousel = document.querySelector("#ob-carouselExampleFade");
+  if (myCarousel) {
+    var carousel = new bootstrap.Carousel(myCarousel, {
+      interval: 5000,
+      ride: "carousel",
+    });
+  }
+});
 // navbar drop down hover effect
-document.addEventListener('DOMContentLoaded', function () {
-  var dropdowns = document.querySelectorAll('.dropdown');
+document.addEventListener("DOMContentLoaded", function () {
+  var dropdowns = document.querySelectorAll(".dropdown");
 
   dropdowns.forEach(function (dropdown) {
-      dropdown.addEventListener('mouseover', function () {
-          this.querySelector('.dropdown-menu').classList.add('show');
-      });
-
-      dropdown.addEventListener('mouseleave', function () {
-          this.querySelector('.dropdown-menu').classList.remove('show');
-      });
+    dropdown.addEventListener("mouseover", function () {
+      this.querySelector(".dropdown-menu").classList.add("show");
+    });
+    dropdown.addEventListener("mouseleave", function () {
+      this.querySelector(".dropdown-menu").classList.remove("show");
+    });
   });
 });
-
 // cart plus button
-$('.plus-cart').click(function(){
-  var id = $(this).attr("pid").toString()
-  var obj = this.parentNode.children[2]
-  console.log("pid=",id)
+$(".plus-cart").click(function () {
+  var id = $(this).attr("pid").toString();
+  var obj = this.parentNode.children[2];
+  console.log("pid=", id);
   $.ajax({
-    type : "GET",
-    url : '/plus_cart',
-    data : {
-      prod_id : id
+    type: "GET",
+    url: "/plus_cart",
+    data: {
+      prod_id: id,
     },
-    success:function(data){
-      console.log("data = " ,data);
-      obj.innerText = data.quantity
-      document.getElementById('amount').innerText = data.amount
-      document.getElementById('total_amount').innerText = data.total_amount
-    }
-  })
-})
+    success: function (data) {
+      console.log("data = ", data);
+      obj.innerText = data.quantity;
+      document.getElementById("amount").innerText = data.amount;
+      document.getElementById("total_amount").innerText = data.total_amount;
+    },
+  });
+});
 // cart minus button
-$('.minus-cart').click(function(){
-  var id = $(this).attr("pid").toString()
-  var obj = this.parentNode.children[2]
-  console.log("pid=",id)
+$(".minus-cart").click(function () {
+  var id = $(this).attr("pid").toString();
+  var obj = this.parentNode.children[2];
+  console.log("pid=", id);
   $.ajax({
-    type : "GET",
-    url : '/minus_cart',
-    data : {
-      prod_id : id
+    type: "GET",
+    url: "/minus_cart",
+    data: {
+      prod_id: id,
     },
-    success:function(data){
-      console.log("data = " ,data);
-      obj.innerText = data.quantity
-      document.getElementById('amount').innerText = data.amount
-      document.getElementById('total_amount').innerText = data.total_amount
-    }
-  })
-})
- // Get the radio buttons  checkout page -(Enable the payment button if a radio button is selected)
- const radioButtons = document.querySelectorAll('.address-radio');   
- radioButtons.forEach(function(radioButton) {  
- radioButton.addEventListener('change', function() {      
- document.getElementById('rzp-button1').disabled = false;    });  });
-
-
+    success: function (data) {
+      console.log("data = ", data);
+      obj.innerText = data.quantity;
+      document.getElementById("amount").innerText = data.amount;
+      document.getElementById("total_amount").innerText = data.total_amount;
+    },
+  });
+});
+// Get the radio buttons  checkout page -(Enable the payment button if a radio button is selected)
+const radioButtons = document.querySelectorAll(".address-radio");
+radioButtons.forEach(function (radioButton) {
+  radioButton.addEventListener("change", function () {
+    document.getElementById("rzp-button1").disabled = false;
+  });
+});
 // Add product to wishlist
- $(document).ready(function() {
-  $('.plus_wishlist').click(function() {
+$(document).ready(function () {
+  $(".plus_wishlist").click(function () {
     var id = $(this).attr("pid").toString();
     $.ajax({
       type: "GET",
       url: "/pluswishlist",
       data: {
-        prod_id: id
+        prod_id: id,
       },
-      success: function(data) {
+      success: function (data) {
         window.location.href = `/product_details/${id}`;
       },
-      error: function(xhr, status, error) {
+      error: function (xhr, status, error) {
         console.error("An error occurred: " + error);
-        alert("An error occurred while adding the product to the wishlist. Please try again.");
-      }
+        alert(
+          "An error occurred while adding the product to the wishlist. Please try again."
+        );
+      },
     });
   });
-// Remove product from wishlist
-  $('.minus_wishlist').click(function() {
+  // Remove product from wishlist
+  $(".minus_wishlist").click(function () {
     var id = $(this).attr("pid").toString();
     $.ajax({
       type: "GET",
       url: "/minuswishlist",
       data: {
-        prod_id: id
+        prod_id: id,
       },
-      success: function(data) {
+      success: function (data) {
         window.location.href = `/product_details/${id}`;
       },
-      error: function(xhr, status, error) {
+      error: function (xhr, status, error) {
         console.error("An error occurred: " + error);
-        alert("An error occurred while removing the product from the wishlist. Please try again.");
-      }
+        alert(
+          "An error occurred while removing the product from the wishlist. Please try again."
+        );
+      },
     });
   });
 });
@@ -133,9 +123,9 @@ var dogSwiper = new Swiper(".dog-slider .slide-content", {
   slidesPerView: 4,
   spaceBetween: 25,
   loop: true,
-  centerSlide: 'true',
-  fade: 'true',
-  grabCursor: 'true',
+  centerSlide: "true",
+  fade: "true",
+  grabCursor: "true",
   pagination: {
     el: ".dog-swiper-pagination",
     clickable: true,
@@ -168,9 +158,9 @@ var catSwiper = new Swiper(".cat-slider .slide-content", {
   slidesPerView: 4,
   spaceBetween: 25,
   loop: true,
-  centerSlide: 'true',
-  fade: 'true',
-  grabCursor: 'true',
+  centerSlide: "true",
+  fade: "true",
+  grabCursor: "true",
   pagination: {
     el: ".cat-swiper-pagination",
     clickable: true,

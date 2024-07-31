@@ -1,10 +1,10 @@
 {% extends "app/base.html" %}
 {% load static %}
 {% block title %}Home{% endblock title %}
-
-{% block carousel %}
+{% block main-content %}
+<!--main carousel-->
 <div class="container-fluid">
-  <div class="row">
+  <div calss='row'>
     <!-- Carousel Slider -->
     <div id="carouselExampleFade" class="col-12  carousel slide carousel-fade slider">
       <div class="carousel-inner">
@@ -27,13 +27,8 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    
-    
   </div>
 </div>
-{% endblock carousel %}
-
-{% block main-content %}
 <!-- Dog Products Categories Slider -->
 <div class="slide-container text-center pt-5 swiper dog-slider">
   <h2 class="Category-head"><span class="pet">DOG'S</span> <span class="categories">Products</span></h2>
@@ -73,7 +68,6 @@
   <div class="swiper-button-prev dog-swiper-prev swiper-navBtn"></div>
   <div class="swiper-pagination dog-swiper-pagination"></div>
 </div>
-
 <!-- Cat Products Categories Slider -->
 <div class="slide-container pt-5 text-center swiper cat-slider">
   <h2 class="Category-head"><span class="pet">CAT'S</span> <span class="categories">Products</span></h2>
@@ -113,14 +107,34 @@
   <div class="swiper-button-prev cat-swiper-prev swiper-navBtn"></div>
   <div class="swiper-pagination cat-swiper-pagination"></div>
 </div>
-<!--offer banner-->
-<div class="container-fluid offer-banner">
-  <img src="{% static 'app/images/banner/offer_banner.png' %}">
+<!--offer banner carousel-->
+<div class="container-fluid ">
+  <div id="ob-carouselExampleFade" class="carousel slide carousel-fade">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'app/images/banner/offer-banner1.png' %}" class="d-block w-100" alt="offer-banner1">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'app/images/banner/offer-banner2.png' %}" class="d-block w-100" alt="{offer-banner2">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'app/images/banner/offer-banner3.png' %}" class="d-block w-100" alt="offer-banner3">
+      </div>
+    </div>
+    <button class="carousel-control-prev d-none" type="button" data-bs-target="#ob-carouselExampleFade" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next d-none" type="button" data-bs-target="#ob-carouselExampleFade" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 </div>
 <!--Product line banner-->
 <div class="container mt-5">
   <div class="row product-line">
-    <!-- dog -->
+    <!-- dog categories-->
     <div class="col-md-4 position-relative">
       <a href="#"> <img class="dog" src="{% static 'app/images/banner/dog.png' %}"></a>
       <div class="text-container">
@@ -128,11 +142,11 @@
         <h5>Rise your dogs to be at  their <br>happiest and  healthiest</h5>
       </div>
     </div>
-    <!-- head -->
+    <!-- product-line-heading -->
     <div class="col col-lg-2 heading-text">
       <h1><span class="color-1">OUR</span> <span class="color-2">PRODUCT LINE</span></h1>
     </div>
-    <!-- cat -->
+    <!-- cat categories-->
     <div class="col-md-4 position-relative">
       <div class="text-container mb-3">
         <h2><span class="color-1">Products For Cats</span></h2>
