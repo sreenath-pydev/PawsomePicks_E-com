@@ -365,7 +365,7 @@ footer .payment-img img:hover {
   font-weight: 1000;
   font-size: 60px;
 }
-.button {
+.contact-us-btn {
   position: relative;
   transition: all 0.3s ease-in-out;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
@@ -384,7 +384,7 @@ footer .payment-img img:hover {
   overflow: hidden;
   font-size: 15px;
 }
-.button a {
+.contact-us-btn a {
   color: white;
 }
 .icon {
@@ -393,20 +393,20 @@ footer .payment-img img:hover {
   transition: all 0.3s ease-in-out;
 }
 
-.button:hover {
+.contact-us-btn:hover {
   transform: scale(1.05);
   border-color: #fff9;
 }
 
-.button:hover .icon {
+.contact-us-btn:hover .icon {
   transform: translate(4px);
 }
 
-.button:hover::before {
+.contact-us-btn:hover::before {
   animation: shine 1.5s ease-out infinite;
 }
 
-.button::before {
+.contact-us-btn::before {
   content: "";
   position: absolute;
   width: 100px;
