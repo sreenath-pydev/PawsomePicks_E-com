@@ -2,52 +2,54 @@
 {% load static %}
 {% block title %}Login{% endblock title %}
 {% block main-content %}
-<div class='container'>
-    <div class="row my-3">
-        <div class="col-sm-6 offset-sm-3 shadow p-5 login">
-            <!--heading text-->
-            <h1>
-                <i class="fas fa-paw" style="color: #FFD43B;"></i> 
-                <span class="color-1">Login</span> 
-                <span class="color-2">Now</span>
-            </h1>
-            <hr>
-            <!--Login Form -->
-            <form action="" method="post" novalidate>
-                {% csrf_token %}
-                {% for field in form %}
-                <div class="mb-3">
-                    <b>{{ field.label_tag }}</b>{{ field }}
-                    <small class="text-danger">{{ field.errors|striptags }}</small>
-                </div>
-                {% endfor %}
-                <!--forget option-->
-                <small>
-                    <a href="{% url 'reset_password' %}" class="text-decoration-none">
-                        <span class="color-1"><b>Forget Password ?</b></span>
-                    </a>
-                </small><br>
-                <!--login button-->
-                <input type="submit" value="Login" class="btn btn login-btn">
-                <!-- New User register Option -->
-                <div class="text-center fw-bold mt-3">
-                    <small>
-                        New User? 
-                        <a href="{% url 'registration' %}" class="text-decoration-none">
-                            <span class="color-1">Register Now</span>
-                        </a>
-                    </small>
-                </div>
-                <!-- Non_field_error messages -->
-                {% if form.non_field_errors %}
-                <div class='alert alert-danger my-3'>
-                    {% for error in form.non_field_errors %}
-                    <p>{{ error }}</p>
+<div class="login-background">
+    <div class='container '>
+        <div class="row my-2">
+            <div class="col-sm-6 offset-sm-3 shadow p-5 login">
+                <!--heading text-->
+                <h1>
+                    <i class="fas fa-paw" style="color: #FFD43B;"></i> 
+                    <span class="color-1">Login</span> 
+                    <span class="color-2">Now</span>
+                </h1>
+                <hr>
+                <!--Login Form -->
+                <form action="" method="post" novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="mb-3">
+                        <b>{{ field.label_tag }}</b>{{ field }}
+                        <small class="text-danger">{{ field.errors|striptags }}</small>
+                    </div>
                     {% endfor %}
-                </div>
-                {% endif %}
-            </form>
-            <!--Login Form End-->
+                    <!--forget option-->
+                    <small>
+                        <a href="{% url 'reset_password' %}" class="text-decoration-none">
+                            <b>Forget Password ?</b>
+                        </a>
+                    </small><br>
+                    <!--login button-->
+                    <input type="submit" value="Login" class="btn btn login-btn">
+                    <!-- New User register Option -->
+                    <div class="text-center fw-bold mt-3">
+                        <small>
+                            <b>New User?</b> 
+                            <a href="{% url 'registration' %}" class="text-decoration-none">
+                                <b>Register Now</b>
+                            </a>
+                        </small>
+                    </div>
+                    <!-- Non_field_error messages -->
+                    {% if form.non_field_errors %}
+                    <div class='alert alert-danger my-3'>
+                        {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </form>
+                <!--Login Form End-->
+            </div>
         </div>
     </div>
 </div>

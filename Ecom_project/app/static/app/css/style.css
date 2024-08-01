@@ -444,9 +444,34 @@ footer .payment-img img:hover {
   height: 400px;
 }
 /* login section */
+.login-background {
+  background-image: url('/static/app/images/banner/login_background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login{
+  margin-top: -10px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+}
 .login h1 {
   font-weight: 1000;
   font-size: 60px;
+}
+form a{
+  color: #f48b48;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+form a:hover{
+color: #ffd34e;
+transform: scale(1.2);
 }
 form .login-btn {
   background-color: #f48b48;
@@ -462,6 +487,7 @@ form .login-btn {
 form .login-btn:hover {
   background-color: #ffd34e;
   border-color: #ffd34e;
+  color: white;
 }
 /* Product card  */
 .slide-container {
