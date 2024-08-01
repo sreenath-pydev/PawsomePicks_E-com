@@ -3,44 +3,57 @@
 {% block title %}Register{% endblock title %}
 
 {% block main-content %}
-<div class='container'>
-    <div class="row my-3">
-        <div class="col-sm-6 offset-sm-3 shadow p-5">
-            <h1 class="text-center">Register Now</h1>
-            <hr>
-            <!-- Registration Form -->
-            <form action="" method="post" novalidate >
-                {% csrf_token %}
-                {% for field in form %}
-                <div class="mb-3">
-                    {{ field.label_tag }}{{ field }}
-                    <small class="text-danger">{{ field.errors|striptags }}</small>
-                </div>
-                {% endfor %}
-                <input type="submit" value="Submit" class="btn btn-primary">
-            </form>
-            <!-- Existing User Login Option -->
-            <div class="text-center text-primary fw-bold mt-3">
-                <small>Existing User? 
-                <a href="{% url 'login' %}" class="text-danger">Login Now</a>
-                </small>
+<div class="register-background">
+    <div class='container'>
+        <div class="row my-3">
+            <div class="col-sm-6 offset-sm-3 shadow p-5 register">
+                <!--heading text-->
+                <h1>
+                    <i class="fas fa-paw" style="color: #f48b48;"></i> 
+                    <span class="color-2">Register</span> 
+                    <span class="color-1">Now</span>
+                </h1>
+                <hr>
+                <!-- Registration Form -->
+                    <form action="" method="post" novalidate>
+                        {% csrf_token %}
+                        <!--Username Field-->
+                        <div class="mb-3">
+                            <label for="{{ form.username.id_for_label }}"><b>{{ form.username.label }}</b></label>
+                            {{ form.username }}
+                            <small class="text-danger">{{ form.username.errors|striptags }}</small>
+                        </div>
+                        <!--Email Field-->
+                        <div class="mb-3">
+                            <label for="{{ form.email.id_for_label }}"><b>{{ form.email.label }}</b></label>
+                            {{ form.email }}
+                            <small class="text-danger">{{ form.email.errors|striptags }}</small>
+                        </div>
+                        <div class="row">
+                            <!--Password Field-->
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.password1.id_for_label }}"><b>{{ form.password1.label }}</b></label>
+                                {{ form.password1 }}
+                               <small class="text-danger">{{ form.password1.errors|striptags }}</small>
+                            </div>
+                            <!--Repeat-Password Field-->
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.password2.id_for_label }}"><b>{{ form.password2.label }}</b></label>
+                                {{ form.password2 }}
+                                <small class="text-danger">{{ form.password2.errors|striptags }}</small>
+                            </div>
+                        </div>
+                        <!--Register button-->
+                        <input type="submit" value="Submit" class="btn btn register-btn">
+                        <!-- Existing User Login Option -->
+                        <div class="text-center text-primary fw-bold mt-3">
+                            <small>Existing User? 
+                            <a href="{% url 'login' %}" >Login Now</a>
+                            </small>
+                        </div>
+                    </form>
+                <!--Registration Form End-->
             </div>
-            <!-- Non_field_error messages -->
-            {% if form.non_field_errors %}
-            <div class='alert alert-danger my-3'>
-                {% for error in form.non_field_errors %}
-                <p>{{ error }}</p>
-                {% endfor %}
-            </div>
-            {% endif %}
-            <!-- Error messages -->
-            {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}" role="alert">
-                {{ message }}
-            </div>
-            {% endfor %}
-            {% endif %}
         </div>
     </div>
 </div>

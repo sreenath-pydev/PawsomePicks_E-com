@@ -489,6 +489,44 @@ form .login-btn:hover {
   border-color: #ffd34e;
   color: white;
 }
+/* New User Registration Section */
+.register-background {
+  background-image: url('/static/app/images/banner/login_background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.register{
+  margin-top: -10px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+}
+.register h1{
+  margin-top: -30px;
+  font-weight: 1000;
+  font-size: 60px;
+}
+form .register-btn {
+  background-color: #f48b48;
+  border-color: #f48b48;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 1000;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+form .register-btn:hover {
+  background-color: #ffd34e;
+  border-color: #ffd34e;
+  color: white;
+}
 /* Product card  */
 .slide-container {
   width: 100%;
