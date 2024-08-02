@@ -31,8 +31,8 @@
                             <p class="text-body"></p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-decoration-line-through">${{ prod.selling_price }}</small>
-                            <span class="text-title">${{ prod.discount_price }}/-</span>
+                            <small class="text-decoration-line-through">₹{{ prod.selling_price }}</small>
+                            <span class="text-title">₹{{ prod.discount_price }}/-</span>
                             
                             <a href="{% url 'product_details' prod.id %}">
                                 <div class="card-button">

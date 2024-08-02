@@ -47,8 +47,8 @@
           <p class="text-title">{{ prod.title }}</p>
           <p class="description">{{ prod.description }}</p>
           <div class="card-footer">
-            <small class="text-decoration-line-through">${{ prod.selling_price }}</small>
-            <span class="text-title">${{ prod.discount_price }}/-</span>
+            <small class="text-decoration-line-through">₹{{ prod.selling_price }}</small>
+            <span class="text-title">₹{{ prod.discount_price }}/-</span>
             <a href="{% url 'product_details' prod.id %}">
               <div class="card-button">
                 <svg class="svg-icon" viewBox="0 0 20 20">
@@ -87,7 +87,7 @@
           <p class="description">{{ prod.description }}</p>
           <div class="card-footer">
             <small class="text-decoration-line-through">${{ prod.selling_price }}</small>
-            <span class="text-title">${{ prod.discount_price }}/-</span>
+            <span class="text-title">₹{{ prod.discount_price }}/-</span>
             <a href="{% url 'product_details' prod.id %}">
               <div class="card-button">
                 <svg class="svg-icon" viewBox="0 0 20 20">
