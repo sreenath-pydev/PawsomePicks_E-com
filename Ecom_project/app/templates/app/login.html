@@ -15,13 +15,19 @@
                 <hr>
                 <!--Login Form -->
                 <form action="" method="post" novalidate>
-                    {% csrf_token %}
-                    {% for field in form %}
-                    <div class="mb-3">
-                        <b>{{ field.label_tag }}</b>{{ field }}
-                        <small class="text-danger">{{ field.errors|striptags }}</small>
+                    {% csrf_token %}                
+                     <!--Username Field-->
+                     <div class="mb-3">
+                        <label for="{{ form.username.id_for_label }}"><b>{{ form.username.label }}</b></label>
+                        {{ form.username }}
+                        <small class="text-danger">{{ form.username.errors|striptags }}</small>
                     </div>
-                    {% endfor %}
+                    <!--Password Field-->
+                    <div class=" mb-3">
+                        <label for="{{ form.password.id_for_label }}"><b>{{ form.password.label }}</b></label>
+                        {{ form.password }}
+                       <small class="text-danger">{{ form.password.errors|striptags }}</small>
+                    </div>   
                     <!--forget option-->
                     <small>
                         <a href="{% url 'reset_password' %}" class="text-decoration-none">
