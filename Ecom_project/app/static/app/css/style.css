@@ -71,10 +71,6 @@ body {
   font-weight: 1000;
   font-size: 30px;
 }
-/* offer banner carousel */
-.swiper-button-next {
-  display: none !important;
-}
 /* Product Line Section */
 .product-line {
   margin-bottom: 5%;
