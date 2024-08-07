@@ -3,20 +3,20 @@ from django.contrib.auth.models import User
 
 # product categorys model choices
 CATERGORY_CHOICES=(
-    ('DF','DOG_FOOD'),
-    ('DT','DOG_TOYS'),
-    ('DL','DOG_LEASH'),
-    ('DH','DOG_HARNESS'),
-    ('DB','DOG_BELT'),
-    ('DBP','DOG_BATH_PRODUCTS'), 
-    ('CF','CAT_FOOD'),
-    ('CT','CAT_TOYS'),
-    ('CL','CAT_LEASH'),
-    ('CH','CAT_HARNESS'),
-    ('CB','CAT_BELT'),
-    ('CBP','CAT_BATH_PRODUCTS'),
-    ('GP','GROOMING_PRODUCTS'),
-    ('OP','OTHER_PRODUCTS')
+    ('DF','DOG FOOD'),
+    ('DT','DOG TOYS'),
+    ('DL','DOG LEASH'),
+    ('DH','DOG HARNESS'),
+    ('DB','DOG BELT'),
+    ('DBP','DOG BATH PRODUCTS'), 
+    ('CF','CAT FOOD'),
+    ('CT','CAT TOYS'),
+    ('CL','CAT LEASH'),
+    ('CH','CAT HARNESS'),
+    ('CB','CAT BELT'),
+    ('CBP','CAT BATH PRODUCTS'),
+    ('GP','GROOMING PRODUCTS'),
+    ('OP','OTHER PRODUCTS')
 )
  # for customer model choices
 STATE_CHOICES = (
