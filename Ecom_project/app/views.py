@@ -408,5 +408,107 @@ def search_products(request):
     }
     return render(request, 'app/search_results.html', context)
 
+# Dogs products & category
+def dogs_products(request):
+    totalitems = 0
+    wishlistitems =0
+    if request.user.is_authenticated:
+            totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
+    dog_prod_Categorys = Products.objects.filter(category__startswith='D').distinct('category')
+    Dog_product = Products.objects.filter(category__startswith='D').order_by('-id')
+    context = {
+        'totalitems':totalitems,
+        'wishlistitems':wishlistitems,
+        'dog_prod_Categorys': dog_prod_Categorys,
+        'Dog_product': Dog_product
+    }
+    return render(request, 'app/category_vice_products.html',context)
 
+# Cats products & category
+def cats_products(request):
+    totalitems = 0
+    wishlistitems =0
+    if request.user.is_authenticated:
+            totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
+    cat_prod_Categorys = Products.objects.filter(category__startswith='C').distinct('category')
+    Cat_product = Products.objects.filter(category__startswith='C').order_by('-id')
+    context = {
+        'totalitems':totalitems,
+        'wishlistitems':wishlistitems,
+        'cat_prod_Categorys': cat_prod_Categorys,
+        'Cat_product': Cat_product
+    }
+    return render(request, 'app/category_vice_products.html', context)
+
+# All products & category
+def All_products(request):
+    totalitems = 0  
+    wishlistitems =0
+    if request.user.is_authenticated:
+            totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
+    all_products = Products.objects.all().order_by('-id')
+    all_categorys = Products.objects.all().distinct('category')
+    print(all_categorys)
+    context = {
+        'totalitems':totalitems,
+        'wishlistitems':wishlistitems,
+        'all_products': all_products,
+        'all_categorys': all_categorys
+    }
+    return render(request, 'app/category_vice_products.html', context)
+
+# Selected Category wise products
+class CategoriesViceView(View):
+    def get(self, request, catg):
+        # Cat Category
+        if catg.startswith('C'): 
+            totalitems = 0
+            wishlistitems =0
+            if request.user.is_authenticated:
+                    totalitems = len(Cart.objects.filter(user=request.user))
+                    wishlistitems = len(Wishlist.objects.filter(user=request.user))
+            selected_cat_products = Products.objects.filter(category=catg)
+            category_title = selected_cat_products[0].get_category_display()
+            cat_prod_Categorys = Products.objects.filter(category__startswith='C').distinct('category')
+            context = {
+                'totalitems':totalitems,
+                'wishlistitems':wishlistitems,
+                'cat_prod_Categorys': cat_prod_Categorys,
+                'Cat_product': selected_cat_products,
+                'category_title': category_title
+            }
+            return render(request, 'app/category_vice_products.html', context)
+        # Dog Category
+        elif catg.startswith('D'): 
+            totalitems = 0
+            wishlistitems =0
+            if request.user.is_authenticated:
+                    totalitems = len(Cart.objects.filter(user=request.user))
+                    wishlistitems = len(Wishlist.objects.filter(user=request.user))
+            selected_dog_products = Products.objects.filter(category=catg)
+            category_title = selected_dog_products[0].get_category_display()
+            dog_prod_Categorys = Products.objects.filter(category__startswith='D').distinct('category')
+            context = {
+                'totalitems':totalitems,
+                'wishlistitems':wishlistitems,
+                'dog_prod_Categorys': dog_prod_Categorys,
+                'Dog_product': selected_dog_products,
+                'category_title': category_title
+            }
+            return render(request, 'app/category_vice_products.html', context)
+        # All Category
+        else: 
+            all_products = Products.objects.filter(category=catg)
+            category_title = all_products[0].get_category_display()
+            all_categorys = Products.objects.all().distinct('category')
+            context = {
+                'all_products': all_products,
+                'category_title': category_title,
+                'all_categorys': all_categorys
+            }
+            return render(request, 'app/category_vice_products.html', context)
+        
 

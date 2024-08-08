@@ -13,6 +13,10 @@ urlpatterns = [
     path('product_details/<int:pk>/', views.ProductDetailsView.as_view(), name='product_details'),
     path('products-title/<val>/', views.CategoryTitle.as_view(), name='products-title'),
     path('Search/',views.search_products,name='Search'),
+    path('categories/<str:catg>/', views.CategoriesViceView.as_view(), name='categories'),
+    path('dog-products/', views.dogs_products, name='dog-products'),
+    path('cat-products/', views.cats_products, name='cat-products'),
+    path('all_product/', views.All_products, name='all-products'),
     #profile section
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('address/', views.address, name='address'),
