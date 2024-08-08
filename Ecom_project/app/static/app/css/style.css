@@ -221,22 +221,30 @@ footer .payment-img img:hover {
   font-size: 1.2rem; /* 24px */
 }
 
-/* products by category*/
-.list-group.position-sticky {
-  position: -webkit-sticky; /* For Safari */
-  position: sticky;
-  top: 0;
-}
-.col-sm-9 {
+/** products by category*/ 
+.cvp .col-sm-9 { /* cvp - category vice products */
   height: 100vh;
   overflow-y: scroll;
 }
-
-.col-md-4 {
+.cvp .col-md-4 {
   padding-bottom: 20px;
 }
-.card {
-  border-color: green;
+.cvp a.btn{
+  color: #f48b48;
+  border-color: #f48b48;
+  width: 40%;
+}
+.cvp a.btn:hover{
+  background-color: #f48b48;
+  color: white;
+}
+.list-group a{
+  border-color: #f48b48;
+  font-weight: 500;
+}
+.list-group a:hover{
+  background-color: #ffd34e;
+
 }
 /* Contact Section */
 .contact-us img {
