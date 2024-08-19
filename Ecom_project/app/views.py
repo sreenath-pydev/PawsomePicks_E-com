@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import Products, Customers, Cart, Payment, OrderPlaced,Wishlist
+from .models import Products, Customers, Cart, Payment, OrderPlaced, Wishlist, ProductImage
 from django.db.models import Count, Q
 from .form import UserRegistrationForm, CustomerProfileForm
 from django.contrib import messages
@@ -58,7 +58,6 @@ class CategoryTitle(View):
         return render(request, 'app/products.html', locals())
 
 # product details
-
 class ProductDetailsView(View):
     def get(self, request, pk):
         product = Products.objects.get(pk=pk)
@@ -69,8 +68,10 @@ class ProductDetailsView(View):
             wishlist = Wishlist.objects.filter(Q(product=product) & Q(user=request.user))
             totalitems = len(Cart.objects.filter(user=request.user))
             wishlistitems = len(Wishlist.objects.filter(user=request.user))
+        related_products = Products.objects.filter(category=product.category).exclude(id=product.id).order_by('?') 
+        other_products = Products.objects.all().exclude(id=product.id).order_by('?')[:8]
+        thumbnail_images = ProductImage.objects.filter(product=product)
         return render(request, 'app/product_detail.html', locals())
-
 
 # Add to wishlist
 def PulsWishlist(request):
@@ -97,7 +98,6 @@ def MinusWishlist(request):
         }
     return JsonResponse(data)
 
-
 # User registration form
 class UserRegistrationView(View):
     def get(self, request):
@@ -116,7 +116,6 @@ class UserRegistrationView(View):
 
 # Customer Profile
 class ProfileView(View):
-    
     def get(self,request):
         if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
@@ -136,8 +135,7 @@ class ProfileView(View):
             city = form.cleaned_data['city']
             phone = form.cleaned_data['phone']
             state = form.cleaned_data['state']
-            zipcode = form.cleaned_data['zipcode']
-            
+            zipcode = form.cleaned_data['zipcode'] 
             reg = Customers(user=user,name=name,locality=locality,city=city,phone=phone,state=state,zipcode=zipcode)
             reg.save()
             messages.success(request,"Congradulation ! Profile saved successfully")
@@ -146,7 +144,6 @@ class ProfileView(View):
         return render(request,'app/profile.html',locals())
 
 # Display the user address
-
 def address(request):
     if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
@@ -155,7 +152,6 @@ def address(request):
     return render(request, 'app/user_address.html', locals())
 
 # Update address
-
 class UpdateAddressView(View):
     def get(self, request, pk):
         if request.user.is_authenticated:
@@ -177,7 +173,6 @@ class UpdateAddressView(View):
             messages.warning(request, "Invalid input")
         return render(request, 'app/update_address.html', locals())
 
-
 # Delete address
 class DeleteAddressView(View):
     def get(self, request, pk):
@@ -185,8 +180,9 @@ class DeleteAddressView(View):
         add.delete()
         messages.success(request, "Address deleted successfully")
         return redirect('address')
-@login_required
+    
 # Add to cart
+@login_required
 def add_to_cart(request):
     user = request.user
     product_id = request.GET.get('prod_id')
@@ -197,6 +193,25 @@ def add_to_cart(request):
         cart_item.save()
     return redirect(f'/product_details/{product_id}')
 
+# Buy now
+@login_required
+def buy_now(request):
+    user = request.user
+    product_id = request.GET.get('prod_id')
+    product = get_object_or_404(Products, id=product_id)
+    
+    # Check if the item already exists in the cart
+    cart_item = Cart.objects.filter(user=user, product=product).first()
+    
+    # If the item doesn't exist in the cart, create it with quantity 1
+    if not cart_item:
+        Cart.objects.create(user=user, product=product, quantity=1)
+    
+    return redirect('cart')
+
+
+
+
 # Remove from cart
 def remove_from_cart(request, prod_id):
     product = get_object_or_404(Products, id=prod_id)
@@ -204,7 +219,6 @@ def remove_from_cart(request, prod_id):
     if cart_item:
         cart_item.delete()
     return redirect('/cart')
-
 
 # Show cart items
 def show_cart_items(request):
@@ -217,9 +231,7 @@ def show_cart_items(request):
     total_amount = amount + 40
     return render(request, 'app/cart.html', locals())
 
-
 # Quantity plus in cart
-
 def plus_cart(request):
     if request.method == 'GET':
         prod_id = request.GET['prod_id']
@@ -314,7 +326,7 @@ class CheckOutView(View):
         }
         return render(request, "app/payment.html", context)
     
-from django.http import HttpResponseBadRequest
+# payment done
 @csrf_exempt
 def paymentdone(request):
     

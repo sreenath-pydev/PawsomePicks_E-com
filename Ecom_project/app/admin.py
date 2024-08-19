@@ -1,10 +1,14 @@
 from django.contrib import admin
-from . models import Products,Customers,Cart,OrderPlaced,Payment,Wishlist
+from . models import Products,Customers,Cart,OrderPlaced,Payment,Wishlist,ProductImage
 
 # //? model for admin panel  products details view. 
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 4  # Number of extra forms to show
 @admin.register(Products)
 class ProductModelAdmin(admin.ModelAdmin):
     list_display=['id','title','selling_price','discount_price','category','product_image']
+    inlines = [ProductImageInline] 
 
 @admin.register(Customers)
 class CustomerModelAdmin(admin.ModelAdmin):

@@ -71,6 +71,13 @@ class Products(models.Model):
     product_image = models.ImageField(upload_to='products',default='product_image')
     def __str__(self):
         return self.title
+# Products  extra images
+class ProductImage(models.Model):
+    product = models.ForeignKey('Products', on_delete=models.CASCADE, related_name='extra_images')
+    image = models.ImageField(upload_to='products/thumbnail_images/')
+
+    def __str__(self):
+        return f"{self.product.title} Image"
 
 # cart model
 class Cart(models.Model):

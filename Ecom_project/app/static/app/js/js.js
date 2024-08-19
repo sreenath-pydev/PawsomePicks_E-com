@@ -188,3 +188,89 @@ var catSwiper = new Swiper(".cat-slider .slide-content", {
     },
   },
 });
+//related products slider for product details section
+var related_products_Swiper = new Swiper(".related-products-slider .slide-content", {
+  slidesPerView: 4,
+  spaceBetween: 25,
+  loop: true,
+  centerSlide: "true",
+  fade: "true",
+  grabCursor: "true",
+  pagination: {
+    el: ".cat-swiper-pagination",
+    clickable: true,
+    dynamicBullets: true,
+  },
+  navigation: {
+    nextEl: ".cat-swiper-next",
+    prevEl: ".cat-swiper-prev",
+  },
+  breakpoints: {
+    0: {
+      slidesPerView: 1,
+    },
+    520: {
+      slidesPerView: 2,
+    },
+    950: {
+      slidesPerView: 3,
+    },
+    1130: {
+      slidesPerView: 4,
+    },
+    1400: {
+      slidesPerView: 5,
+    },
+  },
+});
+// Thumbnail 
+function changeImage(imageUrl) {
+  // Change the main image source
+  var mainImage = document.getElementById("mainImage");
+  mainImage.src = imageUrl;
+  
+  // Remove existing zoom instance to avoid duplication
+  $('.zoomContainer').remove(); // Removes the zoom container if it exists
+  $('#mainImage').removeData('elevateZoom'); // Removes any existing zoom data
+
+  // Reinitialize elevateZoom
+  $("#mainImage").elevateZoom({
+      zoomType: "window",
+      cursor: "crosshair",
+      zoomWindowWidth: 420,
+      zoomWindowHeight: 420,
+      borderSize: 1,
+      borderColor: "#333",
+      zoomWindowOffetx: 20,
+  });
+
+  // Remove the border from all thumbnails
+  var thumbnails = document.querySelectorAll('.small-images .col');
+  thumbnails.forEach(function(thumbnail) {
+      thumbnail.style.borderColor = 'transparent';
+  });
+
+  // Add the border to the hovered thumbnail
+  event.currentTarget.parentElement.style.borderColor = '#f48b48';
+}
+// Initialize zoom
+$(document).ready(function() {
+  $("#mainImage").elevateZoom({
+      zoomType: "window",
+      cursor: "crosshair",
+      zoomWindowWidth: 420,
+      zoomWindowHeight: 420,
+      borderSize: 1,
+      borderColor: "#333",
+      zoomLevel: 1.5,
+      zoomWindowOffetx: 20,
+      zoomWindowOffsetY: 20,
+      responsive: true, // Make zoom window responsive
+      easing: true
+  });
+});
+
+function changeImage(imageUrl) {
+  $("#mainImage").attr("src", imageUrl);
+  $("#mainImage").data("zoom-image", imageUrl).elevateZoom(); // Reinitialize zoom
+}
