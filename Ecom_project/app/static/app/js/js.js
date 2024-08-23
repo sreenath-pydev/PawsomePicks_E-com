@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var myCarousel = document.querySelector("#carouselExampleFade");
   if (myCarousel) {
     var carousel = new bootstrap.Carousel(myCarousel, {
-      interval: 5000,
+      interval: 2000,
       ride: "carousel",
     });
   }
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var myCarousel = document.querySelector("#ob-carouselExampleFade");
   if (myCarousel) {
     var carousel = new bootstrap.Carousel(myCarousel, {
-      interval: 5000,
+      interval: 2000,
       ride: "carousel",
     });
   }
@@ -92,7 +92,7 @@ $(document).ready(function () {
       error: function (xhr, status, error) {
         console.error("An error occurred: " + error);
         alert(
-          "An error occurred while adding the product to the wishlist. Please try again."
+          "Login and try agian"
         );
       },
     });
@@ -223,37 +223,37 @@ var related_products_Swiper = new Swiper(".related-products-slider .slide-conten
     },
   },
 });
-// Thumbnail 
+// Thumbnail click function
 function changeImage(imageUrl) {
   // Change the main image source
-  var mainImage = document.getElementById("mainImage");
-  mainImage.src = imageUrl;
-  
+  var mainImage = $("#mainImage");
+  mainImage.attr("src", imageUrl);
+
   // Remove existing zoom instance to avoid duplication
   $('.zoomContainer').remove(); // Removes the zoom container if it exists
-  $('#mainImage').removeData('elevateZoom'); // Removes any existing zoom data
+  mainImage.removeData('elevateZoom'); // Removes any existing zoom data
 
   // Reinitialize elevateZoom
-  $("#mainImage").elevateZoom({
+  mainImage.data("zoom-image", imageUrl).elevateZoom({
       zoomType: "window",
       cursor: "crosshair",
       zoomWindowWidth: 420,
       zoomWindowHeight: 420,
       borderSize: 1,
       borderColor: "#333",
-      zoomWindowOffetx: 20,
+      zoomWindowOffsetX: 20, // Corrected typo in zoomWindowOffsetX
+      zoomWindowOffsetY: 20, // Added Y offset for consistency with initialization
+      responsive: true,
+      easing: true
   });
 
   // Remove the border from all thumbnails
-  var thumbnails = document.querySelectorAll('.small-images .col');
-  thumbnails.forEach(function(thumbnail) {
-      thumbnail.style.borderColor = 'transparent';
-  });
+  $('.small-images .col').css('borderColor', 'transparent');
 
   // Add the border to the hovered thumbnail
   event.currentTarget.parentElement.style.borderColor = '#f48b48';
 }
-// Initialize zoom
+// Initialize zoom 
 $(document).ready(function() {
   $("#mainImage").elevateZoom({
       zoomType: "window",
@@ -263,14 +263,9 @@ $(document).ready(function() {
       borderSize: 1,
       borderColor: "#333",
       zoomLevel: 1.5,
-      zoomWindowOffetx: 20,
+      zoomWindowOffsetX: 20,
       zoomWindowOffsetY: 20,
-      responsive: true, // Make zoom window responsive
+      responsive: true,
       easing: true
   });
 });
-
-function changeImage(imageUrl) {
-  $("#mainImage").attr("src", imageUrl);
-  $("#mainImage").data("zoom-image", imageUrl).elevateZoom(); // Reinitialize zoom
-}
