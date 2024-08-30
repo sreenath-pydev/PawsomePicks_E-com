@@ -269,3 +269,19 @@ $(document).ready(function() {
       easing: true
   });
 });
+// to toggle form visibility and hide/show existing addresses
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('add-address-btn').addEventListener('click', function(event) {
+      event.preventDefault();
+      var form = document.getElementById('address-form');
+      var existingAddresses = document.getElementById('existing-addresses');
+      
+      if (form.classList.contains('d-none')) {
+          form.classList.remove('d-none');
+          existingAddresses.classList.add('d-none');
+      } else {
+          form.classList.add('d-none');
+          existingAddresses.classList.remove('d-none');
+      }
+  });
+});

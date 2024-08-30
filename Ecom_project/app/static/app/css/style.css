@@ -510,6 +510,15 @@ form .buy-now:hover{
 .update_address .col-sm-9 {
   height: 400px;
 }
+.btn-profile{
+  background-color: #FFD43B!important;
+}
+.btn-addNew{
+  background-color: #f48b48!important;
+}
+.btn-Update{
+  background-color: #ffd34e!important;
+}
 /* login section */
 .login-background {
   background-image: url('/static/app/images/banner/login_background.png');
