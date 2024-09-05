@@ -285,3 +285,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   });
 });
+// Set a timeout to hide the message container after 3 seconds (3000 milliseconds)
+document.addEventListener('DOMContentLoaded', function() {
+  
+  var messageContainer = document.getElementById('message-container');
+  setTimeout(function() {
+      if (messageContainer) {
+          messageContainer.style.display = 'none'; // Hide the message container
+      }
+  }, 3000); 
+});

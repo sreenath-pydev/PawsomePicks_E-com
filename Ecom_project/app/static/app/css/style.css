@@ -510,14 +510,39 @@ form .buy-now:hover{
 .update_address .col-sm-9 {
   height: 400px;
 }
-.btn-profile{
-  background-color: #FFD43B!important;
+.image-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s;
 }
-.btn-addNew{
+.image-upload:hover {
+  border-color: #333;
+}
+#file-input {
+  display: none;
+}
+.profile-image{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.image-upload:hover .upload-icon {
+  transform: scale(1.1);
+}
+.btn-profile1, .btn-addNew{
   background-color: #f48b48!important;
 }
-.btn-Update{
-  background-color: #ffd34e!important;
+.btn-addnew1, .btn-Update, .btn-upload, .btn-address, .btn-profile {
+  background-color: #ffd34e !important;
 }
 /* login section */
 .login-background {

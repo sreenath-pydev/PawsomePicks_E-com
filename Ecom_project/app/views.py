@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import Products, Customers, Cart, Payment, OrderPlaced, Wishlist, ProductImage
+from .models import Products, Customers, Cart, Payment, OrderPlaced, Wishlist, ProductImage,UserProfileImg
 from django.db.models import Count, Q
-from .form import UserRegistrationForm, CustomerProfileForm
+from .form import UserRegistrationForm, CustomerProfileForm, UserProfileImgForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -114,34 +114,47 @@ class UserRegistrationView(View):
             messages.warning(request, "Invalid input")
         return render(request, "app/registration.html", locals())
 
-# Customer Profile
+#  Customer Profile
 class ProfileView(View):
-    def get(self,request):
+    def get(self, request):
         if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
             wishlistitems = len(Wishlist.objects.filter(user=request.user))
-        form = CustomerProfileForm()
-        return render(request,'app/profile.html',locals())
-    
-    def post(self,request):
+        all_addresses = Customers.objects.filter(user=request.user)
+        latest_address = all_addresses.order_by('-id').first()
+        profile_pic = UserProfileImg.objects.filter(user=request.user).first()
+        return render(request, 'app/profile.html', {
+            'totalitems': totalitems,
+            'wishlistitems': wishlistitems,
+            'latest_address': latest_address,
+            'profile_pic': profile_pic,
+            'messages': messages.get_messages(request),
+        })
+
+    def post(self, request):
         if request.user.is_authenticated:
-            totalitems = len(Cart.objects.filter(user=request.user))
-            wishlistitems = len(Wishlist.objects.filter(user=request.user))
-        form = CustomerProfileForm(request.POST)
-        if form.is_valid():
-            user = request.user
-            name = form.cleaned_data['name']
-            locality = form.cleaned_data['locality']
-            city = form.cleaned_data['city']
-            phone = form.cleaned_data['phone']
-            state = form.cleaned_data['state']
-            zipcode = form.cleaned_data['zipcode'] 
-            reg = Customers(user=user,name=name,locality=locality,city=city,phone=phone,state=state,zipcode=zipcode)
-            reg.save()
-            messages.success(request,"Congradulation ! Profile saved successfully")
-        else:
-            messages.warning(request,"invalid input ")
-        return render(request,'app/profile.html',locals())
+            if request.POST.get('form_action') == 'update_profile_image':
+                user_profile, created = UserProfileImg.objects.get_or_create(user=request.user)
+                form = UserProfileImgForm(request.POST, request.FILES, instance=user_profile)
+                if form.is_valid():
+                    form.save()
+                    messages.success(request, "Congratulations! Profile image saved successfully.")
+                else:
+                    messages.warning(request, "Invalid input.")
+                return redirect('profile')  # Redirect to avoid resubmission
+
+            elif request.POST.get('form_action') == 'delete_profile_image':
+                user_profile = UserProfileImg.objects.filter(user=request.user).first()
+                if user_profile and user_profile.profile_image:
+                    user_profile.profile_image.delete()  # Delete the image file from storage
+                    user_profile.profile_image = None  # Set the profile_image field to None
+                    user_profile.save()
+                    messages.warning(request, "Profile image deleted successfully.")
+                else:
+                    messages.warning(request, "No profile image found to delete.")
+                return redirect('profile')  # Redirect to avoid resubmission
+
+        return redirect('profile')  # Fallback redirect
 
 # Display the user address
 def address(request):
@@ -149,6 +162,19 @@ def address(request):
             totalitems = len(Cart.objects.filter(user=request.user))
             wishlistitems = len(Wishlist.objects.filter(user=request.user))
     add = Customers.objects.filter(user=request.user)
+    form = CustomerProfileForm(request.POST)
+    if form.is_valid():
+        user = request.user
+        name = form.cleaned_data['name']
+        locality = form.cleaned_data['locality']
+        city = form.cleaned_data['city']
+        phone = form.cleaned_data['phone']
+        state = form.cleaned_data['state']
+        zipcode = form.cleaned_data['zipcode'] 
+        reg = Customers(user=user,name=name,locality=locality,city=city,phone=phone,state=state,zipcode=zipcode)
+        reg.save()
+        messages.success(request,"Congradulation ! Profile saved successfully")
+    
     return render(request, 'app/user_address.html', locals())
 
 # Update address
@@ -208,9 +234,6 @@ def buy_now(request):
         Cart.objects.create(user=user, product=product, quantity=1)
     
     return redirect('cart')
-
-
-
 
 # Remove from cart
 def remove_from_cart(request, prod_id):

@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField,PasswordChangeForm,SetPasswordForm,PasswordResetForm
 from django.contrib.auth.models import User
-from . models import Customers
+from . models import Customers,UserProfileImg
+
 # User Registration Form
 class UserRegistrationForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'True', 'class': 'form-control'}))
@@ -18,6 +19,7 @@ class UserRegistrationForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("This email address is already in use.")
         return email
+
 # User Login Form
 class LoginForm(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={'autofocus': 'True', 'class': 'form-control'}))
@@ -37,6 +39,7 @@ class PasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(label='Old password',widget=forms.PasswordInput(attrs={'autofocus': 'current-password', 'class': 'form-control'}))
     new_password1 = forms.CharField(label='New Password',widget=forms.PasswordInput(attrs={'autofocus': 'current-password', 'class': 'form-control'}))
     new_password2 = forms.CharField(label='Confirm password',widget=forms.PasswordInput(attrs={'autofocus': 'True', 'class': 'form-control'}))
+
 # Customer Profile Form
 class CustomerProfileForm(forms.ModelForm):
     class Meta:
@@ -50,3 +53,9 @@ class CustomerProfileForm(forms.ModelForm):
             'state': forms.Select(attrs={'class': 'form-control'}),
             'zipcode': forms.NumberInput(attrs={'class': 'form-control'}),
         }
+
+# User Profile Image
+class UserProfileImgForm(forms.ModelForm):
+    class Meta:
+        model = UserProfileImg
+        fields = ['profile_image']

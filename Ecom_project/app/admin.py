@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Products,Customers,Cart,OrderPlaced,Payment,Wishlist,ProductImage
+from . models import Products,Customers,Cart,OrderPlaced,Payment,Wishlist,ProductImage,UserProfileImg
 
 # //? model for admin panel  products details view. 
 class ProductImageInline(admin.TabularInline):
@@ -29,3 +29,7 @@ class PaymentModelAdmin(admin.ModelAdmin):
 @admin.register(Wishlist)
 class WishlistModelAdmin(admin.ModelAdmin):
     list_display = ['id','user','product']
+
+@admin.register(UserProfileImg)
+class UserProfileImgModelAdmin(admin.ModelAdmin):
+    list_display = ['user','profile_image']

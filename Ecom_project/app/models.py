@@ -101,6 +101,18 @@ class Customers(models.Model):
 
     def __str__(self):
         return self.name
+# User profile image
+class UserProfileImg(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    profile_image = models.ImageField(
+        upload_to='profile_images/',
+        default=None,
+        null=True,
+        blank=True
+    )
+
+    def __str__(self):
+        return self.user.username
  
 # store the payment details 
 class Payment(models.Model):

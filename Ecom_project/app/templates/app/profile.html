@@ -3,77 +3,86 @@
 {% block title %}Profile{% endblock title %}
 
 {% block main-content %}
-<div class='container m-5 profile_form '>
+<div class="container m-5 profile_form">
     <div class="row">
+        <!-- User Name -->
         <h2>Hi <span class="text-capitalize">{{ request.user }}</span></h2>
-      
+        
+        <!-- Sidebar Options -->
         <div class="col-sm-2 border-end">
             <ul class="list-unstyled">
-                <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-primary mb-2">Profile</a></li>
-                <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-secondary">Address</a></li>
+                <li class="d-grid">
+                    <a href="{% url 'profile' %}" class="btn btn-profile1 mb-2"><b>Profile</b></a>
+                </li>
+                <li class="d-grid">
+                    <a href="{% url 'address' %}" class="btn btn-address"><b>Address</b></a>
+                </li>
             </ul>
         </div>
-        <div class="col-sm-9 offset-sm-3 shadow p-5 " >
-            <form method="post" action="" novalidate>
-                {% csrf_token %}
-                
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        {{ form.name.label_tag }}{{ form.name }}
-                        <small class="text-danger">{{ form.name.errors|striptags }}</small>
-                    </div>
-                    <div class="col-md-6">
-                        {{ form.locality.label_tag }}{{ form.locality }}
-                        <small class="text-danger">{{ form.locality.errors|striptags }}</small>
-                    </div>
-                </div>
-                
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        {{ form.city.label_tag }}{{ form.city }}
-                        <small class="text-danger">{{ form.city.errors|striptags }}</small>
-                    </div>
-                    <div class="col-md-6">
-                        {{ form.phone.label_tag }}{{ form.phone }}
-                        <small class="text-danger">{{ form.phone.errors|striptags }}</small>
-                    </div>
-                </div>
-                
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        {{ form.state.label_tag }}{{ form.state }}
-                        <small class="text-danger">{{ form.state.errors|striptags }}</small>
-                    </div>
-                    <div class="col-md-6">
-                        {{ form.zipcode.label_tag }}{{ form.zipcode }}
-                        <small class="text-danger">{{ form.zipcode.errors|striptags }}</small>
-                    </div>
-                </div>
-                
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <input type="submit" value="Submit" class="btn btn-primary">
-                    </div>
-                </div>
-                
-                <!-- Non_field_error messages -->
-                {% if form.non_field_errors %}
-                <div class="alert alert-danger my-3">
-                    {% for error in form.non_field_errors %}
-                    <p>{{ error }}</p>
-                    {% endfor %}
-                </div>
-                {% endif %}
-            
-                <!-- Error messages -->
-                {% if messages %}
+
+        <!-- Main Content Area -->
+        <div class="col-sm-9 offset-sm-3 shadow p-2">
+            <!-- Display Messages -->
+            {% if messages %}
+            <div id="message-container" class="position-absolute end-0 m-3" style="z-index: 1000;">
                 {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}" role="alert">
-                    {{ message }}
-                </div>
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" style="width: 300px;" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Profile Image Section -->
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="form_action" value="update_profile_image">
+
+                {% if profile_pic and profile_pic.profile_image %}
+                    <!-- Display the Profile Image -->
+                    <img class="profile-image" src="{{ profile_pic.profile_image.url }}" alt="Profile Image"><br>
+                    <!-- Delete Profile Image Button -->
+                    <input type="hidden" name="form_action" value="delete_profile_image">
+                    <button type="submit" class="btn btn-danger m-2 text-dark">
+                        <b>Delete</b> <i class="fas fa-solid fa-trash" style="color: black;"></i>
+                    </button>
+                {% else %}
+                    <!-- Image Upload Section if No Image is Available -->
+                    <div class="image-upload">
+                        <label for="file-input"> 
+                            <span>
+                                <img class="profile-image" src="{% static 'app/images/banner/profileUploadIcon.png' %}" alt="Default Image">
+                            </span>
+                        </label>
+                        <input id="file-input" type="file" name="profile_image" required />
+                    </div>
+                    
+                    <button type="submit" class="btn btn-upload m-2">
+                        <b>Upload</b> <i class="fas fa-solid fa-upload" style="color: #f48b48;"></i>
+                    </button>
                 {% endif %}
             </form>
+            <!-- End Profile Image Section -->
+
+            <!-- Latest Address Display -->
+            {% if latest_address %}
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title text-capitalize">{{ latest_address.name }}</h5>
+                        <p class="card-text">
+                            {{ latest_address.locality }} <br>
+                            {{ latest_address.city }} <br>
+                            {{ latest_address.phone }} <br>
+                            {{ latest_address.state }} <br>
+                            {{ latest_address.zipcode }}
+                        </p>
+                    </div>
+                </div>
+            {% else %}
+                <p><b>No address found!</b></p>
+                <a href="{% url 'address' %}" class="btn btn-addnew1 m-2"><b>Add New Address</b></a>
+            {% endif %}
         </div>
     </div>
 </div>
