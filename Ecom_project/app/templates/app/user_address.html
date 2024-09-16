@@ -10,11 +10,12 @@
         <!-- Options -->
         <div class="col-sm-2 border-end">
             <ul class="list-unstyled">
-                <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-profile mb-2 text-white"><b>Profile</b></a></li>
-                <li class="d-grid"><a class="btn btn-addNew text-white" id="add-address-btn"><b>Add New Address</b></a></li>
+                <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-profile mb-2"><b>Profile</b></a></li>
+                <li class="d-grid"><a class="btn btn-addNew mb-2" id="add-address-btn"><b>Add New Address</b></a></li>
+                <li class="d-grid"><a href="{% url 'order_success' %}" class="btn btn-orders"><b>Order History</b></a></li>
             </ul>
         </div>
-        <div class="col-sm-9 offset-sm-3 shadow p-5">
+        <div class="col-sm-9 offset-sm-3 shadow p-5" style="overflow-y: auto; max-height: 400px;">
             <!-- Address Card -->
             <div class="row" id="existing-addresses">
                 {% if add %}
@@ -24,8 +25,8 @@
                                 <div class="card-body">
                                     <h5 class="card-title text-capitalize">{{ ad.name }}</h5>
                                     <p class="card-text">{{ ad.locality }} <br>{{ ad.city }} <br>{{ ad.phone }} <br>{{ ad.state }} <br>{{ ad.zipcode }}</p>
-                                    <a href="{% url 'update_address' pk=ad.id %}" class="btn btn-Update text-white">Update</a>
-                                    <a href="{% url 'delete_address' pk=ad.id %}" class="btn btn-danger text-white">Delete</a>
+                                    <a href="{% url 'update_address' pk=ad.id %}" class="btn btn-Update "><b>Update</b></a>
+                                    <a href="{% url 'delete_address' pk=ad.id %}" class="btn btn-danger "><b>Delete</b></a>
                                 </div>
                             </div>
                         </div>

@@ -15,13 +15,16 @@
                     <a href="{% url 'profile' %}" class="btn btn-profile1 mb-2"><b>Profile</b></a>
                 </li>
                 <li class="d-grid">
-                    <a href="{% url 'address' %}" class="btn btn-address"><b>Address</b></a>
+                    <a href="{% url 'address' %}" class="btn btn-address mb-2"><b>Address</b></a>
+                </li>
+                <li class="d-grid">
+                    <a href="{% url 'order_success' %}" class="btn btn-orders"><b>Order History</b></a>
                 </li>
             </ul>
         </div>
 
         <!-- Main Content Area -->
-        <div class="col-sm-9 offset-sm-3 shadow p-2">
+        <div class="col-sm-9 offset-sm-3 shadow p-2" >
             <!-- Display Messages -->
             {% if messages %}
             <div id="message-container" class="position-absolute end-0 m-3" style="z-index: 1000;">
