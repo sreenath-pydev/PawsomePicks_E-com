@@ -3,39 +3,53 @@
 {% block title %}Change Password {% endblock title %}
 
 {% block main-content %}
-<div class='container m-5 profile_form '>
+<div class="container m-5 profile_form">
     <div class="row">
+        <!-- User Name -->
         <h2>Hi <span class="text-capitalize">{{ request.user }}</span></h2>
-      
+        
+        <!-- Sidebar Options -->
         <div class="col-sm-2 border-end">
             <ul class="list-unstyled">
-                <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-primary mb-2">Profile</a></li>
-                
+                <li class="d-grid">
+                    <a href="{% url 'profile' %}" class="btn btn-profile mb-2"><b>Profile</b></a>
+                </li>
+                <li class="d-grid">
+                    <a href="{% url 'address' %}" class="btn btn-address mb-2"><b>Address</b></a>
+                </li>
+                <li class="d-grid">
+                    <a href="{% url 'order_success' %}" class="btn btn-orders mb-2"><b>Order History</b></a>
+                </li>
+                <li class="d-grid">
+                    <a href="{% url 'change_pwd' %}" class="btn btn-change-password1"><b>Change Password</b></a>
+                </li>
             </ul>
         </div>
-        <div class="col-sm-9 offset-sm-3 shadow p-5 " >
+
+        <!-- Main Content Area -->
+        <div class="col-sm-9 offset-sm-3 shadow p-5">
             <form method="post" action="" novalidate>
                 {% csrf_token %}
-                {% for fm in form%}   
-                <div>
-                {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>   
-                </div>
+                {% for fm in form %}   
+                    <div class="p-2">
+                        {{ fm.label_tag }} {{ fm }}
+                        <small class="text-danger">{{ fm.errors|striptags }}</small>   
+                    </div>
                 {% endfor %}   
+                
                 <div class="row pt-3">
                     <div class="col-md-12">
-                        <input type="submit" value="Submit" class="btn btn-primary">
+                        <input type="submit" value="Submit" class="btn login-btn">
                     </div>
                 </div>
-                
-                
-            
+
                 <!-- Error messages -->
                 {% if messages %}
-                {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}" role="alert">
-                    {{ message }}
-                </div>
-                {% endfor %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                 {% endif %}
             </form>
         </div>

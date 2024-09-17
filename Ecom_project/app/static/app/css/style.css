@@ -538,10 +538,10 @@ form .buy-now:hover{
 .image-upload:hover .upload-icon {
   transform: scale(1.1);
 }
-.btn-profile1, .btn-orders1, .btn-addNew{
+.btn-profile1, .btn-orders1, .btn-add-new1, .btn-change-password1{
   background-color: #f48b48!important;
 }
-.btn-addnew1, .btn-orders, .btn-profile2, .btn-Update, .btn-upload, .btn-address, .btn-profile {
+.btn-add-new, .btn-orders, .btn-profile2, .btn-Update, .btn-upload, .btn-address, .btn-profile, .btn-change-password{
   background-color: #ffd34e !important;
 }
 /* login section */
