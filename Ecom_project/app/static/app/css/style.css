@@ -555,13 +555,13 @@ form .buy-now:hover{
   align-items: center;
   justify-content: center;
 }
-.login{
+.login-form{
   margin-top: -10px;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   border-radius: 20px;
 }
-.login h1 {
+.login-form h1 {
   font-weight: 1000;
   font-size: 60px;
 }
@@ -627,6 +627,49 @@ form .register-btn:hover {
   background-color: #ffd34e;
   border-color: #ffd34e;
   color: white;
+}
+
+/* Password Reset Section */
+form .btn-password-reset{
+  background-color: #f48b48;
+  border-color: #f48b48;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 1000;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+form .btn-password-reset:hover {
+  background-color: #ffd34e;
+  border-color: #ffd34e;
+  color: white;
+}
+/* Password confirmation Section */
+form .btn-password-confirmation{
+  background-color: #f48b48;
+  border-color: #f48b48;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 1000;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+form .btn-password-confirmation:hover {
+  background-color: #ffd34e;
+  border-color: #ffd34e;
+  color: white;
+}
+.back-to-login{
+  color: #f48b48;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.back-to-login:hover{
+  color: #ffd34e;
 }
 /* Product card  */
 .slide-container {
