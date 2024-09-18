@@ -538,11 +538,14 @@ form .buy-now:hover{
 .image-upload:hover .upload-icon {
   transform: scale(1.1);
 }
-.btn-profile1, .btn-orders1, .btn-add-new1, .btn-change-password1{
+.btn-profile1, .btn-orders1, .btn-add-new1, .btn-change-password1, .btn-wishlist1{
   background-color: #f48b48!important;
 }
-.btn-add-new, .btn-orders, .btn-profile2, .btn-Update, .btn-upload, .btn-address, .btn-profile, .btn-change-password{
+.btn-add-new, .btn-orders, .btn-profile2, .btn-Update, .btn-upload, .btn-address, .btn-profile, .btn-change-password, .btn-wishlist{
   background-color: #ffd34e !important;
+}
+.offset-sm-3{
+  margin-top: -250px!important;
 }
 /* login section */
 .login-background {
@@ -831,5 +834,8 @@ form .btn-password-confirmation:hover {
   .product-line .col-md-4 {
     width: 300px;
     height: 350px;
+  }
+  .offset-sm-3{
+    margin-top: 0px!important;
   }
 }
