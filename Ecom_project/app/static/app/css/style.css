@@ -757,19 +757,26 @@ form .btn-password-confirmation:hover {
   width: 20px;
   height: 20px;
 }
-/** Products at the cart page */
-.cart-items {
-  display: flex;
-  flex-direction: column;
+
+
+/* Cart Section */
+.btn-place_order {
+  background-color: #f48b48 !important;
+  border-color: #f48b48 !important;
+  color: white !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  font-weight: 1000 !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s, border-color 0.3s !important;
 }
 
-/* Products at the cart page */
-.cart-items {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.btn-place_order:hover {
+  background-color: #ffd34e !important;
+  border-color: #ffd34e !important;
+  color: white !important;
 }
-
 .cart-item {
   border: 1px solid #ccc;
   padding: 20px;
@@ -777,21 +784,12 @@ form .btn-password-confirmation:hover {
   display: flex;
   align-items: center;
 }
-
 .product-image {
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 150px !important;
+  max-height: 150px !important;
   margin-right: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-}
-
-.cart-item h2 {
-  margin: 0 0 10px;
-}
-
-.cart-item p {
-  margin: 5px 0;
 }
 
 .cart-total {
