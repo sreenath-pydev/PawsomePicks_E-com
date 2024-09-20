@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,7 +120,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+# Directory where Django will collect static files during deployment
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Or another directory of your choice
+
+# Define additional directories where Django will look for static files
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
 LOGIN_REDIRECT_URL='/'
@@ -137,8 +145,28 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 RAZORPAY_KEY_ID = 'rzp_test_nuJUFPC95KxH7j'
 RAZORPAY_KEY_SECRET = '3mlKYc6ipIQqbtTomtuCucjd'
 
+# Jazzmin admin settings
+JAZZMIN_SETTINGS = {
+    "site_title": "Admin",
+    "copyright": "PawsomePicksome",
+    "site_brand": "PawsomePicksome",
+    "site_logo": "/app/images/banner/PawsomePicks.png",
+    "welcome_sign": "Welcome to the Admin Panel",
+     "search_model": ["auth.User"],
+     # Links to put along the top menu
+    "topmenu_links": [
 
-  # Or the appropriate path to your login view
+        # Url that gets reversed (Permissions can be added)
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+
+        # model admin to link to (Permissions checked against model)
+        {"model": "auth.User"},
+
+        # App with dropdown menu to all its models pages (Permissions checked against models)
+        {"app": "books"},
+    ],
+}
+
 
 
 
