@@ -3,13 +3,13 @@
 {% block title %}Wishlist{% endblock title %}
 
 {% block main-content %}
-<div class="container m-5 profile_form">
+<div class="container profile_form">
     <div class="row">
-        <!-- User Name -->
-        <h2>Hi <span class="text-capitalize">{{ request.user }}</span></h2>
         
         <!-- Sidebar Options -->
-        <div class="col-sm-2 border-end">
+        <div class="col-sm-3 border-end">
+            <!-- User Name -->
+        <h2>Hi <span class="text-capitalize">{{ request.user }}</span></h2>
             <ul class="list-unstyled">
                 <li class="d-grid">
                     <a href="{% url 'profile' %}" class="btn btn-profile mb-2"><b>Profile</b></a>
@@ -30,7 +30,7 @@
         </div>
 
         <!-- Main Content Area -->
-        <div class=" col-sm-9 offset-sm-3 shadow p-2" style="overflow-y: auto; max-height: 400px;">
+        <div class=" col-sm-9 mt-3 shadow p-2" style="overflow-y: auto; max-height: 400px;">
             {% for items in wishlist %}
             <div class="col-12 mb-4">
                 <div class="card shadow-sm ">
