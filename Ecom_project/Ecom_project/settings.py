@@ -151,8 +151,11 @@ JAZZMIN_SETTINGS = {
     "copyright": "PawsomePicksome",
     "site_brand": "PawsomePicksome",
     "site_logo": "/app/images/banner/PawsomePicks.png",
-    "welcome_sign": "Welcome to the Admin Panel",
+    "welcome_sign": "Welcome to the PAWSOMEPICKSOME  Admin Panel",
      "search_model": ["auth.User"],
+     "custom_css": "app/css/custom_admin.css",
+     "show_ui_builder": False,
+     
      # Links to put along the top menu
     "topmenu_links": [
 
@@ -163,10 +166,40 @@ JAZZMIN_SETTINGS = {
         {"model": "auth.User"},
 
         # App with dropdown menu to all its models pages (Permissions checked against models)
-        {"app": "books"},
+        {"app": "app"},
     ],
 }
 
-
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-warning",
+    "accent": "accent-orange",
+    "navbar": "navbar-warning navbar-light",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-light-warning",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "default",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
+}
 
 
