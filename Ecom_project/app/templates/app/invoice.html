@@ -1,0 +1,82 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Invoice{% endblock title %}
+{% block main-content %}
+<!-- Main container for the invoice -->
+<div class="div" id="pdf">
+    <div class="container  my-3">
+        <!-- Invoice box -->
+        <div class="invoice-box bg-white p-4">
+             <!-- Header row with logo and order details -->
+            <div class="row  mb-4">
+                <div class="col-md-6">
+                    <div class="title-img">
+                        <img src="{% static 'app/images/banner/PawsomePicks.png' %}" alt="Pawsome Picks" />
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <h5>Invoice for Order #{{ order.id }}</h5>
+                    <p>Order Date: {{ order.order_date }}</p>
+                    <p style="color:green;">Order Status: {{ order.order_status }}</p>
+                    <p>Due: February 1, 2023</p>
+                </div>
+            </div>
+             <!-- Company and customer information -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h6>PawsomePicksome, Inc.</h6>
+                    <p>
+                        12345 Kozhikode Road<br />
+                        Kozhikode, 63453
+                    </p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <h6>{{ order.customer.name }}</h6>
+                    <p>
+                        {{ order.customer.locality }}, {{ order.customer.city }}<br />
+                        {{ order.customer.state }}, {{ order.customer.zipcode }}<br />
+                        Phone: {{ order.customer.phone }}<br />
+                        Email: {{ order.user.email }}
+                    </p>
+                </div>
+            </div>
+             <!-- Invoice items table -->
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col" class="text-center">Quantity</th>
+                        <th scope="col" class="text-end">Price</th>
+                        <th scope="col" class="text-end">GST</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ order.product.title }}</td>
+                        <td class="text-center">{{ order.quantity }}</td>
+                        <td class="text-end">₹{{ order.product.discount_price }}</td>
+                        <td class="text-end">₹40</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Total amount row -->
+            <div class="row justify-content-end">
+                <div class="col-md-4">
+                    <table class="table table-sm">
+                        <tr>
+                            <td class="text-end"><strong>Total:</strong></td>
+                            <td class="text-end">₹{{ total_amount }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+        </div> 
+    </div>
+</div>
+<!-- Download Invoice PDF Button -->
+<div class="text-center">
+    <button onclick="print_fun('pdf', '{% url 'order_success' %}')" type="button" class="btn btn-invoice">Download</button>
+</div>
+
+{% endblock main-content %}

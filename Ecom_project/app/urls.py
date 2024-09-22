@@ -33,7 +33,7 @@ urlpatterns = [
     path('pluswishlist/', views.PulsWishlist,name='pluswishlist'),
     path('minuswishlist/', views.MinusWishlist,name='minuswishlist'),
    # checkout section
-    
+    path('invoice/<int:order_id>/', views.invoice, name='invoice'),
     path('checkout/', views.CheckOutView.as_view(), name='checkout'),
     #payment
     #path('order_payment/', views.order_payment, name='order_payment'),

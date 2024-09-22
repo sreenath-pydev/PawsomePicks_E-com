@@ -3,6 +3,8 @@
 {% block title %}Checkout{% endblock title %}
 
 {% block main-content %}
+<!--navbar-->
+{% include 'app/navbar.html' %}
 <div class="container">
   {% if messages %}
     {% for msg in messages %}

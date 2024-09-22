@@ -1,9 +1,10 @@
 {% extends "app/base.html" %}
 {% load static %}
-
 {% block title %}Your Orders{% endblock title %}
 
 {% block main-content %}
+<!--navbar-->
+{% include 'app/navbar.html' %}
 <div class="container profile_form">
     <div class="row">
         
@@ -57,6 +58,15 @@
                                     </div>
                                 </div>
                                 {% endif %}
+                                <div class="text-end">
+                                    <!--Invoice download Option-->
+                                    {% if order.order_status == 'DELIVERED' %}
+                                        <a href="{% url 'invoice' order.id %}" class="text-decoration-none text-dark">
+                                            <i class="fas fa-solid fa-file-invoice"></i> Invoice
+                                        </a>
+                                    {% endif %}
+
+                            </div>
                             </div>
                         </div>
                     </div>

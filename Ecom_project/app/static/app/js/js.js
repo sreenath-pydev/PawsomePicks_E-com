@@ -295,3 +295,14 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }, 3000); 
 });
+// Print Invoice
+function print_fun(p, redirectUrl) {
+  var a = document.body.innerHTML;
+  var b = document.getElementById(p).innerHTML;
+  document.body.innerHTML = b;
+  window.print();
+  // Add a timeout to redirect after printing
+  setTimeout(function() {
+      window.location.href = redirectUrl; // Use the passed URL
+  }, 1000); // Redirect after 1 second
+}

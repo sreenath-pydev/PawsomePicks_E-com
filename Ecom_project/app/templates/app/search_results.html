@@ -3,6 +3,8 @@
 {% block title %}products{% endblock title %}
 
 {% block main-content %}
+<!--navbar-->
+{% include 'app/navbar.html' %}
 <div class="text-center"> <!-- Error messages -->
     {% if messages %}
     {% for message in messages %}

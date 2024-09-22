@@ -800,7 +800,39 @@ form .btn-password-confirmation:hover {
 .cart-total h2 {
   font-size: 1.5em;
 }
-
+/* Invoice Section */
+.invoice-box {
+  max-width: 600px; 
+  margin: auto;
+  border: 1px solid #dee2e6;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+.table td, .table th {
+  vertical-align: middle;
+}
+.title-img img {
+  width: 100px;
+  max-width: 150px;
+}
+.btn-invoice{
+  background-color: #f48b48 !important;
+  border-color: #f48b48 !important;
+  color: white !important;
+  padding: 10px 10px !important;
+  font-size: 16px !important;
+  font-weight: 1000 !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s, border-color 0.3s !important;
+  margin-top: -10px!important;
+}
+.btn-invoice:hover {
+  background-color: #ffd34e !important;
+  border-color: #ffd34e !important;
+  color: white !important;
+}
 /* Media query for screens wider than 576px */ /*PENDING*/
 @media (max-width: 667px) {
   .slider img {

@@ -408,6 +408,20 @@ def order_success(request):
     
     return render(request, "app/order_status.html", locals())
 
+# Invoice generation
+def invoice(request,order_id):
+    order = OrderPlaced.objects.get(id=order_id)
+    discount_price = order.product.discount_price
+    shipping_charge = 40
+    total_amount = (discount_price * order.quantity) + shipping_charge
+    context = {
+        'order': order,
+        'total_amount': total_amount
+        
+        
+    }
+    return render(request, 'app/invoice.html', context)
+
 # wishlist
 def Wishlists(request):
     if request.user.is_authenticated:
