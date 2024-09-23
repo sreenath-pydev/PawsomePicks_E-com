@@ -800,6 +800,39 @@ form .btn-password-confirmation:hover {
 .cart-total h2 {
   font-size: 1.5em;
 }
+.empty-cart-bg {
+  background-image: url("/static/app/images/banner/empty__cart.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 400px;
+  width: 100%;
+  color: #f48b48;
+  font-size: large;
+  font-weight: 1000;
+}
+.empty-cart-text{
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(0.5px);
+  border-radius: 20px;
+}
+.btn-start-shoping{
+  background-color: #f48b48 !important;
+  border-color: #f48b48 !important;
+  color: white !important;
+  padding: 10px 10px !important;
+  font-size: 16px !important;
+  font-weight: 1000 !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s, border-color 0.3s !important;
+  margin-top: -10px!important;
+}
+.btn-start-shoping:hover {
+  background-color: #ffd34e !important;
+  border-color: #ffd34e !important;
+  color: white !important;
+}
 /* Invoice Section */
 .invoice-box {
   max-width: 600px; 

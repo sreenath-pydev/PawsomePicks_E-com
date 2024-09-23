@@ -10,6 +10,7 @@
         <!-- Cart Items Section -->
         <div class="col-md-8 shadow" style="overflow-y: auto; max-height: 85vh;">
             {% if cart_items %}
+                <!-- Display items if cart is not empty -->
                 {% for item in cart_items %}
                     <div class="row mb-4 cart-item">
                         <!-- Product Image -->
@@ -44,8 +45,6 @@
                     </div>
                     <hr class="text-muted">
                 {% endfor %}
-            {% else %}
-                <h1 class="text-center mb-5">Cart is Empty</h1>
             {% endif %}
         </div>
         <!-- Cart Summary Section -->
@@ -71,8 +70,8 @@
                                 <strong>Total</strong> <small>(including GST)</small>
                             </div>
                             <span class="d-flex align-items-center">
-                            <span>₹ </span>
-                            <span id="total_amount">{{ total_amount }}</span>
+                                <span>₹ </span>
+                                <span id="total_amount">{{ total_amount }}</span>
                             </span>
                         </li>
                     </ul>
@@ -85,4 +84,21 @@
         {% endif %}
     </div>
 </div>
+{% if not cart_items %}
+<!-- If the cart is empty -->
+<div class="container my-1">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <!-- Background Image -->
+            <div class="empty-cart-bg d-flex flex-column justify-content-center align-items-center">
+               <div class="empty-cart-text "> 
+                <h2>Your Cart is Empty</h2>
+                <p class="text-muted p-3">Looks like you haven't added anything to your cart yet.</p>
+                <a href="{% url 'all-products' %}" class="btn btn-start-shoping my-3">Start Shopping</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock main-content %}
