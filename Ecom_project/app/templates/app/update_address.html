@@ -5,10 +5,10 @@
 {% block main-content %}
 <!--navbar-->
 {% include 'app/navbar.html' %}
-<div class='container m-5 update_address '>
+<div class="container m-5 update_address">
     <div class="row">
         <h2>Hi <span class="text-capitalize">{{ request.user }}</span></h2>
-        <div class="col-sm-9 offset-sm-3 shadow p-5 " >
+        <div class="col-sm-9 offset-sm-3 mt-3 shadow p-5">
             <form method="post" action="" novalidate>
                 {% csrf_token %}
                 
@@ -46,9 +46,9 @@
                 </div>
                 
                 <div class="row mb-3">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary" >Update</button>
-                       <a href="{% url 'address'%}" class="btn btn-secondary">BAck</a>
+                    <div class="col-md-12 d-flex justify-content-between">
+                        <button type="submit" class="btn btn-update">Update</button>
+                        <a href="{% url 'address' %}" class="btn btn-secondary">Back</a>
                     </div>
                 </div>
                 

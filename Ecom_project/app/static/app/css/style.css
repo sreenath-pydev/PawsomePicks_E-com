@@ -510,6 +510,22 @@ form .buy-now:hover{
 .update_address .col-sm-9 {
   height: 400px;
 }
+.btn-update {
+  background-color: #f48b48!important;
+  border-color: #f48b48!important;
+  color: white!important;
+  padding: 10px 20px!important;
+  font-size: 16px!important;
+  font-weight: 1000!important;
+  border-radius: 4px!important;
+  cursor: pointer!important;
+  transition: background-color 0.3s, border-color 0.3s!important;
+}
+.btn-update:hover {
+  background-color: #ffd34e!important;
+  border-color: #ffd34e!important;
+  color: white!important;
+}
 .image-upload {
   display: flex;
   align-items: center;
