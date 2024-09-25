@@ -307,6 +307,7 @@ class CheckOutView(View):
         total_amount = F_amount + 40
         context = {
             'totalitems':totalitems,
+            'wishlistitems':wishlistitems,
             'user': user,
             'form':form,
             'add':add,
@@ -319,12 +320,13 @@ class CheckOutView(View):
     def post(self, request):
         user = request.user
         cust_id = request.POST.get("custid") 
-        print("cust_id @Checkout-POST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",cust_id)
+        customer_name = Customers.objects.get(id=cust_id)
+        contact = customer_name.phone
+        mail = user.email
         cart_items = Cart.objects.filter(user=user)
         F_amount = sum(p.quantity * p.product.discount_price for p in cart_items)
         total_amount = F_amount + 40
         razor_amount = int(total_amount * 100)
-
         razorpay_client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
         payment_response = razorpay_client.order.create({"amount": razor_amount, "currency": "INR", "receipt": "order_rcptid_11"})
         order_id = payment_response['id']
@@ -337,11 +339,14 @@ class CheckOutView(View):
                 razorpay_order_id=order_id,
                 razorpay_payment_status=order_status,
             )
-            payment.save()                                                  #! 
+            payment.save()                                                
         callback_url = f"http://127.0.0.1:8000/paymentdone/?user_id={user.id}&cust_id={cust_id}&user={user}"
         context = {
             "user": user,
-            # ! pending "cust_id": cust_id,
+            "cust_id": cust_id,
+            "customer_name": customer_name,
+            "contact": contact,
+            "mail": mail,
             "callback_url": callback_url,
             "razorpay_key": settings.RAZORPAY_KEY_ID,
             "razor_amount": razor_amount,
@@ -352,21 +357,13 @@ class CheckOutView(View):
 # payment done
 @csrf_exempt
 def paymentdone(request):
-    
     USER = request.GET.get('user')
     print("USER,",USER)
     user_id = request.GET.get('user_id')
-    
-    print("User_id @ paymentdone.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",user_id)
     user = get_object_or_404(User, pk=user_id)
     cart = Cart.objects.filter(user=user_id)
-    # ! pending
-    """cust_id = request.GET.get('cust_id')
-    print("cust_id @ paymentdone.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.",cust_id)
+    cust_id = request.GET.get('amp;cust_id')
     customer = get_object_or_404(Customers, id=cust_id) 
-    if not user_id or not cust_id:
-        return HttpResponseBadRequest("User ID or Customer ID is missing.")"""
-
     #Verify the signature of the payment response data using Razorpay client
     def verify_signature(response_data):
         client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
@@ -391,13 +388,11 @@ def paymentdone(request):
             payment.razorpay_payment_status = PaymentStatus.SUCCESS
             payment.paid = True
             payment.save()
-
-    for c in cart:             # ! Customer id Pending
-        OrderPlaced(user=user, customer=None, product=c.product, quantity=c.quantity, payment=payment).save()
+    for c in cart:             
+        OrderPlaced(user=user, customer=customer, product=c.product, quantity=c.quantity, payment=payment).save()
         c.delete()
     return redirect('order_success')    
     
-
 # Orders success - order status
 def order_success(request):
     user = request.user

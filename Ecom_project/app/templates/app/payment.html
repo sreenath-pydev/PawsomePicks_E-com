@@ -10,19 +10,20 @@
         key: "{{ razorpay_key }}",
         amount: "{{razor_amount}}", 
         currency: "INR",
-        name: "name",
-        description: "Test Transaction",
-        image: "https://example.com/your_logo",
+        name: "{{customer_name}}",
+        description: "Transaction",
+        image: "{% static 'app/images/banner/PawsomePicks.png' %}",
         order_id: "{{order_id}}",
         callback_url: "{{callback_url}}",
         redirect: true,
         prefill: {
-            "name": "Gaurav Kumar",
-            "email": "gaurav.kumar@example.com",
-            "contact": "9999999999"
+            "name": "{{customer_name}}",
+            "email": "{{mail}}",
+            "contact": "{{contact}}"
         },
         notes: {
-            "address": "Razorpay Corporate Office"
+            "address": "Razorpay Corporate Office",
+             "cust_id": "{{ cust_id }}"
         },
         theme: {
             "color": "#3399cc"
