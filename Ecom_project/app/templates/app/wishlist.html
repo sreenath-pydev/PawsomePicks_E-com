@@ -51,7 +51,11 @@
                             </div>
                             <!-- Buy Now Button -->
                             <div class="col-md-3 d-flex align-items-center justify-content-center">
-                                <button type="button" class="btn btn-success shadow py-2" style="width:150px;">Buy Now</button>
+                                <form action="{% url "buy_now" %}" method="get">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="prod_id" value="{{ items.product.id }}">
+                                    <button type="submit" class="btn btn buy-now shadow py-2"><b>Buy Now</b></button>
+                                </form>
                             </div>
                         </div>
                     </div>
