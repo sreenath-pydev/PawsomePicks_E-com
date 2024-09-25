@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+ 
+
 # product categorys model choices
 CATERGORY_CHOICES=(
     ('DF','DOG FOOD'),
@@ -18,7 +20,37 @@ CATERGORY_CHOICES=(
     ('GP','GROOMING PRODUCTS'),
     ('OP','OTHER PRODUCTS')
 )
- # for customer model choices
+# Product model.
+class Products(models.Model):
+    title = models.CharField(max_length=100)
+    selling_price = models.FloatField()
+    discount_price = models.FloatField()
+    Description =  models.TextField(default='')
+    composition = models.TextField(default='')
+    product_app = models.TextField(default='')
+    category = models.CharField(choices=CATERGORY_CHOICES,max_length=3)
+    product_image = models.ImageField(upload_to='products',default='product_image')
+    def __str__(self):
+        return self.title
+# Products  extra images
+class ProductImage(models.Model):
+    product = models.ForeignKey('Products', on_delete=models.CASCADE, related_name='extra_images')
+    image = models.ImageField(upload_to='products/thumbnail_images/')
+
+    def __str__(self):
+        return f"{self.product.title} Image"
+
+# cart model
+class Cart(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    product = models.ForeignKey(Products,on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    @property
+    def total_price(self):
+        return  self.quantity * self.product.discount_price
+
+# for customer model choices
 STATE_CHOICES = (
     ('ANDAMAN AND NICOBAR ISLANDS', 'ANDAMAN AND NICOBAR ISLANDS'),
     ('ANDHRA PRADESH', 'ANDHRA PRADESH'),
@@ -56,38 +88,6 @@ STATE_CHOICES = (
     ('WEST BENGAL', 'WEST BENGAL'),
     ('PUDUCHERRY', 'PUDUCHERRY'),
 )
-
-
-
-# Product model.
-class Products(models.Model):
-    title = models.CharField(max_length=100)
-    selling_price = models.FloatField()
-    discount_price = models.FloatField()
-    Description =  models.TextField(default='')
-    composition = models.TextField(default='')
-    product_app = models.TextField(default='')
-    category = models.CharField(choices=CATERGORY_CHOICES,max_length=3)
-    product_image = models.ImageField(upload_to='products',default='product_image')
-    def __str__(self):
-        return self.title
-# Products  extra images
-class ProductImage(models.Model):
-    product = models.ForeignKey('Products', on_delete=models.CASCADE, related_name='extra_images')
-    image = models.ImageField(upload_to='products/thumbnail_images/')
-
-    def __str__(self):
-        return f"{self.product.title} Image"
-
-# cart model
-class Cart(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    product = models.ForeignKey(Products,on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-
-    @property
-    def total_price(self):
-        return  self.quantity * self.product.discount_price
 
 # customer Details
 class Customers(models.Model):
