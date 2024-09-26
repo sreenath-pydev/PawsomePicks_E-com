@@ -37,7 +37,14 @@
                         </a>
                     </small><br>
                     <!--login button-->
-                    <input type="submit" value="Login" class="btn btn login-btn">
+                    <input type="submit" value="Login" class="btn btn login-btn"> <b>or</b>
+                    <!--Sign in with Google-->
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" >
+                        <button type="button" class="btn-google-login">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFFUTi1RsVDFSupmzDUJ5I3ZHBtwz043rbHQ&s" alt="Google Logo" style="width: 20px; margin-right: 10px;">
+                           <b> Sign in with Google</b>
+                        </button>
+                    </a>
                     <!-- New User register Option -->
                     <div class="text-center fw-bold mt-3">
                         <small>

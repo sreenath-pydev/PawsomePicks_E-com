@@ -609,6 +609,19 @@ form .login-btn:hover {
   border-color: #ffd34e;
   color: white;
 }
+/* Google Login */
+.btn-google-login{
+  background-color: white!important;
+  border-radius: 4px!important;
+  height: 42px!important;
+  margin-top: 5px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.btn-google-login:hover{
+  background-color: #f48b48!important;
+  border-color: #f48b48!important;
+  color: white!important;
+}
 /* New User Registration Section */
 .register-background {
   background-image: url('/static/app/images/banner/login_background.png');

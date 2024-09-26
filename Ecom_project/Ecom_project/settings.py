@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'social_django',
+    
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'Ecom_project.urls'
@@ -64,6 +68,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                 
             ],
         },
     },
@@ -125,13 +131,38 @@ STATIC_URL = '/static/'
 # Directory where Django will collect static files during deployment
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # Or another directory of your choice
 
-# Define additional directories where Django will look for static files
-STATICFILES_DIRS = [BASE_DIR / 'static']
-
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
-LOGIN_REDIRECT_URL='/'
-LOGOUT_REDIRECT_URL = '/'
+
+# Google authentication
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+# Google OAuth2 configuration
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'  
+LOGIN_REDIRECT_URL = '/'  
+LOGOUT_REDIRECT_URL = '/'  
+
+# Google OAuth2 client ID and secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'your-google-oauth2-client-id'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'your-google-oauth2-client-secret'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'REDIRECT_URI': 'http://localhost:8000/social-auth/complete/google-oauth2/',  # Make sure this matches exactly
+    }
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -142,8 +173,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Razorpay payment KEY ID AND KEY SECRET
-RAZORPAY_KEY_ID = 'rzp_test_nuJUFPC95KxH7j'
-RAZORPAY_KEY_SECRET = '3mlKYc6ipIQqbtTomtuCucjd'
+RAZORPAY_KEY_ID = 'Your Key Id'
+RAZORPAY_KEY_SECRET = 'Your Key Secret'
 
 # Jazzmin admin settings
 JAZZMIN_SETTINGS = {
