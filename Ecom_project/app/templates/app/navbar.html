@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 {% block navbar %}
 <!-- Main Navbar -->
 <nav class="navbar navbar-expand-lg ">
@@ -52,7 +53,7 @@
                 <!-- User Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <b>{{ request.user }}</b>
+                        <b>{{ request.user.username|remove_numbers }}</b>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
