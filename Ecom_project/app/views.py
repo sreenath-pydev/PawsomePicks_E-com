@@ -159,23 +159,40 @@ class ProfileView(View):
 # Display the user address
 def address(request):
     if request.user.is_authenticated:
-            totalitems = len(Cart.objects.filter(user=request.user))
-            wishlistitems = len(Wishlist.objects.filter(user=request.user))
-    add = Customers.objects.filter(user=request.user)
-    form = CustomerProfileForm(request.POST)
-    if form.is_valid():
-        user = request.user
-        name = form.cleaned_data['name']
-        locality = form.cleaned_data['locality']
-        city = form.cleaned_data['city']
-        phone = form.cleaned_data['phone']
-        state = form.cleaned_data['state']
-        zipcode = form.cleaned_data['zipcode'] 
-        reg = Customers(user=user,name=name,locality=locality,city=city,phone=phone,state=state,zipcode=zipcode)
-        reg.save()
-        messages.success(request,"Congradulation ! Profile saved successfully")
+        totalitems = len(Cart.objects.filter(user=request.user))
+        wishlistitems = len(Wishlist.objects.filter(user=request.user))
     
-    return render(request, 'app/user_address.html', locals())
+    add = Customers.objects.filter(user=request.user)
+
+    if request.method == 'POST':
+        form = CustomerProfileForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            name = form.cleaned_data['name']
+            locality = form.cleaned_data['locality']
+            city = form.cleaned_data['city']
+            phone = form.cleaned_data['phone']
+            state = form.cleaned_data['state']
+            zipcode = form.cleaned_data['zipcode'] 
+            
+            # Save new address
+            reg = Customers(user=user, name=name, locality=locality, city=city,
+                            phone=phone, state=state, zipcode=zipcode)
+            reg.save()
+            messages.success(request, "Congratulations! Profile saved successfully")
+            #return redirect('some_success_url')  # Redirect after saving
+
+    else:
+        form = CustomerProfileForm()  # Create an empty form for GET requests
+
+    context = {
+        'form': form,
+        'add': add,
+        'totalitems': totalitems,
+        'wishlistitems': wishlistitems,
+    }
+    
+    return render(request, 'app/user_address.html', context)
 
 # Update address
 class UpdateAddressView(View):
