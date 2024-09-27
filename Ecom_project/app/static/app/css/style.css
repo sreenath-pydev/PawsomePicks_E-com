@@ -30,6 +30,10 @@ body {
   background-color: #ffd34e;
 }
 
+.navbar-nav .dropdown-menu form button:hover {
+  background-color: #ffd34e;
+  border-color: #ffd34e;
+}
 /* Search Bar */
 .custom-search-input {
   width: 600px !important;
