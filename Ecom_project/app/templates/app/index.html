@@ -8,7 +8,7 @@
 <div class="container-fluid">
   <div class='row'>
     <!-- Carousel Slider -->
-    <div id="carouselExampleFade" class="col-12  carousel slide carousel-fade slider">
+    <div id="carouselExampleFade" class="col-12  carousel slide carousel-fade slider" data-aos="fade-up">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="{% static 'app/images/banner/carousel1.png' %}" class="d-block w-100" alt="Carousel-Image1">
@@ -32,7 +32,7 @@
   </div>
 </div>
 <!-- Dog Products Categories Slider -->
-<div class="slide-container text-center pt-5 swiper dog-slider">
+<div class="slide-container text-center pt-5 swiper dog-slider" data-aos="fade-up" >
   <h2 class="Category-head"><span class="pet">DOG'S</span> <span class="categories">Products</span></h2>
   <div class="slide-content">
     <div class="card-wrapper swiper-wrapper">
@@ -65,7 +65,7 @@
   <div class="swiper-pagination dog-swiper-pagination"></div>
 </div>
 <!-- Cat Products Categories Slider -->
-<div class="slide-container pt-5 text-center swiper cat-slider">
+<div class="slide-container pt-5 text-center swiper cat-slider" data-aos="fade-up" >
   <h2 class="Category-head"><span class="pet">CAT'S</span> <span class="categories">Products</span></h2>
   <div class="slide-content">
     <div class="card-wrapper swiper-wrapper">
@@ -98,7 +98,7 @@
   <div class="swiper-pagination cat-swiper-pagination"></div>
 </div>
 <!--offer banner carousel-->
-<div class="container-fluid ">
+<div class="container-fluid" data-aos="fade-up" >
   <div id="ob-carouselExampleFade" class="carousel slide carousel-fade">
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -122,10 +122,10 @@
   </div>
 </div>
 <!--Product line banner-->
-<div class="container mt-5">
+<div class="container mt-5" data-aos="fade-up" >
   <div class="row product-line">
     <!-- dog categories-->
-    <div class="col-md-4 position-relative">
+    <div class="col-md-4 position-relative" data-aos="fade-up" data-aos-delay="500">
       <a href="{% url 'dog-products' %}"> <img class="dog"  src="{% static 'app/images/banner/dog.png' %}"></a>
       <div class="text-container">
         <h2><span class="color-1">Products For Dogs</span></h2>
@@ -133,11 +133,11 @@
       </div>
     </div>
     <!-- product-line-heading -->
-    <div class="col col-lg-2 heading-text">
+    <div class="col col-lg-2 heading-text" data-aos="zoom-out-down">
       <h1><span class="color-1">OUR</span> <span class="color-2">PRODUCT LINE</span></h1>
     </div>
     <!-- cat categories-->
-    <div class="col-md-4 position-relative">
+    <div class="col-md-4 position-relative" data-aos="fade-up" data-aos-delay="500">
       <div class="text-container mb-3">
         <h2><span class="color-1">Products For Cats</span></h2>
         <h5>Premium products for your <br> favorite feline companions</h5>
@@ -149,6 +149,10 @@
 
 {% endblock main-content %}
 
+
 {% block footer %}
 {% include "app/footer.html" %}
 {% endblock footer %}
+<script>
+  
+</script>

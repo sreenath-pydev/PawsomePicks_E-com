@@ -5,10 +5,10 @@
 {% block main-content %}
 <!--navbar-->
 {% include 'app/navbar.html' %}
-<div class="container my-5">
+<div class="container my-5" data-aos="fade-up" data-aos-duration="500">
     <div class="row">
         <!-- Cart Items Section -->
-        <div class="col-md-8 shadow" style="overflow-y: auto; max-height: 85vh;">
+        <div class="col-md-8 shadow" style="overflow-y: auto; max-height: 85vh;" data-aos="fade-right" data-aos-duration="500" >
             {% if cart_items %}
                 <!-- Display items if cart is not empty -->
                 {% for item in cart_items %}
@@ -49,7 +49,7 @@
         </div>
         <!-- Cart Summary Section -->
         {% if cart_items %}
-        <div class="col-md-4 text-center">
+        <div class="col-md-4 text-center" data-aos="fade-left" data-aos-duration="500">
             <div class="card sticky-top z-3">
                 <div class="card-body">
                     <h3 class="card-title">Cart Summary</h3>
@@ -86,12 +86,12 @@
 </div>
 {% if not cart_items %}
 <!-- If the cart is empty -->
-<div class="container my-1">
+<div class="container my-1" data-aos="fade-up" data-aos-duration="1000">
     <div class="row justify-content-center">
         <div class="col-12 text-center">
             <!-- Background Image -->
             <div class="empty-cart-bg d-flex flex-column justify-content-center align-items-center">
-               <div class="empty-cart-text "> 
+               <div class="empty-cart-text" data-aos="fade-up" data-aos-duration="500"> 
                 <h2>Your Cart is Empty</h2>
                 <p class="text-muted p-3">Looks like you haven't added anything to your cart yet.</p>
                 <a href="{% url 'all-products' %}" class="btn btn-start-shoping my-3">Start Shopping</a>

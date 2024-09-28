@@ -303,3 +303,10 @@ function print_fun(p, redirectUrl) {
       window.location.href = redirectUrl; // Use the passed URL
   }, 1000); // Redirect after 1 second
 }
+// Scrolling down animation
+document.addEventListener('DOMContentLoaded', function() {
+  AOS.init({
+    duration: 1000, 
+    once: false      
+  });
+});

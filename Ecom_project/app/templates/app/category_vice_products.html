@@ -5,11 +5,11 @@
 {% block main-content %}
 <!--navbar-->
 {% include 'app/navbar.html' %}
-<div class="container-fluid">
+<div class="container-fluid" >
     <div class="row align-items-start cvp">
         {% if cat_prod_Categorys %}
         <!-- List cat products category -->
-        <div class="col-sm-3 mt-3 ">
+        <div class="col-sm-3 mt-3">
             <div class="text-center my-3">
                 <a class="btn btn" href="{% url 'dog-products' %}"><b>Dog</b> </a>
                 <a class="btn btn" href="{% url 'all-products' %}"><b>All </b></a>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <!-- Display the products by cat category -->
-        <div class="col-sm-9 my-2">
+        <div class="col-sm-9 my-2" data-aos="fade-up" data-aos-duration="500">
             <div class="row">
                 {% if Cat_product %}
                 {% for prod in Cat_product %}
@@ -69,7 +69,7 @@
             </div>
         </div>
         <!-- Display the products by dog category -->
-        <div class="col-sm-9 my-3">
+        <div class="col-sm-9 my-3" data-aos="fade-up" data-aos-duration="500">
             <div class="row">
                 {% if Dog_product %}
                 {% for prod in Dog_product %}
@@ -116,7 +116,7 @@
             </div>
         </div>
         <!-- Display all products -->
-        <div class="col-sm-9 my-3">
+        <div class="col-sm-9 my-3" data-aos="fade-up" data-aos-duration="500">
             <div class="row">
                 {% if all_products %}
                 {% for prod in all_products %}

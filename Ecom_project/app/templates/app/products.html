@@ -7,7 +7,7 @@
 {% include 'app/navbar.html' %}
 <div class="container-fluid ">
     <div class="row align-items-start">
-        <div class="col-sm-3 my-3">
+        <div class="col-sm-3 my-3" data-aos="fade-right" data-aos-duration="500">
             <!-- List product titles by category -->
             <div class="list-group">
                 {% for val in title %}
@@ -18,7 +18,7 @@
             </div>
         </div>
         <!-- Display the products by category -->
-        <div class="col-sm-9 my-3">
+        <div class="col-sm-9 my-3" data-aos="fade-up" data-aos-duration="500">
             <div class="row">
                 {% for prod in product %}
                 <div class="col-12 col-md-3 mb-3">

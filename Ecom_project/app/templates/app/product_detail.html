@@ -11,7 +11,7 @@
     <div class="container">
         <!-- Single product details-->
         <div class="row justify-content-center align-items-start my-4 product_details">
-            <div class="col-md-6">
+            <div class="col-md-6" data-aos="fade-right" data-aos-duration="500">
                 <!-- Product Main image-->
                 <div class="text-center main_image">
                 <img id="mainImage" src="{{ product.product_image.url }}"  class="img-fluid "  alt="Main-image" >
@@ -31,7 +31,7 @@
                 </div>
             </div>   
             <!-- Produt details and options -->
-                <div class="col-md-6 overflow-auto">
+                <div class="col-md-6 overflow-auto" data-aos="fade-left" data-aos-duration="500">
                     <div class="px-4">
                         <h1 style="font-family: Georgia; font-size: 50px;">{{ product.title }}</h1>
                         <small class="text-decoration-line-through text-muted fs-6"><del>Rs. {{ product.selling_price }}/-</del></small>
@@ -92,7 +92,7 @@
                 </div>       
         </div>
         <!--Similar product slider-->
-        <div class="slide-container pt-5 text-center swiper related-products-slider">
+        <div class="slide-container pt-5 text-center swiper related-products-slider" data-aos="fade-up" data-aos-duration="500">
             <h2>Similar Products</h2>
             <div class="slide-content">
               <div class="card-wrapper swiper-wrapper">
@@ -125,7 +125,7 @@
             <div class="swiper-pagination cat-swiper-pagination"></div>
         </div>
         <!-- All products-->
-        <div class="row  text-center">
+        <div class="row  text-center" data-aos="fade-up" data-aos-duration="500">
             <h2>You may also like</h2>
             {% for prod in other_products %}
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
