@@ -1,5 +1,6 @@
 {% extends "app/base.html" %}
 {% load static %}
+{% load custom_filters %}
 {% block title %}Password Change Success{% endblock title %}
 
 {% block main-content %}
@@ -10,7 +11,7 @@
         <!-- Sidebar Options -->
         <div class="col-sm-3 border-end">
             <!-- User Name -->
-        <h2>Hi, <span class="text-capitalize">{{ request.user.username }}</span></h2>
+        <h2>Hi, <span class="text-capitalize">{{ request.user.username|remove_numbers }}</span></h2>
             <ul class="list-unstyled">
                 <li class="d-grid">
                     <a href="{% url 'profile' %}" class="btn btn-profile mb-2"><b>Profile</b></a>
