@@ -1,5 +1,6 @@
 {% extends "app/base.html" %}
 {% load static %}
+{% load custom_filters %}
 {% block title %}Your Orders{% endblock title %}
 
 {% block main-content %}
@@ -11,7 +12,7 @@
         <!-- Sidebar Navigation -->
         <div class="col-sm-3 border-end">
             <!-- User Greeting -->
-        <h2>Hi, <span class="text-capitalize">{{ request.user }}</span></h2>
+         <h2>Hi, <span class="text-capitalize">{{ request.user.username|remove_numbers }}</span></h2>
             <ul class="list-unstyled">
                 <li class="d-grid">
                     <a href="{% url 'profile' %}" class="btn btn-profile mb-2"><b>Profile</b></a>
@@ -33,6 +34,7 @@
         
         <!-- Orders Section -->
         <div class="col-sm-9 mt-3 shadow p-2" style="overflow-y: auto; max-height: 400px;">
+            {% if orders %}
             {% for order in orders %}
             <div class="col-md-12 mb-4">
                 <div class="card shadow-sm">
@@ -75,6 +77,9 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <h1 style="margin-top:170px; color:#f48b48">Your order history is empty !</h1>
+            {% endif %}
         </div>
     </div>
 </div>
