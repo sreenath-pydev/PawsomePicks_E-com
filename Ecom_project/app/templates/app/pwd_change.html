@@ -1,5 +1,6 @@
 {% extends "app/base.html" %}
 {% load static %}
+{% load custom_filters %}
 {% block title %}Change Password {% endblock title %}
 
 {% block main-content %}
@@ -10,7 +11,7 @@
         <!-- Sidebar Options -->
         <div class="col-sm-3 border-end">
             <!-- User Name -->
-        <h2>Hi <span class="text-capitalize">{{ request.user }}</span></h2>
+         <h2>Hi, <span class="text-capitalize">{{ request.user.username|remove_numbers }}</span></h2>
             <ul class="list-unstyled">
                 <li class="d-grid">
                     <a href="{% url 'profile' %}" class="btn btn-profile mb-2"><b>Profile</b></a>
@@ -32,6 +33,17 @@
 
         <!-- Main Content Area -->
         <div class="col-sm-9 mt-3 shadow p-5">
+            <!-- Display Messages -->
+            {% if messages %}
+            <div id="message-container" class="position-absolute end-0 m-3" style="z-index: 1000;">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" style="width: 300px;" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
             <form method="post" action="" novalidate>
                 {% csrf_token %}
                 {% for fm in form %}   
