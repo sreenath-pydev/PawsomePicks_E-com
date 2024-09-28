@@ -1,5 +1,6 @@
 {% extends "app/base.html" %}
 {% load static %}
+{% load custom_filters %}
 {% block title %}Wishlist{% endblock title %}
 
 {% block main-content %}
@@ -10,7 +11,7 @@
         <!-- Sidebar Options -->
         <div class="col-sm-3 border-end">
             <!-- User Name -->
-        <h2>Hi <span class="text-capitalize">{{ request.user }}</span></h2>
+            <h2>Hi, <span class="text-capitalize">{{ request.user.username|remove_numbers }}</span></h2>
             <ul class="list-unstyled">
                 <li class="d-grid">
                     <a href="{% url 'profile' %}" class="btn btn-profile mb-2"><b>Profile</b></a>
@@ -32,6 +33,7 @@
 
         <!-- Main Content Area -->
         <div class=" col-sm-9 mt-3 shadow p-2" style="overflow-y: auto; max-height: 400px;">
+            {% if wishlist %}
             {% for items in wishlist %}
             <div class="col-12 mb-4">
                 <div class="card shadow-sm ">
@@ -56,12 +58,17 @@
                                     <input type="hidden" name="prod_id" value="{{ items.product.id }}">
                                     <button type="submit" class="btn btn buy-now shadow py-2"><b>Buy Now</b></button>
                                 </form>
+                                <!-- Remove Button -->
+                                <a href="{% url 'RemoveWishlist' prod_id=items.product.id %}" class="btn btn-wishlist-remove"><i class="fas fa-times fa-2xl" style="color:red;"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <h1 style="margin-top:260px; color:#f48b48">+ Add To Wishlist</h1>
+            {% endif %}
         </div>
     </div>
 </div>

@@ -73,6 +73,14 @@ class ProductDetailsView(View):
         thumbnail_images = ProductImage.objects.filter(product=product)
         return render(request, 'app/product_detail.html', locals())
 
+# wishlist
+def Wishlists(request):
+    if request.user.is_authenticated:
+            totalitems = len(Cart.objects.filter(user=request.user))
+            wishlistitems = len(Wishlist.objects.filter(user=request.user))
+    wishlist = Wishlist.objects.filter(user=request.user)
+    return render(request,"app/wishlist.html",locals()) 
+
 # Add to wishlist
 def PulsWishlist(request):
     if request.method=="GET":
@@ -84,6 +92,13 @@ def PulsWishlist(request):
             'massage':'wishlist added successfully'
         }
     return JsonResponse(data)
+# Remove option from wishlist page
+def RemoveWishlist(request, prod_id):
+    if request.method == "GET":
+            product = Products.objects.get(id=prod_id)
+            user = request.user
+            Wishlist.objects.filter(user=user, product=product).delete()
+    return redirect('wishlist')
 
 # Remove From wishlist
 def MinusWishlist(request):
@@ -433,15 +448,7 @@ def invoice(request,order_id):
         
     }
     return render(request, 'app/invoice.html', context)
-
-# wishlist
-def Wishlists(request):
-    if request.user.is_authenticated:
-            totalitems = len(Cart.objects.filter(user=request.user))
-            wishlistitems = len(Wishlist.objects.filter(user=request.user))
-    wishlist = Wishlist.objects.filter(user=request.user)
-    return render(request,"app/wishlist.html",locals())   
-
+  
 # search 
 def search_products(request):
     searched = request.GET['searched']
