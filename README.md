@@ -41,22 +41,40 @@ Pawsome Picksome is an e-commerce website dedicated to pet products, allowing us
 1. Clone the repository:
    ```bash
     git clone https://github.com/Sreenathkk00/PawsomePicks_E-com.git
-3. Install dependencies:
+2. Install dependencies:
    ```bash
     pip install -r requirements.txt
-4. Configure PostgreSQL database settings in `settings.py`.
-
-5. Apply migrations:
+3. Configure PostgreSQL database settings in `settings.py`.
+   ```bash
+     DATABASES = {
+    'default': {
+        'ENGINE': 'Specify the backend',
+        'NAME': 'Your database name',
+        'USER': 'Your database username',
+        'PASSWORD': 'Your database password',
+        'HOST': 'Set to empty string for localhost',
+        'PORT': 'Default PostgreSQL port',
+    }
+   }
+4. Configure Razorpay credentials in `settings.py`.
+   ```bash
+   RAZORPAY_KEY_ID = 'Your Razorpay Key ID'
+   RAZORPAY_SECRET_KEY = 'Your Razorpay Secret Key'
+5. Configure Google Authentication keys in `settings.py`.
+   ```bash
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'Your Google Auth Key'
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Your Google Auth Secret'
+6. Apply migrations:
    ```bash
    python manage.py makemigrations
    python manage.py migrate
 7. Create a superuser for admin access:
    ```bash
    python manage.py createsuperuser
-9. Run the development server:
+8. Run the development server:
     ```bash
    python manage.py runserver
-11. Access the application at `http://localhost:8000/`.
+9. Access the application at `http://localhost:8000/`.
 
 ## Usage
 
