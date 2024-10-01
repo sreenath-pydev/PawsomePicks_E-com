@@ -40,7 +40,7 @@ Pawsome Picksome is an e-commerce website dedicated to pet products, allowing us
 
 1. Clone the repository:
    ```bash
-    git clone https://github.com/Sreenathkk00/Ecommerce_project01.git
+    git clone https://github.com/Sreenathkk00/PawsomePicks_E-com.git
 3. Install dependencies:
    ```bash
     pip install -r requirements.txt
