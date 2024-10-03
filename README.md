@@ -108,3 +108,7 @@ Contributions are welcome! Please follow GitHub's guidelines for pull requests.
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## LinkedIn Post
+
+Here's a [LinkedIn post](https://www.linkedin.com/posts/sreenath-k-k-661840247_python-django-ecommerce-activity-7246390843492720640-oxmc?utm_source=share&utm_medium=member_desktop) where I shared more about it!
