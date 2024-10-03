@@ -92,6 +92,7 @@ def PulsWishlist(request):
             'massage':'wishlist added successfully'
         }
     return JsonResponse(data)
+
 # Remove option from wishlist page
 def RemoveWishlist(request, prod_id):
     if request.method == "GET":
@@ -104,7 +105,6 @@ def RemoveWishlist(request, prod_id):
 def MinusWishlist(request):
     if request.method=="GET":
         prod_id = request.GET.get('prod_id')
-        print("pppppp",prod_id)
         product = Products.objects.get(id=prod_id)
         user = request.user
         Wishlist.objects.filter(user=user,product=product).delete()
@@ -390,12 +390,12 @@ class CheckOutView(View):
 @csrf_exempt
 def paymentdone(request):
     USER = request.GET.get('user')
-    print("USER,",USER)
     user_id = request.GET.get('user_id')
     user = get_object_or_404(User, pk=user_id)
     cart = Cart.objects.filter(user=user_id)
     cust_id = request.GET.get('amp;cust_id')
-    customer = get_object_or_404(Customers, id=cust_id) 
+    customer = get_object_or_404(Customers, id=cust_id)
+
     #Verify the signature of the payment response data using Razorpay client
     def verify_signature(response_data):
         client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
@@ -420,15 +420,18 @@ def paymentdone(request):
             payment.razorpay_payment_status = PaymentStatus.SUCCESS
             payment.paid = True
             payment.save()
+
     for c in cart:             
         OrderPlaced(user=user, customer=customer, product=c.product, quantity=c.quantity, payment=payment).save()
         c.delete()
+
     return redirect('order_success')    
     
 # Orders success - order status
 def order_success(request):
     user = request.user
     orders = OrderPlaced.objects.filter(user=user).order_by('-order_date')
+
     if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
             wishlistitems = len(Wishlist.objects.filter(user=request.user))
@@ -444,47 +447,52 @@ def invoice(request,order_id):
     context = {
         'order': order,
         'total_amount': total_amount
-        
-        
     }
     return render(request, 'app/invoice.html', context)
   
 # search 
 def search_products(request):
     searched = request.GET['searched']
-    print(searched)
+
     if searched:
         # Perform search using the query
         searched = Products.objects.filter(title__icontains=searched)
+        
         if not searched:
             messages.success(request, "This Product Does Not Exist...Please Try Again")
             searched = Products.objects.all()
-            print(searched)
+
     else:
         # Handle the case when the search query is not provided
         messages.success(request,"This Product Does Not Exist...Please Try Again")
         searched = Products.objects.all()
+
     totalitems = 0
     wishlistitems =0
+
     if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
             wishlistitems = len(Wishlist.objects.filter(user=request.user))
+
     context ={
         'totalitems':totalitems,
         'wishlistitems':wishlistitems,
         'searched': searched
     }
+
     return render(request, 'app/search_results.html', context)
 
 # Dogs products & category
 def dogs_products(request):
     totalitems = 0
     wishlistitems =0
+
     if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
             wishlistitems = len(Wishlist.objects.filter(user=request.user))
     dog_prod_Categorys = Products.objects.filter(category__startswith='D').distinct('category')
     Dog_product = Products.objects.filter(category__startswith='D').order_by('-id')
+
     context = {
         'totalitems':totalitems,
         'wishlistitems':wishlistitems,
@@ -497,11 +505,13 @@ def dogs_products(request):
 def cats_products(request):
     totalitems = 0
     wishlistitems =0
+
     if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
             wishlistitems = len(Wishlist.objects.filter(user=request.user))
     cat_prod_Categorys = Products.objects.filter(category__startswith='C').distinct('category')
     Cat_product = Products.objects.filter(category__startswith='C').order_by('-id')
+
     context = {
         'totalitems':totalitems,
         'wishlistitems':wishlistitems,
@@ -514,12 +524,13 @@ def cats_products(request):
 def All_products(request):
     totalitems = 0  
     wishlistitems =0
+
     if request.user.is_authenticated:
             totalitems = len(Cart.objects.filter(user=request.user))
             wishlistitems = len(Wishlist.objects.filter(user=request.user))
     all_products = Products.objects.all().order_by('-id')
     all_categorys = Products.objects.all().distinct('category')
-    print(all_categorys)
+
     context = {
         'totalitems':totalitems,
         'wishlistitems':wishlistitems,
@@ -535,12 +546,14 @@ class CategoriesViceView(View):
         if catg.startswith('C'): 
             totalitems = 0
             wishlistitems =0
+
             if request.user.is_authenticated:
                     totalitems = len(Cart.objects.filter(user=request.user))
                     wishlistitems = len(Wishlist.objects.filter(user=request.user))
             selected_cat_products = Products.objects.filter(category=catg)
             category_title = selected_cat_products[0].get_category_display()
             cat_prod_Categorys = Products.objects.filter(category__startswith='C').distinct('category')
+
             context = {
                 'totalitems':totalitems,
                 'wishlistitems':wishlistitems,
@@ -549,6 +562,7 @@ class CategoriesViceView(View):
                 'category_title': category_title
             }
             return render(request, 'app/category_vice_products.html', context)
+        
         # Dog Category
         elif catg.startswith('D'): 
             totalitems = 0
@@ -567,6 +581,7 @@ class CategoriesViceView(View):
                 'category_title': category_title
             }
             return render(request, 'app/category_vice_products.html', context)
+        
         # All Category
         else: 
             all_products = Products.objects.filter(category=catg)

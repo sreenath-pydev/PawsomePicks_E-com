@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
  
-
 # product categorys model choices
 CATERGORY_CHOICES=(
     ('DF','DOG FOOD'),
@@ -20,6 +19,7 @@ CATERGORY_CHOICES=(
     ('GP','GROOMING PRODUCTS'),
     ('OP','OTHER PRODUCTS')
 )
+
 # Product model.
 class Products(models.Model):
     title = models.CharField(max_length=100)
@@ -32,6 +32,7 @@ class Products(models.Model):
     product_image = models.ImageField(upload_to='products',default='product_image')
     def __str__(self):
         return self.title
+    
 # Products  extra images
 class ProductImage(models.Model):
     product = models.ForeignKey('Products', on_delete=models.CASCADE, related_name='extra_images')
@@ -101,6 +102,7 @@ class Customers(models.Model):
 
     def __str__(self):
         return self.name
+    
 # User profile image
 class UserProfileImg(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -135,6 +137,7 @@ ORDER_STATUS_CHOICES = (
     ('RETURNED', 'Returned'),
     ('REFUNDED', 'Refunded'),
 )
+
 class OrderPlaced(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customers, on_delete=models.CASCADE,null=True)
@@ -143,6 +146,7 @@ class OrderPlaced(models.Model):
     order_date = models.DateTimeField(auto_now_add=True)
     order_status = models.CharField(max_length=100, choices=ORDER_STATUS_CHOICES, default='PENDING')
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
+
     def get_progress_value(self):
         progress_values = {
             'PENDING': 25,
@@ -154,6 +158,7 @@ class OrderPlaced(models.Model):
             'REFUNDED': 100,
         }
         return progress_values.get(self.order_status.upper(), 0)
+    
     def get_progress_class(self):
         progress_classes = {
             'PENDING': 'bg-secondary',
