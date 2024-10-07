@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Products,Customers,Cart,OrderPlaced,Payment,Wishlist,ProductImage,UserProfileImg
+from . models import Products, Customers, Cart, OrderPlaced, Payment, Wishlist, ProductImage, UserProfileImg
 from django.utils.html import format_html
 
 #* Products thumbnail images
