@@ -38,13 +38,27 @@ Pawsome Picksome is an e-commerce website dedicated to pet products, allowing us
 
 ## Installation
 
-1. Clone the repository:
+1. Create and activate virtual environment
+
+   For windows
+   ```cmd
+   python -m venv .venv
+   .venv\Scripts\activate
+   ```
+
+   For linux
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+2. Clone the repository:
    ```bash
     git clone https://github.com/Sreenathkk00/PawsomePicks_E-com.git
-2. Install dependencies:
+3. Install dependencies:
    ```bash
     pip install -r requirements.txt
-3. Configure PostgreSQL database settings in `settings.py`.
+4. Configure PostgreSQL database settings in `settings.py`.
    ```bash
      DATABASES = {
     'default': {
@@ -56,25 +70,25 @@ Pawsome Picksome is an e-commerce website dedicated to pet products, allowing us
         'PORT': 'Default PostgreSQL port',
     }
    }
-4. Configure Razorpay credentials in `settings.py`.
+5. Configure Razorpay credentials in `settings.py`.
    ```bash
    RAZORPAY_KEY_ID = 'Your Razorpay Key ID'
    RAZORPAY_SECRET_KEY = 'Your Razorpay Secret Key'
-5. Configure Google Authentication keys in `settings.py`.
+6. Configure Google Authentication keys in `settings.py`.
    ```bash
     SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'Your Google Auth Key'
     SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Your Google Auth Secret'
-6. Apply migrations:
+7. Apply migrations:
    ```bash
    python manage.py makemigrations
    python manage.py migrate
-7. Create a superuser for admin access:
+8. Create a superuser for admin access:
    ```bash
    python manage.py createsuperuser
-8. Run the development server:
+9. Run the development server:
     ```bash
    python manage.py runserver
-9. Access the application at `http://localhost:8000/`.
+10. Access the application at `http://localhost:8000/`.
 
 ## Usage
 
@@ -94,3 +108,7 @@ Contributions are welcome! Please follow GitHub's guidelines for pull requests.
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## LinkedIn Post
+
+Here's a [LinkedIn post](https://www.linkedin.com/posts/sreenath-k-k-661840247_python-django-ecommerce-activity-7246390843492720640-oxmc?utm_source=share&utm_medium=member_desktop) where I shared more about it!
