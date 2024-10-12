@@ -63,7 +63,7 @@ Check out my project post on LinkedIn: [View on LinkedIn](https://www.linkedin.c
 4. Install dependencies:
    ```bash
     pip install -r requirements.txt
-5. Configure PostgreSQL database settings in `settings.py`.
+5. Configure Your database settings in `settings.py`.
    ```bash
      DATABASES = {
     'default': {
