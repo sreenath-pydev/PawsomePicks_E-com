@@ -4,6 +4,10 @@
 
 Pawsome Picksome is an e-commerce website dedicated to pet products, allowing users to browse, purchase, and manage their pet-related purchases conveniently. The website is built using Python and Django framework, with front-end development using HTML, CSS, and JavaScript (Bootstrap for responsive design). It includes various features such as user authentication, payment integration with Razorpay, PostgreSQL database for data management, and several user-centric functionalities like wishlists, cart management, order status tracking, and more.
 
+## Project Showcase on LinkedIn
+
+Check out my project post on LinkedIn: [View on LinkedIn](https://www.linkedin.com/posts/sreenath-k-k-661840247_python-django-ecommerce-activity-7246390843492720640-oxmc?utm_source=share&utm_medium=member_desktop)👈🏽
+
 ## Features
 
 - **User Authentication:** Secure user registration, login, logout, and authentication using Django's built-in authentication system as well as Google OAuth2 via **Google Authentication**.
@@ -35,10 +39,15 @@ Pawsome Picksome is an e-commerce website dedicated to pet products, allowing us
 - **Invoice Generation:** Automatic invoice generation for delivered products
 - **Authentication:** Google OAuth2 for login via **Google Authentication**
 
-
 ## Installation
 
-1. Create and activate virtual environment
+1. Clone the repository:
+   ```bash
+    git clone https://github.com/Sreenathkk00/PawsomePicks_E-com.git
+2. Navigate to the Project Directory
+   ```bash
+   cd <project_directory>
+3. Create and activate virtual environment
 
    For windows
    ```cmd
@@ -51,14 +60,10 @@ Pawsome Picksome is an e-commerce website dedicated to pet products, allowing us
    python3 -m venv .venv
    source .venv/bin/activate
    ```
-
-2. Clone the repository:
-   ```bash
-    git clone https://github.com/Sreenathkk00/PawsomePicks_E-com.git
-3. Install dependencies:
+4. Install dependencies:
    ```bash
     pip install -r requirements.txt
-4. Configure PostgreSQL database settings in `settings.py`.
+5. Configure PostgreSQL database settings in `settings.py`.
    ```bash
      DATABASES = {
     'default': {
@@ -70,25 +75,25 @@ Pawsome Picksome is an e-commerce website dedicated to pet products, allowing us
         'PORT': 'Default PostgreSQL port',
     }
    }
-5. Configure Razorpay credentials in `settings.py`.
+6. Configure Razorpay credentials in `settings.py`.
    ```bash
    RAZORPAY_KEY_ID = 'Your Razorpay Key ID'
    RAZORPAY_SECRET_KEY = 'Your Razorpay Secret Key'
-6. Configure Google Authentication keys in `settings.py`.
+7. Configure Google Authentication keys in `settings.py`.
    ```bash
     SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'Your Google Auth Key'
     SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Your Google Auth Secret'
-7. Apply migrations:
+8. Apply migrations:
    ```bash
    python manage.py makemigrations
    python manage.py migrate
-8. Create a superuser for admin access:
+9. Create a superuser for admin access:
    ```bash
    python manage.py createsuperuser
-9. Run the development server:
+10. Run the development server:
     ```bash
    python manage.py runserver
-10. Access the application at `http://localhost:8000/`.
+11. Access the application at `http://localhost:8000/`.
 
 ## Usage
 
