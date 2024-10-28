@@ -43,7 +43,7 @@ Check out my project post on LinkedIn: [View on LinkedIn](https://www.linkedin.c
 
 1. Clone the repository:
    ```bash
-    https://github.com/sreenath-pydev/PawsomePicks_E-com.git
+    git clone https://github.com/sreenath-pydev/PawsomePicks_E-com.git
 2. Navigate to the Project Directory
    ```bash
    cd <project_directory>
