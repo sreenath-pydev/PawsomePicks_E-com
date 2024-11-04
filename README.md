@@ -51,14 +51,14 @@ Check out my project post on LinkedIn: [View on LinkedIn](https://www.linkedin.c
 
    For windows
    ```cmd
-   python -m venv .venv
-   .venv\Scripts\activate
+   python -m venv myvenv
+   myvenv\Scripts\activate
    ```
 
    For linux
    ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
+   python3 -m venv myvenv
+   source myvenv/bin/activate
    ```
 4. Install dependencies:
    ```bash
@@ -92,7 +92,7 @@ Check out my project post on LinkedIn: [View on LinkedIn](https://www.linkedin.c
    python manage.py createsuperuser
 10. Run the development server:
     ```bash
-   python manage.py runserver
+    python manage.py runserver
 11. Access the application at `http://localhost:8000/`.
 
 ## Usage
