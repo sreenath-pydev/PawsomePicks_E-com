@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'app',
     'social_django',
     
+    
 ]
 SITE_ID = 1
 
@@ -83,12 +84,21 @@ WSGI_APPLICATION = 'Ecom_project.wsgi.application'
 
 DATABASES = {
        'default': {
+<<<<<<< HEAD
            'ENGINE': 'You database engine',
            'NAME': 'Your database name',
            'USER': 'Your database user',
            'PASSWORD': 'Your database password',
            'HOST': 'Your database host',
            'PORT': 'Your database port',
+=======
+           'ENGINE': 'Specify the backend',
+           'NAME': 'Your database name',
+           'USER': 'Your database username',
+           'PASSWORD': 'Your database password',
+           'HOST': 'Set to empty string for localhost',
+           'PORT': 'Default PostgreSQL port',
+>>>>>>> ca18e9e1cc13694fabadaceda20db127ac7c267d
        }
    }
 
