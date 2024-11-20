@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -83,12 +83,12 @@ WSGI_APPLICATION = 'Ecom_project.wsgi.application'
 
 DATABASES = {
        'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'pp_ecom_db',
-           'USER': 'postgres',
-           'PASSWORD': 'Sreenath@1',
-           'HOST': 'localhost',
-           'PORT': '5432',
+           'ENGINE': 'You database engine',
+           'NAME': 'Your database name',
+           'USER': 'Your database user',
+           'PASSWORD': 'Your database password',
+           'HOST': 'Your database host',
+           'PORT': 'Your database port',
        }
    }
 
@@ -133,7 +133,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'  # Or another directory of your choice
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR/'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Google authentication
 AUTHENTICATION_BACKENDS = (

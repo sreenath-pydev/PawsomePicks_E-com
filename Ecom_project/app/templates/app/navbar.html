@@ -100,16 +100,27 @@
         </div>
     </div>
 </nav>
-
-<!-- Search Bar -->
+<!--Live Search Bar-->
 <nav class="navbar ">
     <div class="container-fluid justify-content-center d-flex">
         <form class="d-flex" role="search" action="/Search">
-            <input class="form-control me-2 custom-search-input" name="searched" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control me-2 custom-search-input" 
+            name="searched" 
+            type="search" 
+            placeholder="Search" 
+            oninput="LiveSearchInput(event)"
+            aria-label="Search">
             <button class="btn btn-outline-success custom-search-button" type="submit">
                 <i class="fas fa-search"></i>
             </button>
         </form>
     </div>
+    <!--Product displaying section-->
+    <div 
+        id="searchResults" 
+        class="dropdown-menu w-50 mt-1 display-flex shadow " 
+        style="max-height: 300px; overflow-y: auto ;"
+    ></div>
 </nav>
+<!--Live Search Bar End-->
 {% endblock navbar %}

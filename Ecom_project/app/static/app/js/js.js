@@ -310,3 +310,46 @@ document.addEventListener('DOMContentLoaded', function() {
     once: false      
   });
 });
+
+// live search
+
+function LiveSearchInput(event) {
+  const query = event.target.value;
+  if (query.trim() === '') {
+    const searchResults = document.getElementById('searchResults');
+    searchResults.innerHTML = '';
+    searchResults.classList.remove('show');
+    return;
+  }
+
+  fetch(`/livesearch?q=${query}`)
+    .then((response) => response.json())
+    .then((data) => DisplaySearchResults(data))
+    .catch((error) => console.error('Error:', error));
+}
+
+function DisplaySearchResults(data) {
+  const searchResults = document.getElementById('searchResults');
+  searchResults.innerHTML = '';
+  
+  if (data.products.length === 0) {
+    searchResults.innerHTML = '<p class="text-center p-2">No products found</p>';
+    return;
+  }
+
+  data.products.forEach((product) => {
+    const searchItems = document.createElement('a');
+    searchItems.className = 'dropdown-item align-items-center d-flex gap-10';
+    searchItems.href = `/product_details/${product.id}`;
+    searchItems.innerHTML = `
+      <img src="${product.product_image}" class="search-image" style="width: 100px; height: 100px; ">
+      <div class="d-flex flex-column p-5">
+        <h5 class="product-name">${product.product_name} <h6 class="product-price">₹ ${product.product_price}</h6></h5>
+        
+      </div>
+    `;
+    searchResults.appendChild(searchItems);
+  });
+
+  searchResults.classList.add('show');
+}

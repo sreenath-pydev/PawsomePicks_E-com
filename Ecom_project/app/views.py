@@ -476,6 +476,22 @@ def search_products(request):
     }
     return render(request, 'app/search_results.html', context)
 
+class SearchView(View):
+    def get(self, request):
+        query = request.GET.get('q', '')
+        products = Products.objects.filter(title__icontains=query)
+        data = [
+            {
+                "id": product.id,
+                "product_name": product.title,
+                "product_price": product.discount_price,
+                "product_image": product.product_image.url if product.product_image else "",
+            }
+            for product in products
+        ]
+        return JsonResponse({"products": data}, safe=False)
+
+     
 # Dogs products & category
 def dogs_products(request):
     totalitems = 0

@@ -56,6 +56,30 @@ body {
 .custom-search-button:hover i {
   color: #ffffff !important;
 }
+/* live search */
+#searchResults{
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  align-items: center;
+  justify-content: center
+}
+#searchResults .dropdown-menu{
+  display: flex;
+  margin: auto;
+  justify-content: center!important;
+  align-items: center!important;
+  display: flex!important;
+  flex-direction: column!important;
+}
 /* Carousel Slider */
 .carousel-inner img {
   height: 100%;
