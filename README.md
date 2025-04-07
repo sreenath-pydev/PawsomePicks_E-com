@@ -6,7 +6,7 @@ Pawsome Picksome is an e-commerce website dedicated to pet products, allowing us
 
 ## Project Showcase on LinkedIn
 
-Check out my project post on LinkedIn: [View on LinkedIn](https://www.linkedin.com/posts/sreenath-k-k-661840247_python-django-ecommerce-activity-7246390843492720640-oxmc?utm_source=share&utm_medium=member_desktop)👈🏽
+Check out my project post on LinkedIn: [View on LinkedIn](https://www.linkedin.com/posts/sreenath-pydev_python-django-ecommerce-activity-7246390843492720640-3xjC?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD0rl6kBpeRZSToz7pAL1wRoMMvFKHLNPt0)👈🏽
 
 ## Features
 
